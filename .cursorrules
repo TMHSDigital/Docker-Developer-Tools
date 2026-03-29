@@ -18,6 +18,30 @@
 - Use `execDocker()` from `utils/docker-api.ts` for all Docker CLI calls.
 - Always check for Docker availability before executing commands.
 
+## Release checklist
+Before finalizing any version bump, complete every item in order:
+1. Implement all MCP tools, skills, and rules listed for the milestone in ROADMAP.md.
+2. Add input validation tests for every new MCP tool in `input-validation.test.ts`.
+3. Build the MCP server (`npm run build`) and confirm zero compiler errors.
+4. Run all tests: `cd mcp-server && npm test` (Vitest) and `pytest tests/ -v --tb=short` (structure).
+5. Bump version in ALL of these files (must be consistent):
+   - `.cursor-plugin/plugin.json` (version + description tool count)
+   - `mcp-server/package.json` (version + description)
+   - `mcp-server/src/index.ts` (McpServer version string)
+   - `README.md` (version badge, tool count in tagline, tools table)
+   - `CLAUDE.md` (version, tool count, tool table, CLI quick reference)
+   - `ROADMAP.md` (mark new version as current, previous as Released, update Completed list)
+6. Add a new section to `CHANGELOG.md` with all Added/Changed/Fixed items.
+7. Update `docs/index.html` (GitHub Pages site):
+   - Meta description and og:description tool counts
+   - Hero version pill
+   - Stats counter data-target for MCP Tools
+   - Tools table (add new tool rows)
+   - Roadmap timeline (mark current, add/shift planned items)
+8. Re-run all tests after doc changes (some tests validate docs consistency).
+9. Commit, push, tag (`vX.Y.Z`), and `gh release create` with release notes.
+10. Update repo description: `gh repo edit --description "..."` with new tool count.
+
 ## Docker conventions
 - Default to Alpine or slim base images when suggesting Dockerfiles.
 - Always suggest multi-stage builds for production images.

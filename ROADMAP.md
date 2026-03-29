@@ -230,6 +230,19 @@ All destructive MCP tools (`rm`, `rmi`, `prune`, `kill`, `down`) will:
 
 ---
 
+## Release Process
+
+Every release follows the checklist in [CONTRIBUTING.md](CONTRIBUTING.md#release-checklist). The short version:
+
+1. Implement all tools/skills/rules for the milestone
+2. Add tests, build, verify all tests pass
+3. Bump version consistently across `plugin.json`, `package.json`, `index.ts`, `README.md`, `CLAUDE.md`, and this file
+4. Update `CHANGELOG.md` and `docs/index.html` (GitHub Pages)
+5. Re-run tests (some validate doc consistency)
+6. Commit, tag, push, create GitHub release, update repo description
+
+---
+
 ## Contributing
 
 Have an idea for a new skill, rule, or MCP tool? Check the [Contributing Guide](CONTRIBUTING.md) and open an issue or pull request.

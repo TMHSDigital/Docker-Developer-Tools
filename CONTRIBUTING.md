@@ -229,6 +229,50 @@ export function register(server: McpServer): void {
 3. Fill out the PR template completely
 4. One approval required for merge
 
+## Release Checklist
+
+When cutting a new version, complete every step in order before merging to `main`:
+
+### 1. Implementation
+
+- [ ] All MCP tools, skills, and rules listed for the milestone in `ROADMAP.md` are implemented
+- [ ] Input validation tests added for every new MCP tool (`input-validation.test.ts`)
+- [ ] MCP server builds cleanly (`cd mcp-server && npm run build`)
+- [ ] All Vitest tests pass (`cd mcp-server && npm test`)
+- [ ] All pytest structure tests pass (`pytest tests/ -v --tb=short`)
+
+### 2. Version bump (must be consistent across all files)
+
+- [ ] `.cursor-plugin/plugin.json` - `version` field and tool count in `description`
+- [ ] `mcp-server/package.json` - `version` field and `description`
+- [ ] `mcp-server/src/index.ts` - `version` in `McpServer` constructor
+- [ ] `README.md` - version badge, tool count in tagline, tools table rows
+- [ ] `CLAUDE.md` - version, tool count, tool tables, CLI quick reference table
+- [ ] `ROADMAP.md` - mark new version `(current)`, previous version `Released`, update Completed list
+
+### 3. Documentation
+
+- [ ] `CHANGELOG.md` - new version section with all Added/Changed/Fixed items and comparison link
+- [ ] `docs/index.html` (GitHub Pages):
+  - Meta description and `og:description` tool counts
+  - Hero version pill
+  - Stats counter `data-target` for MCP Tools
+  - Tools table (add rows for new tools)
+  - Roadmap timeline (shift current marker, update planned items)
+
+### 4. Final validation
+
+- [ ] Re-run all tests after doc changes (some tests check docs consistency)
+- [ ] Verify `docs/index.html` renders correctly in a browser
+
+### 5. Ship
+
+- [ ] Commit and push to `main`
+- [ ] Create annotated tag: `git tag vX.Y.Z`
+- [ ] Push tag: `git push origin vX.Y.Z`
+- [ ] Create GitHub release: `gh release create vX.Y.Z --title "vX.Y.Z - Theme" --notes "..."`
+- [ ] Update repo description: `gh repo edit --description "...new tool count..."`
+
 ## Style Guidelines
 
 - **No em dashes.** Use regular dashes (-) or rewrite the sentence.

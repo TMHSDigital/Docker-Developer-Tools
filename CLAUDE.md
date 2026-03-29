@@ -132,6 +132,25 @@ pip install -r requirements-test.txt
 pytest tests/ -v --tb=short
 ```
 
+## Release Checklist
+
+When bumping a version, update ALL of these (they must stay in sync):
+
+| File | What to update |
+|------|---------------|
+| `.cursor-plugin/plugin.json` | `version`, tool count in `description` |
+| `mcp-server/package.json` | `version`, `description` |
+| `mcp-server/src/index.ts` | `version` in `McpServer` constructor |
+| `README.md` | Version badge, tagline tool count, tools table |
+| `CLAUDE.md` | Version, tool count, tool tables, CLI quick reference |
+| `CHANGELOG.md` | New version section with Added/Changed/Fixed |
+| `ROADMAP.md` | Mark new version `(current)`, previous `Released`, update Completed |
+| `docs/index.html` | Meta tags, hero pill, stats counter, tools table, roadmap timeline |
+
+After all updates: re-run tests (some validate doc consistency), commit, tag, push, create GitHub release, update repo description.
+
+Full checklist with copy-paste commands: [CONTRIBUTING.md - Release Checklist](CONTRIBUTING.md#release-checklist)
+
 ## Key Conventions
 
 - **No em dashes.** Use regular dashes (-) or rewrite the sentence.

@@ -4,7 +4,7 @@
 
 ## Current Status
 
-**v0.11.0** - Swarm Stacks, Configs, Secrets, and Trust release with 17 skills, 10 rules, and 140 MCP tools.
+**v0.12.0** - Niche, Scout, and Extras release with 17 skills, 10 rules, and 150 MCP tools.
 
 ## Release Plan
 
@@ -20,8 +20,8 @@
 | v0.8.0 | Compose Completeness | +16 | 84 | +0 | +1 | Released |
 | v0.9.0 | Container/Image Gaps, Context, Auth | +14 | 98 | +1 | +0 | Released |
 | v0.10.0 | Swarm Orchestration | +24 | 122 | +1 | +1 | Released |
-| v0.11.0 | Swarm Stacks, Configs, Secrets, Trust | +18 | 140 | +1 | +0 | (current) |
-| v0.12.0 | Niche, Scout, and Extras | +10 | 150 | +0 | +0 | Planned |
+| v0.11.0 | Swarm Stacks, Configs, Secrets, Trust | +18 | 140 | +1 | +0 | Released |
+| v0.12.0 | Niche, Scout, and Extras | +10 | 150 | +0 | +0 | (current) |
 | v1.0.0 | Stable | +0 | 150 | +0 | +0 | Planned |
 
 ---
@@ -420,6 +420,11 @@ All destructive MCP tools (`rm`, `rmi`, `prune`, `kill`, `down`, `leave`) will:
 - [x] GitHub Actions CI/CD workflows
 - [x] GitHub Pages landing site
 - [x] Contributing guide and issue templates
+- [x] 24 Swarm orchestration tools (swarmInit/Join/Leave/JoinToken/Update/Unlock/UnlockKey/Ca, serviceCreate/Update/Rm/Ls/Inspect/Logs/Ps/Scale/Rollback, nodeLs/Inspect/Ps/Rm/Update/Promote/Demote)
+- [x] 18 Swarm stack, config, secret, and trust tools (stackDeploy/Rm/Ls/Ps/Services/Config, configCreate/Inspect/Ls/Rm, secretCreate/Inspect/Ls/Rm, trustInspect/Sign/Revoke/Key)
+- [x] 10 niche/scout/extras tools (version, composeVersion, composeWatch, scoutQuickview/Cves/Recommendations, pluginLs/Install/Rm/Enable)
+- [x] 17 skills covering all Docker workflows
+- [x] 10 rules for Docker validation
 
 ---
 

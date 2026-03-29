@@ -4,11 +4,11 @@ Project documentation for Claude Code and AI assistants working on this reposito
 
 ## Project Overview
 
-Docker Developer Tools is a Cursor IDE plugin that integrates Docker and container workflows into Cursor's AI chat. It includes 17 skills, 10 rules, and a companion MCP server with 140 tools for live Docker CLI integration.
+Docker Developer Tools is a Cursor IDE plugin that integrates Docker and container workflows into Cursor's AI chat. It includes 17 skills, 10 rules, and a companion MCP server with 150 tools for live Docker CLI integration.
 
 This is a monorepo - the Cursor plugin (skills and rules) and the companion MCP server live in the same repository. Docker's API is local (Docker Engine socket / CLI), so one repo is simpler for users to install and maintain.
 
-**Version:** 0.11.0
+**Version:** 0.12.0
 **License:** CC-BY-NC-ND-4.0
 **Author:** TMHSDigital
 
@@ -72,7 +72,7 @@ Docker-Developer-Tools/
 | `compose-scaling` | Compose files | Flag scaling blockers: container_name, fixed host ports, missing limits |
 | `swarm-security` | Docker-related files | Flag missing autolock, unrotated certs, unencrypted overlays, exposed ports |
 
-## MCP Server (140 tools)
+## MCP Server (150 tools)
 
 The MCP server talks to Docker via CLI exec (`docker` commands) rather than the Docker Engine REST API. It uses stdio transport and requires `docker` to be available on PATH.
 
@@ -530,3 +530,13 @@ Full checklist with copy-paste commands: [CONTRIBUTING.md - Release Checklist](C
 | `docker trust sign` | `docker_trustSign` |
 | `docker trust revoke` | `docker_trustRevoke` |
 | `docker trust key` | `docker_trustKey` |
+| `docker version --format json` | `docker_version` |
+| `docker compose version --format json` | `docker_composeVersion` |
+| `docker compose watch` | `docker_composeWatch` |
+| `docker scout quickview` | `docker_scoutQuickview` |
+| `docker scout cves` | `docker_scoutCves` |
+| `docker scout recommendations` | `docker_scoutRecommendations` |
+| `docker plugin ls --format json` | `docker_pluginLs` |
+| `docker plugin install` | `docker_pluginInstall` |
+| `docker plugin rm` | `docker_pluginRm` |
+| `docker plugin enable` | `docker_pluginEnable` |

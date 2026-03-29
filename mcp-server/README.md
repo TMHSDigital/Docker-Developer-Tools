@@ -1,6 +1,6 @@
 # @tmhs/docker-mcp
 
-MCP server for Docker CLI integration - 140 tools for containers, images, complete Compose V2, volumes, networks, cleanup, observability, buildx, manifests, contexts, registry auth, Swarm orchestration, stacks, configs, secrets, content trust, and system info.
+MCP server for Docker CLI integration - 150 tools for containers, images, complete Compose V2, volumes, networks, cleanup, observability, buildx, manifests, contexts, registry auth, Swarm orchestration, stacks, configs, secrets, content trust, Scout, plugins, and system info.
 
 Part of the [Docker Developer Tools](https://github.com/TMHSDigital/Docker-Developer-Tools) Cursor plugin.
 
@@ -294,6 +294,36 @@ Or if installed globally:
 | `docker_trustSign` | Sign an image |
 | `docker_trustRevoke` | Revoke trust for an image |
 | `docker_trustKey` | Manage signing keys |
+
+### Utility (2)
+
+| Tool | Description |
+|------|-------------|
+| `docker_version` | Show Docker client and server version information |
+| `docker_composeVersion` | Show Docker Compose version information |
+
+### Compose Extras (1)
+
+| Tool | Description |
+|------|-------------|
+| `docker_composeWatch` | Watch build context and auto-rebuild on file changes |
+
+### Docker Scout (3)
+
+| Tool | Description |
+|------|-------------|
+| `docker_scoutQuickview` | Quick overview of image vulnerabilities |
+| `docker_scoutCves` | List CVEs found in an image |
+| `docker_scoutRecommendations` | Get base image update recommendations |
+
+### Plugin Management (4)
+
+| Tool | Description |
+|------|-------------|
+| `docker_pluginLs` | List installed Docker plugins |
+| `docker_pluginInstall` | Install a Docker plugin from a registry |
+| `docker_pluginRm` | Remove one or more Docker plugins |
+| `docker_pluginEnable` | Enable a disabled Docker plugin |
 
 ## License
 

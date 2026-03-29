@@ -143,10 +143,20 @@ import { register as registerTrustInspect } from "./tools/trustInspect.js";
 import { register as registerTrustSign } from "./tools/trustSign.js";
 import { register as registerTrustRevoke } from "./tools/trustRevoke.js";
 import { register as registerTrustKey } from "./tools/trustKey.js";
+import { register as registerVersion } from "./tools/version.js";
+import { register as registerComposeVersion } from "./tools/composeVersion.js";
+import { register as registerComposeWatch } from "./tools/composeWatch.js";
+import { register as registerScoutQuickview } from "./tools/scoutQuickview.js";
+import { register as registerScoutCves } from "./tools/scoutCves.js";
+import { register as registerScoutRecommendations } from "./tools/scoutRecommendations.js";
+import { register as registerPluginLs } from "./tools/pluginLs.js";
+import { register as registerPluginInstall } from "./tools/pluginInstall.js";
+import { register as registerPluginRm } from "./tools/pluginRm.js";
+import { register as registerPluginEnable } from "./tools/pluginEnable.js";
 
 const server = new McpServer({
   name: "docker-mcp",
-  version: "0.11.0",
+  version: "0.12.0",
 });
 
 registerListContainers(server);
@@ -289,6 +299,16 @@ registerTrustInspect(server);
 registerTrustSign(server);
 registerTrustRevoke(server);
 registerTrustKey(server);
+registerVersion(server);
+registerComposeVersion(server);
+registerComposeWatch(server);
+registerScoutQuickview(server);
+registerScoutCves(server);
+registerScoutRecommendations(server);
+registerPluginLs(server);
+registerPluginInstall(server);
+registerPluginRm(server);
+registerPluginEnable(server);
 
 async function main(): Promise<void> {
   const transport = new StdioServerTransport();

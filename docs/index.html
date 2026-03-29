@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Docker Developer Tools - Cursor Plugin</title>
-<meta name="description" content="Expert Docker workflows inside Cursor IDE. 17 skills, 10 rules, 140 MCP tools.">
+<meta name="description" content="Expert Docker workflows inside Cursor IDE. 17 skills, 10 rules, 150 MCP tools.">
 <meta name="theme-color" content="#0db7ed">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Docker Developer Tools - Cursor Plugin">
-<meta property="og:description" content="Expert Docker workflows inside Cursor IDE. 17 skills, 10 rules, 140 MCP tools.">
+<meta property="og:description" content="Expert Docker workflows inside Cursor IDE. 17 skills, 10 rules, 150 MCP tools.">
 <meta property="og:image" content="docs/assets/og-card.jpg">
 <meta property="og:url" content="https://tmhsdigital.github.io/Docker-Developer-Tools/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -241,7 +241,7 @@ section{padding:72px 0}
   <h1><span>Docker</span> Developer Tools</h1>
   <p class="tagline">Expert Docker workflows, live container data, and real-time linting - all inside Cursor IDE.</p>
   <div class="pills">
-    <span class="pill blue">v0.11.0</span>
+    <span class="pill blue">v0.12.0</span>
     <span class="pill">CC BY-NC-ND 4.0</span>
     <span class="pill">Cursor Plugin</span>
   </div>
@@ -497,7 +497,7 @@ section{padding:72px 0}
 <!-- MCP TOOLS TABLE -->
 <section id="mcp-tools">
   <div class="container">
-    <h2 class="section-title reveal">140 MCP Tools</h2>
+    <h2 class="section-title reveal">150 MCP Tools</h2>
     <p class="section-subtitle reveal">Live Docker data, container lifecycle, image pipeline, complete Compose V2, volume/network CRUD, resource cleanup, buildx, manifests, context management, and registry authentication via the companion MCP server.</p>
     <div class="tools-table-wrap reveal">
       <table class="tools-table">
@@ -716,6 +716,40 @@ section{padding:72px 0}
           <tr><td class="tool-name">docker_trustKey</td><td>Manage signing keys</td></tr>
         </tbody>
       </table>
+      <h3 class="tool-category">Utility (2)</h3>
+      <table>
+        <thead><tr><th>Tool</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td class="tool-name">docker_version</td><td>Show Docker client and server version info</td></tr>
+          <tr><td class="tool-name">docker_composeVersion</td><td>Show Docker Compose version info</td></tr>
+        </tbody>
+      </table>
+      <h3 class="tool-category">Compose Extras (1)</h3>
+      <table>
+        <thead><tr><th>Tool</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td class="tool-name">docker_composeWatch</td><td>Watch build context and auto-rebuild on file changes</td></tr>
+        </tbody>
+      </table>
+      <h3 class="tool-category">Docker Scout (3)</h3>
+      <table>
+        <thead><tr><th>Tool</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td class="tool-name">docker_scoutQuickview</td><td>Quick overview of image vulnerabilities</td></tr>
+          <tr><td class="tool-name">docker_scoutCves</td><td>List CVEs found in an image</td></tr>
+          <tr><td class="tool-name">docker_scoutRecommendations</td><td>Get base image update recommendations</td></tr>
+        </tbody>
+      </table>
+      <h3 class="tool-category">Plugin Management (4)</h3>
+      <table>
+        <thead><tr><th>Tool</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td class="tool-name">docker_pluginLs</td><td>List installed Docker plugins</td></tr>
+          <tr><td class="tool-name">docker_pluginInstall</td><td>Install a Docker plugin from a registry</td></tr>
+          <tr><td class="tool-name">docker_pluginRm</td><td>Remove one or more Docker plugins</td></tr>
+          <tr><td class="tool-name">docker_pluginEnable</td><td>Enable a disabled Docker plugin</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
@@ -878,20 +912,20 @@ section{padding:72px 0}
 
       <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <h3>v0.11.0 <span class="tag current-tag">Current</span></h3>
+        <h3>v0.11.0</h3>
         <p>Swarm Stacks, Configs, Secrets, Trust - 18 tools: stack deploy, config/secret CRUD, Docker Content Trust.</p>
       </div>
 
       <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <h3>v0.12.0 <span class="tag upcoming-tag">Planned</span></h3>
+        <h3>v0.12.0 <span class="tag current-tag">Current</span></h3>
         <p>Niche, Scout, Extras - 10 tools: version info, Scout CVEs/recommendations, compose watch, plugin management.</p>
       </div>
 
       <div class="timeline-item">
         <div class="timeline-dot"></div>
         <h3>v1.0.0 <span class="tag upcoming-tag">Planned</span></h3>
-        <p>Stable release - finalized APIs, full test coverage, comprehensive docs, ~150 MCP tools.</p>
+        <p>Stable release - finalized APIs, full test coverage, comprehensive docs, 150 MCP tools.</p>
       </div>
 
     </div>

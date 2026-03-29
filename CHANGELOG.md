@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.12.0] - 2026-03-29
+
+### Added
+
+#### MCP Server - Niche, Scout, and Extras (+10, total 150)
+- `docker_version` - show Docker client and server version information (JSON format)
+- `docker_composeVersion` - show Docker Compose version information (JSON format)
+- `docker_composeWatch` - watch build context for Compose services and auto-rebuild on file changes (120s timeout)
+- `docker_scoutQuickview` - quick overview of image vulnerabilities using Docker Scout (requires Docker Desktop, 120s timeout)
+- `docker_scoutCves` - list CVEs found in an image with optional severity and only-fixed filters (120s timeout)
+- `docker_scoutRecommendations` - get base image update recommendations using Docker Scout (120s timeout)
+- `docker_pluginLs` - list installed Docker plugins (JSON format)
+- `docker_pluginInstall` - install a Docker plugin from a registry (grant-all-permissions, alias, 120s timeout)
+- `docker_pluginRm` - remove one or more Docker plugins (force option)
+- `docker_pluginEnable` - enable a disabled Docker plugin
+
+---
+
 ## [0.11.0] - 2026-03-29
 
 ### Added

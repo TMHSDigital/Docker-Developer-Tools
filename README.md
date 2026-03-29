@@ -11,7 +11,7 @@
 <p align="center">
   <a href="https://github.com/TMHSDigital/Docker-Developer-Tools/actions/workflows/validate.yml"><img src="https://img.shields.io/github/actions/workflow/status/TMHSDigital/Docker-Developer-Tools/validate.yml?branch=main&label=CI" alt="CI" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-CC--BY--NC--ND--4.0-blue" alt="License" /></a>
-  <img src="https://img.shields.io/badge/version-0.11.0-green" alt="Version" />
+  <img src="https://img.shields.io/badge/version-0.12.0-green" alt="Version" />
   <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/v/@tmhs/docker-mcp" alt="npm" /></a>
   <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/dm/@tmhs/docker-mcp" alt="npm downloads" /></a>
   <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/unpacked-size/@tmhs/docker-mcp" alt="npm size" /></a>
@@ -22,7 +22,7 @@
 </p>
 
 <p align="center">
-  <strong>17 skills</strong>&nbsp;&bull;&nbsp;<strong>10 rules</strong>&nbsp;&bull;&nbsp;<strong>140 MCP tools</strong>
+  <strong>17 skills</strong>&nbsp;&bull;&nbsp;<strong>10 rules</strong>&nbsp;&bull;&nbsp;<strong>150 MCP tools</strong>
 </p>
 
 ---
@@ -122,7 +122,7 @@ Add to your Cursor MCP config (`.cursor/mcp.json`):
 ```
 
 <details>
-<summary><strong>98 MCP Tools</strong> - full tool reference</summary>
+<summary><strong>150 MCP Tools</strong> - full tool reference</summary>
 
 &nbsp;
 
@@ -370,6 +370,36 @@ Add to your Cursor MCP config (`.cursor/mcp.json`):
 | `docker_trustSign` | Sign an image for Docker Content Trust |
 | `docker_trustRevoke` | Revoke trust for an image |
 | `docker_trustKey` | Manage signing keys (generate or load) |
+
+**Utility** (2)
+
+| Tool | What It Does |
+|---|---|
+| `docker_version` | Show Docker client and server version information |
+| `docker_composeVersion` | Show Docker Compose version information |
+
+**Compose Extras** (1)
+
+| Tool | What It Does |
+|---|---|
+| `docker_composeWatch` | Watch build context and auto-rebuild on file changes |
+
+**Docker Scout** (3)
+
+| Tool | What It Does |
+|---|---|
+| `docker_scoutQuickview` | Quick overview of image vulnerabilities |
+| `docker_scoutCves` | List CVEs found in an image with severity filters |
+| `docker_scoutRecommendations` | Get base image update recommendations |
+
+**Plugin Management** (4)
+
+| Tool | What It Does |
+|---|---|
+| `docker_pluginLs` | List installed Docker plugins |
+| `docker_pluginInstall` | Install a Docker plugin from a registry |
+| `docker_pluginRm` | Remove one or more Docker plugins |
+| `docker_pluginEnable` | Enable a disabled Docker plugin |
 
 </details>
 

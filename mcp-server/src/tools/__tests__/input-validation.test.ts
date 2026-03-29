@@ -3339,3 +3339,180 @@ describe("docker_trustKey input validation", () => {
     expect(() => schema.parse({ action: "delete" })).toThrow();
   });
 });
+
+// ---- v0.12.0 Utility ----
+
+describe("docker_version input validation", () => {
+  const schema = z.object({});
+
+  it("accepts empty input", () => {
+    const result = schema.parse({});
+    expect(result).toEqual({});
+  });
+});
+
+describe("docker_composeVersion input validation", () => {
+  const schema = z.object({});
+
+  it("accepts empty input", () => {
+    const result = schema.parse({});
+    expect(result).toEqual({});
+  });
+});
+
+// ---- v0.12.0 Compose extras ----
+
+describe("docker_composeWatch input validation", () => {
+  const schema = z.object({
+    projectDirectory: z.string().min(1),
+    services: z.array(z.string()).optional(),
+    noUp: z.boolean().optional().default(false),
+    quiet: z.boolean().optional().default(false),
+  });
+
+  it("accepts required fields", () => {
+    const result = schema.parse({ projectDirectory: "/app" });
+    expect(result.projectDirectory).toBe("/app");
+    expect(result.noUp).toBe(false);
+  });
+
+  it("accepts with services", () => {
+    const result = schema.parse({ projectDirectory: "/app", services: ["web", "api"] });
+    expect(result.services).toEqual(["web", "api"]);
+  });
+
+  it("accepts with options", () => {
+    const result = schema.parse({ projectDirectory: "/app", noUp: true, quiet: true });
+    expect(result.noUp).toBe(true);
+    expect(result.quiet).toBe(true);
+  });
+
+  it("rejects empty projectDirectory", () => {
+    expect(() => schema.parse({ projectDirectory: "" })).toThrow();
+  });
+});
+
+// ---- v0.12.0 Docker Scout ----
+
+describe("docker_scoutQuickview input validation", () => {
+  const schema = z.object({
+    image: z.string().min(1),
+  });
+
+  it("accepts image", () => {
+    const result = schema.parse({ image: "nginx:latest" });
+    expect(result.image).toBe("nginx:latest");
+  });
+
+  it("rejects empty image", () => {
+    expect(() => schema.parse({ image: "" })).toThrow();
+  });
+});
+
+describe("docker_scoutCves input validation", () => {
+  const schema = z.object({
+    image: z.string().min(1),
+    onlyFixed: z.boolean().optional().default(false),
+    severities: z.string().optional(),
+  });
+
+  it("accepts image only", () => {
+    const result = schema.parse({ image: "nginx:latest" });
+    expect(result.onlyFixed).toBe(false);
+  });
+
+  it("accepts with filters", () => {
+    const result = schema.parse({ image: "nginx", onlyFixed: true, severities: "critical,high" });
+    expect(result.onlyFixed).toBe(true);
+    expect(result.severities).toBe("critical,high");
+  });
+
+  it("rejects empty image", () => {
+    expect(() => schema.parse({ image: "" })).toThrow();
+  });
+});
+
+describe("docker_scoutRecommendations input validation", () => {
+  const schema = z.object({
+    image: z.string().min(1),
+  });
+
+  it("accepts image", () => {
+    const result = schema.parse({ image: "node:18" });
+    expect(result.image).toBe("node:18");
+  });
+
+  it("rejects empty image", () => {
+    expect(() => schema.parse({ image: "" })).toThrow();
+  });
+});
+
+// ---- v0.12.0 Plugin management ----
+
+describe("docker_pluginLs input validation", () => {
+  const schema = z.object({});
+
+  it("accepts empty input", () => {
+    const result = schema.parse({});
+    expect(result).toEqual({});
+  });
+});
+
+describe("docker_pluginInstall input validation", () => {
+  const schema = z.object({
+    plugin: z.string().min(1),
+    grantAllPermissions: z.boolean().optional().default(true),
+    alias: z.string().optional(),
+  });
+
+  it("accepts plugin name", () => {
+    const result = schema.parse({ plugin: "vieux/sshfs" });
+    expect(result.plugin).toBe("vieux/sshfs");
+    expect(result.grantAllPermissions).toBe(true);
+  });
+
+  it("accepts with alias", () => {
+    const result = schema.parse({ plugin: "vieux/sshfs", alias: "sshfs" });
+    expect(result.alias).toBe("sshfs");
+  });
+
+  it("rejects empty plugin", () => {
+    expect(() => schema.parse({ plugin: "" })).toThrow();
+  });
+});
+
+describe("docker_pluginRm input validation", () => {
+  const schema = z.object({
+    plugins: z.array(z.string()).min(1),
+    force: z.boolean().optional().default(false),
+  });
+
+  it("accepts plugins", () => {
+    const result = schema.parse({ plugins: ["vieux/sshfs"] });
+    expect(result.plugins).toEqual(["vieux/sshfs"]);
+  });
+
+  it("accepts with force", () => {
+    const result = schema.parse({ plugins: ["p1"], force: true });
+    expect(result.force).toBe(true);
+  });
+
+  it("rejects empty array", () => {
+    expect(() => schema.parse({ plugins: [] })).toThrow();
+  });
+});
+
+describe("docker_pluginEnable input validation", () => {
+  const schema = z.object({
+    plugin: z.string().min(1),
+  });
+
+  it("accepts plugin name", () => {
+    const result = schema.parse({ plugin: "vieux/sshfs" });
+    expect(result.plugin).toBe("vieux/sshfs");
+  });
+
+  it("rejects empty plugin", () => {
+    expect(() => schema.parse({ plugin: "" })).toThrow();
+  });
+});

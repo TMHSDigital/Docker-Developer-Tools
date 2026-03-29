@@ -52,10 +52,16 @@ import { register as registerNetworkPrune } from "./tools/networkPrune.js";
 import { register as registerSystemPrune } from "./tools/systemPrune.js";
 import { register as registerContainerPrune } from "./tools/containerPrune.js";
 import { register as registerImagePrune } from "./tools/imagePrune.js";
+import { register as registerCp } from "./tools/cp.js";
+import { register as registerStats } from "./tools/stats.js";
+import { register as registerTop } from "./tools/top.js";
+import { register as registerEvents } from "./tools/events.js";
+import { register as registerUpdate } from "./tools/update.js";
+import { register as registerWait } from "./tools/wait.js";
 
 const server = new McpServer({
   name: "docker-mcp",
-  version: "0.5.0",
+  version: "0.6.0",
 });
 
 registerListContainers(server);
@@ -107,6 +113,12 @@ registerNetworkPrune(server);
 registerSystemPrune(server);
 registerContainerPrune(server);
 registerImagePrune(server);
+registerCp(server);
+registerStats(server);
+registerTop(server);
+registerEvents(server);
+registerUpdate(server);
+registerWait(server);
 
 async function main(): Promise<void> {
   const transport = new StdioServerTransport();

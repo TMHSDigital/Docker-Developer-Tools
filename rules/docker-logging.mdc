@@ -1,0 +1,70 @@
+---
+description: Flag missing or misconfigured logging drivers and log rotation settings in Docker and Compose files.
+alwaysApply: false
+globs:
+  - "**/Dockerfile*"
+  - "**/docker-compose*.yml"
+  - "**/docker-compose*.yaml"
+  - "**/compose*.yml"
+  - "**/compose*.yaml"
+---
+
+# Docker Logging Validation Rules
+
+## Patterns to Flag
+
+### Missing Logging Configuration
+- Compose services without a `logging:` block in production configurations
+- No logging driver specified (defaults to `json-file` with no rotation, which fills disk)
+- Services that write high-volume logs without any log management
+
+### Missing Log Rotation
+- `logging: driver: json-file` without `max-size` and `max-file` options
+- Missing `max-size` option on any file-based logging driver
+- Missing `max-file` option (logs accumulate without bound)
+
+### Oversized Log Limits
+- `max-size` values above `100m` for most services - this is usually excessive and risks filling disk before rotation kicks in
+- `max-file` values above `10` without clear justification
+
+### Dockerfile Concerns
+- Applications that log to files inside the container instead of stdout/stderr - this bypasses Docker's logging driver entirely
+- Custom log paths without volume mounts (logs lost on container removal)
+
+## What to Do
+
+- Add a `logging:` block to every compose service that runs in production:
+  ```yaml
+  logging:
+    driver: json-file
+    options:
+      max-size: "10m"
+      max-file: "3"
+  ```
+- For high-volume services, consider `local` driver which is more performant:
+  ```yaml
+  logging:
+    driver: local
+    options:
+      max-size: "10m"
+      max-file: "5"
+  ```
+- Ensure applications log to stdout/stderr, not to files inside the container
+- For centralized logging, use `fluentd`, `gelf`, or `syslog` drivers with appropriate endpoints
+- Set daemon-level defaults in `/etc/docker/daemon.json` as a safety net:
+  ```json
+  {
+    "log-driver": "json-file",
+    "log-opts": {
+      "max-size": "10m",
+      "max-file": "3"
+    }
+  }
+  ```
+
+## Exceptions
+
+- Development compose files may omit logging configuration
+- Services using external log aggregation (fluentd, Loki, CloudWatch) handle rotation externally
+- Short-lived batch/job containers that run and exit quickly
+- `driver: none` is acceptable for services whose output is intentionally discarded

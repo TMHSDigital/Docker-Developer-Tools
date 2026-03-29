@@ -4,7 +4,7 @@
 
 ## Current Status
 
-**v0.5.0** - Volumes, Networks, and Cleanup release with 12 skills, 6 rules, and 49 MCP tools.
+**v0.6.0** - Advanced and Observability release with 13 skills, 7 rules, and 55 MCP tools.
 
 ## Release Plan
 
@@ -14,8 +14,8 @@
 | v0.2.0 | Container Lifecycle | +10 | 20 | +0 | +0 | Released |
 | v0.3.0 | Image and Build | +8 | 28 | +0 | +0 | Released |
 | v0.4.0 | Compose | +8 | 36 | +1 | +1 | Released |
-| v0.5.0 | Volumes, Networks, Cleanup | +13 | 49 | +0 | +0 | (current) |
-| v0.6.0 | Advanced and Observability | +6 | 55 | +1 | +1 | Planned |
+| v0.5.0 | Volumes, Networks, Cleanup | +13 | 49 | +0 | +0 | Released |
+| v0.6.0 | Advanced and Observability | +6 | 55 | +1 | +1 | (current) |
 | v0.7.0 | Buildx and Multi-platform | +5 | 60 | +0 | +0 | Planned |
 | v0.8.0 | Polish | +0 | 60 | +0 | +0 | Planned |
 | v1.0.0 | Stable | +0 | 60 | +0 | +0 | Planned |
@@ -225,8 +225,9 @@ All destructive MCP tools (`rm`, `rmi`, `prune`, `kill`, `down`) will:
 - [x] 13 volume, network, and cleanup tools (volumeCreate/Rm/Inspect/Prune, networkCreate/Rm/Connect/Disconnect/Inspect/Prune, systemPrune, containerPrune, imagePrune)
 - [x] VolumeNotFoundError and NetworkNotFoundError error classes
 - [x] npm publish of @tmhs/docker-mcp with GitHub Actions automation
-- [x] 12 skills covering core Docker workflows
-- [x] 6 rules for Dockerfile and compose validation
+- [x] 6 advanced/observability tools (cp, stats, top, events, update, wait)
+- [x] 13 skills covering core Docker workflows
+- [x] 7 rules for Dockerfile and compose validation
 - [x] Python test suite for structure validation
 - [x] Vitest test suite for MCP server
 - [x] GitHub Actions CI/CD workflows

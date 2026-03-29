@@ -1191,3 +1191,183 @@ describe("docker_imagePrune input validation", () => {
     expect(result.filter).toBe("until=24h");
   });
 });
+
+// --- v0.6.0: Advanced and Observability ---
+
+describe("docker_cp input validation", () => {
+  const schema = z.object({
+    source: z.string().min(1),
+    destination: z.string().min(1),
+    archive: z.boolean().optional().default(false),
+    followLink: z.boolean().optional().default(false),
+  });
+
+  it("requires source and destination", () => {
+    expect(() => schema.parse({})).toThrow();
+    expect(() => schema.parse({ source: "container:/app" })).toThrow();
+  });
+
+  it("rejects empty strings", () => {
+    expect(() =>
+      schema.parse({ source: "", destination: "/tmp" }),
+    ).toThrow();
+  });
+
+  it("accepts valid paths", () => {
+    const result = schema.parse({
+      source: "mycontainer:/app/logs",
+      destination: "./logs",
+    });
+    expect(result.source).toBe("mycontainer:/app/logs");
+    expect(result.destination).toBe("./logs");
+    expect(result.archive).toBe(false);
+    expect(result.followLink).toBe(false);
+  });
+
+  it("accepts optional flags", () => {
+    const result = schema.parse({
+      source: "/tmp/config.json",
+      destination: "mycontainer:/app/config.json",
+      archive: true,
+      followLink: true,
+    });
+    expect(result.archive).toBe(true);
+    expect(result.followLink).toBe(true);
+  });
+});
+
+describe("docker_stats input validation", () => {
+  const schema = z.object({
+    containers: z.array(z.string()).optional(),
+    noStream: z.boolean().optional().default(true),
+  });
+
+  it("accepts empty for all containers", () => {
+    const result = schema.parse({});
+    expect(result.containers).toBeUndefined();
+    expect(result.noStream).toBe(true);
+  });
+
+  it("accepts container list", () => {
+    const result = schema.parse({ containers: ["web", "db"] });
+    expect(result.containers).toEqual(["web", "db"]);
+  });
+
+  it("accepts noStream false", () => {
+    const result = schema.parse({ noStream: false });
+    expect(result.noStream).toBe(false);
+  });
+});
+
+describe("docker_top input validation", () => {
+  const schema = z.object({
+    containerId: z.string().min(1),
+    psArgs: z.string().optional(),
+  });
+
+  it("requires containerId", () => {
+    expect(() => schema.parse({})).toThrow();
+  });
+
+  it("rejects empty containerId", () => {
+    expect(() => schema.parse({ containerId: "" })).toThrow();
+  });
+
+  it("accepts containerId only", () => {
+    const result = schema.parse({ containerId: "myapp" });
+    expect(result.containerId).toBe("myapp");
+    expect(result.psArgs).toBeUndefined();
+  });
+
+  it("accepts psArgs", () => {
+    const result = schema.parse({ containerId: "myapp", psArgs: "aux" });
+    expect(result.psArgs).toBe("aux");
+  });
+});
+
+describe("docker_events input validation", () => {
+  const schema = z.object({
+    since: z.string().optional(),
+    until: z.string().optional(),
+    filter: z.array(z.string()).optional(),
+  });
+
+  it("accepts empty", () => {
+    const result = schema.parse({});
+    expect(result.since).toBeUndefined();
+    expect(result.until).toBeUndefined();
+    expect(result.filter).toBeUndefined();
+  });
+
+  it("accepts since and until", () => {
+    const result = schema.parse({ since: "10m", until: "0s" });
+    expect(result.since).toBe("10m");
+    expect(result.until).toBe("0s");
+  });
+
+  it("accepts filters", () => {
+    const result = schema.parse({
+      filter: ["type=container", "event=start"],
+    });
+    expect(result.filter).toEqual(["type=container", "event=start"]);
+  });
+});
+
+describe("docker_update input validation", () => {
+  const schema = z.object({
+    containerId: z.string().min(1),
+    cpus: z.number().optional(),
+    memory: z.string().optional(),
+    memorySwap: z.string().optional(),
+    cpuShares: z.number().optional(),
+    restartPolicy: z.string().optional(),
+  });
+
+  it("requires containerId", () => {
+    expect(() => schema.parse({})).toThrow();
+  });
+
+  it("rejects empty containerId", () => {
+    expect(() => schema.parse({ containerId: "" })).toThrow();
+  });
+
+  it("accepts containerId only", () => {
+    const result = schema.parse({ containerId: "myapp" });
+    expect(result.containerId).toBe("myapp");
+  });
+
+  it("accepts all resource options", () => {
+    const result = schema.parse({
+      containerId: "myapp",
+      cpus: 1.5,
+      memory: "512m",
+      memorySwap: "1g",
+      cpuShares: 512,
+      restartPolicy: "unless-stopped",
+    });
+    expect(result.cpus).toBe(1.5);
+    expect(result.memory).toBe("512m");
+    expect(result.memorySwap).toBe("1g");
+    expect(result.cpuShares).toBe(512);
+    expect(result.restartPolicy).toBe("unless-stopped");
+  });
+});
+
+describe("docker_wait input validation", () => {
+  const schema = z.object({
+    containerId: z.string().min(1),
+  });
+
+  it("requires containerId", () => {
+    expect(() => schema.parse({})).toThrow();
+  });
+
+  it("rejects empty containerId", () => {
+    expect(() => schema.parse({ containerId: "" })).toThrow();
+  });
+
+  it("accepts valid containerId", () => {
+    const result = schema.parse({ containerId: "batch-job-1" });
+    expect(result.containerId).toBe("batch-job-1");
+  });
+});

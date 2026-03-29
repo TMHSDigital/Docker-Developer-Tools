@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.0] - 2026-03-29
+
+### Added
+
+#### MCP Server - Advanced and Observability Tools (+6, total 55)
+- `docker_cp` - copy files or directories between a container and the local filesystem (archive, follow-link options)
+- `docker_stats` - show live resource usage statistics for containers (CPU, memory, network I/O)
+- `docker_top` - show running processes in a container (with optional ps arguments)
+- `docker_events` - stream real-time events from the Docker daemon (since, until, filter options)
+- `docker_update` - update container resource configuration live (CPU, memory, restart policy)
+- `docker_wait` - block until a container stops and return its exit code
+
+#### Plugin
+- `docker-advanced-workflows` skill - multi-stage pipelines, sidecar patterns, healthchecks, init containers, signal handling, graceful shutdown
+- `docker-logging` rule - flag missing logging drivers and log rotation settings in Docker and Compose files
+
+### Changed
+- Updated npm publish workflow to use OIDC trusted publishers (no NPM_TOKEN secret needed)
+
+---
+
 ## [0.5.0] - 2026-03-29
 
 ### Added
@@ -161,6 +182,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Python test suite: plugin manifest, skills, rules, docs consistency, internal links, roadmap
 - Vitest test suite: error classes, docker-api utilities, input validation
 
+[0.6.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.6.0
 [0.5.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.5.0
 [0.4.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.4.0
 [0.3.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.3.0

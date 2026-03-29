@@ -11,7 +11,7 @@
 <p align="center">
   <a href="https://github.com/TMHSDigital/Docker-Developer-Tools/actions/workflows/validate.yml"><img src="https://img.shields.io/github/actions/workflow/status/TMHSDigital/Docker-Developer-Tools/validate.yml?branch=main&label=CI" alt="CI" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-CC--BY--NC--ND--4.0-blue" alt="License" /></a>
-  <img src="https://img.shields.io/badge/version-0.5.0-green" alt="Version" />
+  <img src="https://img.shields.io/badge/version-0.6.0-green" alt="Version" />
   <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/v/@tmhs/docker-mcp" alt="npm" /></a>
   <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/dm/@tmhs/docker-mcp" alt="npm downloads" /></a>
   <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/unpacked-size/@tmhs/docker-mcp" alt="npm size" /></a>
@@ -22,7 +22,7 @@
 </p>
 
 <p align="center">
-  <strong>12 skills</strong>&nbsp;&bull;&nbsp;<strong>6 rules</strong>&nbsp;&bull;&nbsp;<strong>49 MCP tools</strong>
+  <strong>13 skills</strong>&nbsp;&bull;&nbsp;<strong>7 rules</strong>&nbsp;&bull;&nbsp;<strong>55 MCP tools</strong>
 </p>
 
 ---
@@ -50,7 +50,7 @@ flowchart LR
 ---
 
 <details>
-<summary><strong>12 Skills</strong> - on-demand Docker expertise</summary>
+<summary><strong>13 Skills</strong> - on-demand Docker expertise</summary>
 
 &nbsp;
 
@@ -68,11 +68,12 @@ flowchart LR
 | **DevOps** | `docker-registry` | Private registries, image tagging strategies, cleanup policies |
 | **DevOps** | `docker-development-env` | Dev containers, hot reload, debugger attachment, local stacks |
 | **Debugging** | `container-debugging` | Exec into containers, log analysis, health checks, process inspection |
+| **Advanced** | `docker-advanced-workflows` | Multi-stage pipelines, sidecar patterns, healthchecks, signal handling |
 
 </details>
 
 <details>
-<summary><strong>6 Rules</strong> - automatic best-practice enforcement</summary>
+<summary><strong>7 Rules</strong> - automatic best-practice enforcement</summary>
 
 &nbsp;
 
@@ -84,6 +85,7 @@ flowchart LR
 | `docker-resource-limits` | Docker-related files | Flag missing memory and CPU limits |
 | `docker-image-pinning` | Dockerfiles, compose files | Flag unpinned image tags (`:latest` or no tag) |
 | `docker-port-conflicts` | Dockerfiles, compose files | Flag commonly conflicting port mappings |
+| `docker-logging` | Dockerfiles, compose files | Flag missing logging drivers and log rotation |
 
 </details>
 
@@ -113,7 +115,7 @@ Add to your Cursor MCP config (`.cursor/mcp.json`):
 ```
 
 <details>
-<summary><strong>49 MCP Tools</strong> - full tool reference</summary>
+<summary><strong>55 MCP Tools</strong> - full tool reference</summary>
 
 &nbsp;
 
@@ -201,6 +203,17 @@ Add to your Cursor MCP config (`.cursor/mcp.json`):
 | `docker_containerPrune` | Remove all stopped containers |
 | `docker_imagePrune` | Remove dangling or unused images |
 
+**Advanced / Observability** (6)
+
+| Tool | What It Does |
+|---|---|
+| `docker_cp` | Copy files or directories between a container and the local filesystem |
+| `docker_stats` | Show live resource usage statistics (CPU, memory, network I/O) |
+| `docker_top` | Show running processes in a container |
+| `docker_events` | Stream real-time events from the Docker daemon |
+| `docker_update` | Update container resource configuration (CPU, memory, restart policy) |
+| `docker_wait` | Block until a container stops and return its exit code |
+
 </details>
 
 ---
@@ -257,6 +270,7 @@ Then add the JSON config from the [MCP Server section](#companion-docker-mcp-ser
 | `docker-registry` | "Set up a private registry with authentication" |
 | `docker-development-env` | "Create a dev container with hot reload for my Go project" |
 | `container-debugging` | "Show me the logs and processes inside my crashing container" |
+| `docker-advanced-workflows` | "Set up healthchecks and graceful shutdown for my Node.js container" |
 
 </details>
 

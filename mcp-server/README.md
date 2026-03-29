@@ -1,6 +1,6 @@
 # @tmhs/docker-mcp
 
-MCP server for Docker CLI integration - 49 tools for containers, images, Compose, volumes, networks, cleanup, and system info.
+MCP server for Docker CLI integration - 55 tools for containers, images, Compose, volumes, networks, cleanup, observability, and system info.
 
 Part of the [Docker Developer Tools](https://github.com/TMHSDigital/Docker-Developer-Tools) Cursor plugin.
 
@@ -48,7 +48,7 @@ Or if installed globally:
 }
 ```
 
-## Tools (49)
+## Tools (55)
 
 ### Read / Inspect (10)
 
@@ -133,6 +133,17 @@ Or if installed globally:
 | `docker_systemPrune` | Remove unused containers, networks, images |
 | `docker_containerPrune` | Remove stopped containers |
 | `docker_imagePrune` | Remove unused images |
+
+### Advanced / Observability (6)
+
+| Tool | Description |
+|------|-------------|
+| `docker_cp` | Copy files between container and host |
+| `docker_stats` | Live resource usage statistics |
+| `docker_top` | Running processes in a container |
+| `docker_events` | Real-time Docker daemon events |
+| `docker_update` | Update container resource config |
+| `docker_wait` | Wait for container to stop |
 
 ## License
 

@@ -4,11 +4,11 @@ Project documentation for Claude Code and AI assistants working on this reposito
 
 ## Project Overview
 
-Docker Developer Tools is a Cursor IDE plugin that integrates Docker and container workflows into Cursor's AI chat. It includes 12 skills, 6 rules, and a companion MCP server with 49 tools for live Docker CLI integration.
+Docker Developer Tools is a Cursor IDE plugin that integrates Docker and container workflows into Cursor's AI chat. It includes 13 skills, 7 rules, and a companion MCP server with 55 tools for live Docker CLI integration.
 
 This is a monorepo - the Cursor plugin (skills and rules) and the companion MCP server live in the same repository. Docker's API is local (Docker Engine socket / CLI), so one repo is simpler for users to install and maintain.
 
-**Version:** 0.5.0
+**Version:** 0.6.0
 **License:** CC-BY-NC-ND-4.0
 **Author:** TMHSDigital
 
@@ -35,7 +35,7 @@ Docker-Developer-Tools/
   tests/                     # Python structure tests
 ```
 
-## Skills (12)
+## Skills (13)
 
 | Skill | Description |
 |-------|-------------|
@@ -51,8 +51,9 @@ Docker-Developer-Tools/
 | `docker-troubleshooting` | Common Docker problem diagnosis |
 | `docker-development-env` | Development environments with Docker |
 | `docker-resource-management` | Resource limits and monitoring |
+| `docker-advanced-workflows` | Multi-stage pipelines, sidecar patterns, healthchecks, signal handling |
 
-## Rules (6)
+## Rules (7)
 
 | Rule | Scope | Description |
 |------|-------|-------------|
@@ -62,8 +63,9 @@ Docker-Developer-Tools/
 | `docker-resource-limits` | Docker-related files | Flag missing resource limits |
 | `docker-image-pinning` | Dockerfiles, compose files | Flag unpinned image tags |
 | `docker-port-conflicts` | Dockerfiles, compose files | Flag port conflicts |
+| `docker-logging` | Dockerfiles, compose files | Flag missing logging drivers and log rotation |
 
-## MCP Server (49 tools)
+## MCP Server (55 tools)
 
 The MCP server talks to Docker via CLI exec (`docker` commands) rather than the Docker Engine REST API. It uses stdio transport and requires `docker` to be available on PATH.
 
@@ -150,6 +152,17 @@ The MCP server talks to Docker via CLI exec (`docker` commands) rather than the 
 | `docker_systemPrune` | Remove unused containers, networks, images, volumes |
 | `docker_containerPrune` | Remove all stopped containers |
 | `docker_imagePrune` | Remove dangling or unused images |
+
+### Advanced / Observability (6)
+
+| Tool | Description |
+|------|-------------|
+| `docker_cp` | Copy files between container and host |
+| `docker_stats` | Live resource usage (CPU, memory, net I/O) |
+| `docker_top` | Running processes in a container |
+| `docker_events` | Real-time Docker daemon events |
+| `docker_update` | Update container resource config live |
+| `docker_wait` | Block until container stops, return exit code |
 
 ## Development Workflow
 
@@ -269,3 +282,9 @@ Full checklist with copy-paste commands: [CONTRIBUTING.md - Release Checklist](C
 | `docker system prune -f` | `docker_systemPrune` |
 | `docker container prune -f` | `docker_containerPrune` |
 | `docker image prune -f` | `docker_imagePrune` |
+| `docker cp` | `docker_cp` |
+| `docker stats --no-stream --format json` | `docker_stats` |
+| `docker top` | `docker_top` |
+| `docker events --format json` | `docker_events` |
+| `docker update` | `docker_update` |
+| `docker wait` | `docker_wait` |

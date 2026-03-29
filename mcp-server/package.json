@@ -1,7 +1,7 @@
 {
   "name": "@tmhs/docker-mcp",
-  "version": "0.5.0",
-  "description": "MCP server for Docker CLI integration - 49 tools for containers, images, compose, volumes, networks, cleanup, and system info. Full lifecycle, image pipeline, Compose V2, volume/network CRUD, and resource pruning.",
+  "version": "0.6.0",
+  "description": "MCP server for Docker CLI integration - 55 tools for containers, images, compose, volumes, networks, cleanup, observability, and system info. Full lifecycle, image pipeline, Compose V2, volume/network CRUD, resource pruning, and live monitoring.",
   "type": "module",
   "main": "dist/index.js",
   "bin": {

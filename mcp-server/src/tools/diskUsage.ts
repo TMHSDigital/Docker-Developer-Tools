@@ -8,12 +8,10 @@ export function register(server: McpServer): void {
     {},
     async () => {
       try {
-        const output = await execDocker([
-          "system",
-          "df",
-          "--format",
-          "json",
-        ]);
+        const output = await execDocker(
+          ["system", "df", "--format", "json"],
+          { timeout: 120_000 },
+        );
 
         const lines = output.trim().split("\n").filter(Boolean);
         const usage = lines.map((line) => JSON.parse(line));

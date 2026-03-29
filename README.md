@@ -184,14 +184,17 @@ One prompt per skill showing practical usage:
 
 ## Roadmap
 
-| Version | Theme | Highlights |
-|---|---|---|
-| **v0.1.0** | Foundation | 12 skills, 6 rules, 10 read-only MCP tools |
-| **v0.2.0** | Compose & Build | Compose status/config tools, image build tools |
-| **v0.3.0** | Container Ops | Start, stop, remove, exec MCP tools |
-| **v0.4.0** | Advanced | Prune, stats, export, push MCP tools |
-| **v0.5.0** | Polish | Cross-references, pitfalls, documentation |
-| **v1.0.0** | Stable | Production release, npm publish |
+| Version | Theme | MCP Tools | Highlights |
+|---|---|---|---|
+| **v0.1.0** | Foundation | 10 | 12 skills, 6 rules, 10 read-only MCP tools |
+| **v0.2.0** | Container Lifecycle | +10 | run, start, stop, restart, kill, rm, exec, pause |
+| **v0.3.0** | Image and Build | +8 | pull, push, build, tag, rmi, commit, save, load |
+| **v0.4.0** | Compose | +8 | up, down, ps, logs, build, restart, pull, exec |
+| **v0.5.0** | Volumes, Networks, Cleanup | +12 | volume/network CRUD, system/container/image prune |
+| **v0.6.0** | Advanced and Observability | +6 | cp, stats, top, events, update, wait |
+| **v0.7.0** | Buildx and Multi-platform | +5 | Multi-arch builds, builder management |
+| **v0.8.0** | Polish | +0 | Cross-references, pitfalls, documentation |
+| **v1.0.0** | Stable | +0 | Production release, npm publish (~59 MCP tools) |
 
 ---
 

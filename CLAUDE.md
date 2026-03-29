@@ -4,9 +4,11 @@ Project documentation for Claude Code and AI assistants working on this reposito
 
 ## Project Overview
 
-Docker Developer Tools is a Cursor IDE plugin that integrates Docker and container workflows into Cursor's AI chat. It includes 17 skills, 10 rules, and a companion MCP server with 150 tools for live Docker CLI integration.
+Docker Developer Tools integrates Docker and container workflows into AI-assisted development. It includes 17 skills, 10 rules, and a companion MCP server with 150 tools for live Docker CLI integration.
 
-This is a monorepo - the Cursor plugin (skills and rules) and the companion MCP server live in the same repository. Docker's API is local (Docker Engine socket / CLI), so one repo is simpler for users to install and maintain.
+**Works with:** Cursor (plugin), Claude Code (terminal and in-editor), and any MCP-compatible client.
+
+This is a monorepo - the skills, rules, and companion MCP server live in the same repository. Docker's API is local (Docker Engine socket / CLI), so one repo is simpler for users to install and maintain.
 
 **Version:** 1.0.0
 **License:** CC-BY-NC-ND-4.0

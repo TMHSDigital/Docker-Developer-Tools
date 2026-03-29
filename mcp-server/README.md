@@ -2,7 +2,7 @@
 
 MCP server for Docker CLI integration - 150 tools for containers, images, complete Compose V2, volumes, networks, cleanup, observability, buildx, manifests, contexts, registry auth, Swarm orchestration, stacks, configs, secrets, content trust, Scout, plugins, and system info.
 
-Part of the [Docker Developer Tools](https://github.com/TMHSDigital/Docker-Developer-Tools) Cursor plugin.
+Part of [Docker Developer Tools](https://github.com/TMHSDigital/Docker-Developer-Tools) - works with Cursor, Claude Code, and any MCP-compatible client.
 
 ## Requirements
 

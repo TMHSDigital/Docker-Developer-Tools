@@ -5,7 +5,7 @@
 <h1 align="center">Docker Developer Tools</h1>
 
 <p align="center">
-  <strong>Expert Docker workflows, directly inside Cursor.</strong>
+  <strong>Expert Docker workflows for Cursor, Claude Code, and any MCP-compatible editor.</strong>
 </p>
 
 <p align="center">
@@ -34,9 +34,22 @@
 
 ---
 
+## Compatibility
+
+This project works with any AI coding tool that supports skills, rules, or MCP:
+
+| Component | Cursor | Claude Code (terminal) | Claude Code in Cursor | Other MCP clients |
+|---|:---:|:---:|:---:|:---:|
+| **CLAUDE.md** context | Yes | Yes | Yes | - |
+| **17 Skills** (SKILL.md) | Yes | Yes | Yes | - |
+| **10 Rules** (.mdc) | Yes | Via CLAUDE.md | Yes | - |
+| **150 MCP tools** | Yes | Yes | Yes | Yes |
+
+> **Claude Code** reads `CLAUDE.md` automatically and can reference skills. The MCP server works with any client that supports the MCP stdio transport.
+
 ## Quick Start
 
-Install the plugin, then ask Cursor anything about Docker:
+Install the plugin, then ask anything about Docker:
 
 ```text
 "Write a production Dockerfile for my Node.js app with multi-stage builds"
@@ -48,7 +61,7 @@ Install the plugin, then ask Cursor anything about Docker:
 
 ```mermaid
 flowchart LR
-    A[User asks Docker question] --> B[Cursor loads a Skill]
+    A[User asks Docker question] --> B[AI loads a Skill]
     B --> C[Skill guides the response]
     C --> D[MCP tools fetch live Docker data]
     D --> E[User gets expert help]
@@ -107,7 +120,7 @@ flowchart LR
 
 ## Companion: Docker MCP Server
 
-The MCP server gives Cursor live access to your local Docker environment.
+The MCP server gives your AI assistant live access to your local Docker environment. Works with Cursor, Claude Code, and any MCP-compatible client.
 
 <p>
   <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/v/@tmhs/docker-mcp" alt="npm version" /></a>
@@ -417,7 +430,7 @@ Add to your Cursor MCP config (`.cursor/mcp.json`):
 
 &nbsp;
 
-### Plugin
+### Cursor (plugin + MCP)
 
 Symlink this repo into your Cursor plugins directory:
 
@@ -433,7 +446,7 @@ New-Item -ItemType SymbolicLink `
 ln -s /path/to/Docker-Developer-Tools ~/.cursor/plugins/docker-developer-tools
 ```
 
-### MCP Server
+Build and configure the MCP server:
 
 ```bash
 cd mcp-server
@@ -442,6 +455,26 @@ npm run build
 ```
 
 Then add the JSON config from the [MCP Server section](#companion-docker-mcp-server) to `.cursor/mcp.json`.
+
+### Claude Code (terminal or in Cursor)
+
+Claude Code reads `CLAUDE.md` automatically when you open this repo. For the MCP server, register it with:
+
+```bash
+cd mcp-server && npm install && npm run build
+claude mcp add docker node ./mcp-server/dist/index.js
+```
+
+Or if installed globally via npm:
+
+```bash
+npm install -g @tmhs/docker-mcp
+claude mcp add docker -- npx @tmhs/docker-mcp
+```
+
+### Other MCP clients
+
+Any client supporting MCP stdio transport can use the Docker MCP server. Point it at `node ./mcp-server/dist/index.js` or the global `npx @tmhs/docker-mcp`.
 
 </details>
 

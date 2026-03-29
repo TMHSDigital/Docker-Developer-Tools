@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Docker Developer Tools - Cursor Plugin</title>
-<meta name="description" content="Expert Docker workflows inside Cursor IDE. 17 skills, 10 rules, 150 MCP tools.">
+<title>Docker Developer Tools - Cursor, Claude Code &amp; MCP</title>
+<meta name="description" content="Expert Docker workflows for Cursor, Claude Code, and MCP-compatible editors. 17 skills, 10 rules, 150 MCP tools.">
 <meta name="theme-color" content="#0db7ed">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Docker Developer Tools - Cursor Plugin">
-<meta property="og:description" content="Expert Docker workflows inside Cursor IDE. 17 skills, 10 rules, 150 MCP tools.">
+<meta property="og:title" content="Docker Developer Tools - Cursor, Claude Code &amp; MCP">
+<meta property="og:description" content="Expert Docker workflows for Cursor, Claude Code, and MCP-compatible editors. 17 skills, 10 rules, 150 MCP tools.">
 <meta property="og:image" content="docs/assets/og-card.jpg">
 <meta property="og:url" content="https://tmhsdigital.github.io/Docker-Developer-Tools/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -328,11 +328,13 @@ section{padding:72px 0}
 <section class="hero" id="hero">
   <div class="hero-logo"><img src="assets/logo-256.png" alt="Docker Logo" width="64" height="64"></div>
   <h1><span>Docker</span> Developer Tools</h1>
-  <p class="tagline">Expert Docker workflows, live container data, and real-time linting - all inside Cursor IDE.</p>
+  <p class="tagline">Expert Docker workflows, live container data, and real-time linting - for Cursor, Claude Code, and any MCP client.</p>
   <div class="pills">
     <span class="pill blue">v1.0.0</span>
     <span class="pill">CC BY-NC-ND 4.0</span>
-    <span class="pill">Cursor Plugin</span>
+    <span class="pill">Cursor</span>
+    <span class="pill">Claude Code</span>
+    <span class="pill">MCP</span>
   </div>
   <div class="hero-actions">
     <a href="#get-started" class="btn btn-primary"><svg viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg> Get Started</a>
@@ -396,7 +398,7 @@ section{padding:72px 0}
       <div class="step reveal">
         <div class="step-num">1</div>
         <h3>Ask a Docker Question</h3>
-        <p>Type your question in Cursor's AI chat - anything from Dockerfile syntax to debugging a crashing container.</p>
+        <p>Type your question in Cursor or Claude Code - anything from Dockerfile syntax to debugging a crashing container.</p>
         <span class="step-arrow">&rarr;</span>
       </div>
       <div class="step reveal">
@@ -729,6 +731,7 @@ section{padding:72px 0}
       <div class="install-step"><div class="step-marker">2</div><div class="step-content"><h3>Symlink into Cursor plugins</h3><p>macOS / Linux:</p><div class="code-block">ln -s "$(pwd)" ~/.cursor/plugins/docker-developer-tools<button class="copy-btn" onclick="copyCode(this)">Copy</button></div><p style="margin-top:12px">Windows (PowerShell as Admin):</p><div class="code-block" style="margin-top:8px">New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\.cursor\plugins\docker-developer-tools" -Target (Get-Location)<button class="copy-btn" onclick="copyCode(this)">Copy</button></div></div></div>
       <div class="install-step"><div class="step-marker">3</div><div class="step-content"><h3>Install and build the MCP server</h3><div class="code-block">cd mcp-server &amp;&amp; npm install &amp;&amp; npm run build<button class="copy-btn" onclick="copyCode(this)">Copy</button></div></div></div>
       <div class="install-step"><div class="step-marker">4</div><div class="step-content"><h3>Or install globally via npm</h3><div class="code-block">npm install -g @tmhs/docker-mcp<button class="copy-btn" onclick="copyCode(this)">Copy</button></div></div></div>
+      <div class="install-step"><div class="step-marker">5</div><div class="step-content"><h3>Claude Code - register the MCP server</h3><p>Claude Code reads CLAUDE.md automatically. Add the MCP server with:</p><div class="code-block">claude mcp add docker node ./mcp-server/dist/index.js<button class="copy-btn" onclick="copyCode(this)">Copy</button></div><p style="margin-top:12px">Or via the global npm package:</p><div class="code-block" style="margin-top:8px">claude mcp add docker -- npx @tmhs/docker-mcp<button class="copy-btn" onclick="copyCode(this)">Copy</button></div></div></div>
     </div>
   </div>
 </section>
@@ -737,7 +740,7 @@ section{padding:72px 0}
 <section id="try-it">
   <div class="container">
     <h2 class="section-title reveal">Try It</h2>
-    <p class="section-subtitle reveal">Paste any of these into Cursor's AI chat to see the plugin in action.</p>
+    <p class="section-subtitle reveal">Paste any of these into your AI chat to see it in action.</p>
     <div class="prompt-grid" data-stagger>
       <div class="prompt-card reveal"><div class="prompt-q">Write a multi-stage Dockerfile for my Node.js API with a production build</div></div>
       <div class="prompt-card reveal"><div class="prompt-q">Why is my docker-compose networking not working between services?</div></div>
@@ -797,7 +800,7 @@ section{padding:72px 0}
     <a href="https://github.com/TMHSDigital/Docker-Developer-Tools/blob/main/LICENSE" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/license-CC--BY--NC--ND--4.0-0db7ed?style=flat-square" alt="License"></a>
   </div>
   <p class="footer-text">&copy; 2026 <a href="https://github.com/TMHSDigital" target="_blank" rel="noopener">TM Hospitality Strategies</a>. Built by <a href="https://github.com/TMHSDigital" target="_blank" rel="noopener">TMHSDigital</a>.</p>
-  <p class="footer-cursor">Made for <span>Cursor IDE</span></p>
+  <p class="footer-cursor">Made for <span>Cursor</span>, <span>Claude Code</span> &amp; <span>MCP</span></p>
 </footer>
 
 <script>

@@ -1,0 +1,25 @@
+# Docker Developer Tools - Cursor Rules
+
+## Formatting
+- Never use em dashes. Use a regular dash (-) or rewrite the sentence.
+- Never hardcode Docker credentials, registry passwords, or tokens. Always use environment variables or Docker secrets.
+
+## Plugin conventions
+- Skills live in `skills/<skill-name>/SKILL.md` (one per directory, kebab-case).
+- Rules live in `rules/<rule-name>.mdc`.
+- Every skill SKILL.md must have YAML frontmatter with `name` (matching directory) and `description`.
+- Every rule .mdc must have YAML frontmatter with `description` and `alwaysApply`.
+- Skill sections in order: Trigger, Required Inputs, Workflow, Key References, Example Interaction, MCP Usage, Common Pitfalls, See Also.
+
+## MCP server conventions
+- Tool names follow `docker_camelCase` pattern (e.g. `docker_listContainers`, `docker_inspectImage`).
+- Each tool file exports a `register(server)` function.
+- All Docker interaction goes through CLI exec, not the Docker Engine REST API.
+- Use `execDocker()` from `utils/docker-api.ts` for all Docker CLI calls.
+- Always check for Docker availability before executing commands.
+
+## Docker conventions
+- Default to Alpine or slim base images when suggesting Dockerfiles.
+- Always suggest multi-stage builds for production images.
+- Flag `latest` tags - suggest pinned versions or SHA digests.
+- Environment variable pattern: `DOCKER_HOST` for remote Docker, no API keys needed for local use.

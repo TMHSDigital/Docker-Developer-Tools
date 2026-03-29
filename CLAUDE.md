@@ -1,0 +1,142 @@
+# CLAUDE.md
+
+Project documentation for Claude Code and AI assistants working on this repository.
+
+## Project Overview
+
+Docker Developer Tools is a Cursor IDE plugin that integrates Docker and container workflows into Cursor's AI chat. It includes 12 skills, 6 rules, and a companion MCP server with 10 tools for live Docker CLI integration.
+
+This is a monorepo - the Cursor plugin (skills and rules) and the companion MCP server live in the same repository. Docker's API is local (Docker Engine socket / CLI), so one repo is simpler for users to install and maintain.
+
+**Version:** 0.1.0
+**License:** CC-BY-NC-ND-4.0
+**Author:** TMHSDigital
+
+## Plugin Architecture
+
+```
+Docker-Developer-Tools/
+  .cursor-plugin/
+    plugin.json              # Plugin manifest
+  skills/
+    <skill-name>/
+      SKILL.md               # One skill per directory
+  rules/
+    <rule-name>.mdc           # Rule files
+  mcp-server/
+    src/
+      index.ts               # MCP server entry point
+      tools/                 # One file per MCP tool
+      utils/
+        docker-api.ts        # Docker CLI helpers
+        errors.ts            # Custom error classes
+  docs/
+    index.html               # GitHub Pages site
+  tests/                     # Python structure tests
+```
+
+## Skills (12)
+
+| Skill | Description |
+|-------|-------------|
+| `dockerfile-best-practices` | Write and optimize Dockerfiles |
+| `docker-compose-helper` | Write, debug, and optimize compose files |
+| `container-debugging` | Debug running containers |
+| `image-optimization` | Reduce Docker image sizes |
+| `docker-networking` | Container networking configuration |
+| `docker-volumes` | Data persistence and volume management |
+| `docker-security` | Container security hardening |
+| `docker-ci-cd` | Docker in CI/CD pipelines |
+| `docker-registry` | Container registry workflows |
+| `docker-troubleshooting` | Common Docker problem diagnosis |
+| `docker-development-env` | Development environments with Docker |
+| `docker-resource-management` | Resource limits and monitoring |
+
+## Rules (6)
+
+| Rule | Scope | Description |
+|------|-------|-------------|
+| `dockerfile-lint` | `**/Dockerfile*` | Flag Dockerfile antipatterns |
+| `docker-secrets` | Global (always active) | Flag hardcoded credentials |
+| `compose-validation` | `**/docker-compose*.yml`, `**/compose*.yml` | Flag compose issues |
+| `docker-resource-limits` | Docker-related files | Flag missing resource limits |
+| `docker-image-pinning` | Dockerfiles, compose files | Flag unpinned image tags |
+| `docker-port-conflicts` | Dockerfiles, compose files | Flag port conflicts |
+
+## MCP Server (10 tools)
+
+The MCP server talks to Docker via CLI exec (`docker` commands) rather than the Docker Engine REST API. It uses stdio transport and requires `docker` to be available on PATH.
+
+| Tool | Description |
+|------|-------------|
+| `docker_listContainers` | List running/all containers |
+| `docker_inspectContainer` | Detailed container info |
+| `docker_containerLogs` | Fetch container logs |
+| `docker_listImages` | List local images |
+| `docker_inspectImage` | Detailed image metadata |
+| `docker_listVolumes` | List volumes |
+| `docker_listNetworks` | List networks |
+| `docker_systemInfo` | Docker system info |
+| `docker_diskUsage` | Disk usage breakdown |
+| `docker_searchHub` | Search Docker Hub |
+
+## Development Workflow
+
+### Plugin development (symlink)
+
+**macOS/Linux:**
+```bash
+ln -s "$(pwd)" ~/.cursor/plugins/docker-developer-tools
+```
+
+**Windows (PowerShell as Admin):**
+```powershell
+New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\.cursor\plugins\docker-developer-tools" -Target (Get-Location)
+```
+
+### MCP server development
+
+```bash
+cd mcp-server
+npm install
+npm run build
+npm test
+npm run dev  # watch mode
+```
+
+### Running tests
+
+```bash
+# MCP server tests (Vitest)
+cd mcp-server && npm test
+
+# Plugin structure tests (pytest)
+pip install -r requirements-test.txt
+pytest tests/ -v --tb=short
+```
+
+## Key Conventions
+
+- **No em dashes.** Use regular dashes (-) or rewrite the sentence.
+- **No hardcoded credentials.** Always use environment variables or Docker secrets.
+- **Skill frontmatter:** `name` (matching directory) and `description` only.
+- **Rule frontmatter:** `description`, `alwaysApply`, and `globs` (when scoped).
+- **Tool naming:** `docker_camelCase` (e.g., `docker_listContainers`).
+- **Tool pattern:** Each file exports `register(server: McpServer)`.
+- **ESM imports:** Use `.js` extensions for TypeScript ESM resolution.
+- **Docker interaction:** All via `execDocker()` helper, never direct REST API.
+
+## Docker CLI Quick Reference
+
+| Command | Used By |
+|---------|---------|
+| `docker ps --format json` | `docker_listContainers` |
+| `docker inspect --type container` | `docker_inspectContainer` |
+| `docker logs --tail N` | `docker_containerLogs` |
+| `docker images --format json` | `docker_listImages` |
+| `docker inspect --type image` | `docker_inspectImage` |
+| `docker volume ls --format json` | `docker_listVolumes` |
+| `docker network ls --format json` | `docker_listNetworks` |
+| `docker info --format json` | `docker_systemInfo` |
+| `docker system df --format json` | `docker_diskUsage` |
+| `docker search --format json` | `docker_searchHub` |

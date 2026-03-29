@@ -1,0 +1,45 @@
+---
+description: Flag common Dockerfile antipatterns including unpinned base images, running as root, missing cleanup, and ADD misuse.
+alwaysApply: false
+globs:
+  - "**/Dockerfile*"
+---
+
+# Dockerfile Linting Rules
+
+## Patterns to Flag
+
+### Base Image Issues
+- Using `FROM <image>:latest` or `FROM <image>` without a tag - suggest pinning to a specific version or SHA digest
+- Using `FROM ubuntu` or `FROM debian` for production - suggest Alpine or distroless alternatives when appropriate
+
+### Security Issues
+- No `USER` instruction after installing packages - containers should not run as root in production
+- Using `ADD` when `COPY` would suffice - `ADD` has implicit tar extraction and URL fetching that creates security risks
+- Missing `--no-install-recommends` on `apt-get install` - pulls unnecessary packages
+
+### Layer Efficiency
+- Separate `RUN apt-get update` and `RUN apt-get install` - these should be in the same `RUN` layer to avoid stale cache
+- Missing cleanup in the same layer as package installation (`rm -rf /var/lib/apt/lists/*`)
+- Multiple consecutive `COPY` instructions that could be combined
+- `RUN` instructions that could be consolidated with `&&`
+
+### Missing Best Practices
+- No `.dockerignore` file in the same directory as the Dockerfile
+- Missing `HEALTHCHECK` instruction for production services
+- No `LABEL` metadata (maintainer, version, description)
+- Using `ENTRYPOINT` without `CMD` or vice versa without clear intent
+
+## What to Do
+
+- Suggest specific version tags for base images (e.g., `node:20-alpine` instead of `node:latest`)
+- Recommend adding a non-root user with `RUN addgroup/adduser` and `USER` instruction
+- Show how to combine `apt-get update && apt-get install` in a single `RUN` layer with cleanup
+- Suggest creating a `.dockerignore` with common exclusions (node_modules, .git, .env)
+- Recommend `COPY` over `ADD` unless tar extraction or URL fetching is explicitly needed
+
+## Exceptions
+
+- Development Dockerfiles may use `:latest` tags for convenience
+- Multi-stage builder stages may run as root if the final stage uses a non-root user
+- `ADD` is acceptable for extracting local tar archives

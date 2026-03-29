@@ -1,0 +1,60 @@
+---
+description: Flag unpinned image tags in Dockerfiles and compose files. Suggest specific version tags or SHA digests for reproducible builds.
+alwaysApply: false
+globs:
+  - "**/Dockerfile*"
+  - "**/docker-compose*.yml"
+  - "**/docker-compose*.yaml"
+  - "**/compose*.yml"
+  - "**/compose*.yaml"
+---
+
+# Docker Image Tag Pinning
+
+## Patterns to Flag
+
+### Dockerfiles
+- `FROM image` without any tag - defaults to `:latest` which is mutable
+- `FROM image:latest` - explicitly mutable, builds are not reproducible
+- `FROM image:lts` or `FROM image:stable` - still mutable rolling tags
+
+### Compose Files
+- `image: name` without a tag in service definitions
+- `image: name:latest` in service definitions
+- Rolling tags like `image: node:lts` or `image: python:3`
+
+### What Counts as Pinned
+- Specific version: `node:20.11.1-alpine3.19` (good)
+- Minor version: `node:20.11-alpine` (acceptable)
+- Major only: `node:20` (acceptable for development, flag for production)
+- SHA digest: `node@sha256:abc123...` (best for reproducibility)
+
+## What to Do
+
+- Suggest replacing `:latest` with a specific version tag
+- For production Dockerfiles, recommend full version pins (e.g., `node:20.11.1-alpine3.19`)
+- For compose files, recommend at least minor version pins (e.g., `postgres:16.2`)
+- Mention SHA digest pinning as the most reproducible option
+- Suggest using Renovate or Dependabot to keep pinned versions updated
+
+## Examples
+
+Flagged:
+```dockerfile
+FROM node
+FROM python:latest
+FROM nginx:stable
+```
+
+Suggested:
+```dockerfile
+FROM node:20.11.1-alpine3.19
+FROM python:3.12.2-slim-bookworm
+FROM nginx:1.25.4-alpine
+```
+
+## Exceptions
+
+- Development Dockerfiles and local compose files may use less strict pinning
+- Builder stages in multi-stage builds have lower pinning priority than the final stage
+- Official base images with very stable APIs (like `alpine:3.19`) are lower risk with minor version pins

@@ -1,0 +1,45 @@
+---
+description: Flag missing memory and CPU limits in Docker configurations to prevent unbounded resource usage.
+alwaysApply: false
+globs:
+  - "**/docker-compose*.yml"
+  - "**/docker-compose*.yaml"
+  - "**/compose*.yml"
+  - "**/compose*.yaml"
+  - "**/Dockerfile*"
+  - "**/*docker*"
+---
+
+# Docker Resource Limits
+
+## Patterns to Flag
+
+### Compose Files
+- Services without `deploy.resources.limits.memory` or `mem_limit` - containers can consume all host memory
+- Services without `deploy.resources.limits.cpus` or `cpus` - containers can monopolize CPU
+- Missing `deploy.resources.reservations` for critical services - no guaranteed minimum resources
+- `memswap_limit` set without `mem_limit` - ineffective without a memory baseline
+
+### Dockerfiles
+- Java applications without `-Xmx` or container-aware JVM flags
+- Node.js applications without `--max-old-space-size`
+- Python applications with known memory-intensive libraries (pandas, numpy on large datasets) without documentation on expected resource needs
+
+### Runtime Commands
+- `docker run` without `--memory` or `--cpus` flags for production workloads
+- Missing `--oom-kill-disable` awareness - disabling OOM killer without setting memory limits is dangerous
+
+## What to Do
+
+- Add memory limits: `mem_limit: 512m` or `deploy.resources.limits.memory: 512M`
+- Add CPU limits: `cpus: '0.5'` or `deploy.resources.limits.cpus: '0.50'`
+- Set reservations for critical services: `deploy.resources.reservations.memory: 256M`
+- For Java apps, add `-XX:MaxRAMPercentage=75.0` to use container-aware memory settings
+- For Node.js, set `--max-old-space-size` based on container memory limit
+- Document expected resource usage in comments when limits are intentionally omitted
+
+## Exceptions
+
+- Development environments may omit resource limits for convenience
+- Build stages in multi-stage Dockerfiles do not need runtime resource limits
+- Single-container hosts where the container is expected to use all available resources

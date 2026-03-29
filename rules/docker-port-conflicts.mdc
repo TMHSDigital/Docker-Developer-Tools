@@ -1,0 +1,60 @@
+---
+description: Flag commonly conflicting port mappings in Docker configurations and suggest checking for conflicts before binding.
+alwaysApply: false
+globs:
+  - "**/docker-compose*.yml"
+  - "**/docker-compose*.yaml"
+  - "**/compose*.yml"
+  - "**/compose*.yaml"
+  - "**/Dockerfile*"
+---
+
+# Docker Port Conflict Detection
+
+## Patterns to Flag
+
+### High-Conflict Ports
+Flag when these host ports are mapped without a comment acknowledging potential conflicts:
+
+| Port | Common Service | Risk |
+|------|---------------|------|
+| 80 | HTTP servers, nginx, Apache | Very high - often used by host web servers |
+| 443 | HTTPS servers | Very high - often used by host web servers |
+| 3000 | Node.js dev servers, Grafana | High - multiple dev tools default here |
+| 3306 | MySQL/MariaDB | High - common database port |
+| 5432 | PostgreSQL | High - common database port |
+| 5672 | RabbitMQ | Medium |
+| 6379 | Redis | High - common cache port |
+| 8080 | HTTP alternatives, Jenkins, many dev tools | Very high - overloaded default |
+| 8443 | HTTPS alternatives | Medium |
+| 9090 | Prometheus | Medium |
+| 27017 | MongoDB | Medium |
+
+### Compose-Specific Issues
+- Multiple services in the same compose file mapping the same host port
+- Port ranges that overlap between services
+- Using `ports: "80:80"` (string) instead of long syntax - can cause YAML parsing issues with some port formats
+
+### Dockerfile Issues
+- `EXPOSE` instructions without documentation on which port the service actually uses
+- Multiple `EXPOSE` instructions that suggest the service binds to many ports
+
+## What to Do
+
+- Suggest using non-standard host ports when conflicts are likely (e.g., `8081:80`, `5433:5432`)
+- Recommend checking for port conflicts: `docker ps --format 'table {{.Ports}}'` or `netstat -tlnp` / `ss -tlnp`
+- For compose files with multiple services, ensure no host port overlaps
+- Suggest using the long port syntax for clarity:
+  ```yaml
+  ports:
+    - target: 80
+      published: 8080
+      protocol: tcp
+  ```
+- Document port choices in comments when using conflict-prone ports
+
+## Exceptions
+
+- Production deployments behind a reverse proxy typically do need ports 80 and 443
+- Development environments where the developer controls the full port space
+- Host networking mode where port mapping is not applicable

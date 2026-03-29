@@ -1,0 +1,51 @@
+---
+description: Flag common docker-compose issues including missing healthchecks, privileged mode, host networking, and port conflicts.
+alwaysApply: false
+globs:
+  - "**/docker-compose*.yml"
+  - "**/docker-compose*.yaml"
+  - "**/compose*.yml"
+  - "**/compose*.yaml"
+---
+
+# Docker Compose Validation Rules
+
+## Patterns to Flag
+
+### Security Concerns
+- `privileged: true` without clear justification - this gives the container full host access
+- `network_mode: host` without documented reason - bypasses Docker network isolation
+- `cap_add` with broad capabilities like `SYS_ADMIN` or `ALL`
+- `pid: host` or `ipc: host` - shares host namespaces
+
+### Missing Best Practices
+- Services without `healthcheck` definitions - needed for reliable `depends_on` with `condition: service_healthy`
+- Services without `restart` policy for production configs
+- Missing `mem_limit` or `deploy.resources.limits` for resource constraints
+- No `logging` driver configuration for production services
+
+### Configuration Issues
+- Hardcoded port mappings on common ports (80, 443, 3000, 5432, 3306, 6379, 8080) without comments explaining the choice
+- Using `links:` instead of user-defined networks (deprecated pattern)
+- `depends_on` without `condition:` (does not wait for service readiness)
+- Volume paths using Windows-style backslashes
+- Missing `version` field for v1 format compose files (v2+ compose spec does not require it)
+
+### Environment Variables
+- Inline secrets in `environment:` block instead of using `env_file:` or Docker secrets
+- Missing `.env` file reference when `${VARIABLE}` substitution is used
+
+## What to Do
+
+- Add healthchecks to services that expose ports or are dependencies
+- Use `depends_on` with `condition: service_healthy` for startup ordering
+- Set `restart: unless-stopped` or `restart: always` for production
+- Use user-defined networks instead of `links:`
+- Add resource limits via `deploy.resources.limits` or top-level `mem_limit`/`cpus`
+- Document why `privileged`, `host` networking, or elevated capabilities are needed
+
+## Exceptions
+
+- Development compose files may omit healthchecks and resource limits
+- `network_mode: host` is acceptable for monitoring tools that need host network visibility
+- `privileged: true` is acceptable for Docker-in-Docker or hardware access use cases

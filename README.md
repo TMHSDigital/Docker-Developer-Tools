@@ -9,13 +9,20 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/TMHSDigital/Docker-Developer-Tools/actions/workflows/validate.yml"><img src="https://img.shields.io/github/actions/workflow/status/TMHSDigital/Docker-Developer-Tools/validate.yml?branch=main&label=CI" alt="CI" /></a>
+  <a href="https://github.com/TMHSDigital/Docker-Developer-Tools/actions/workflows/validate.yml"><img src="https://img.shields.io/github/actions/workflow/status/TMHSDigital/Docker-Developer-Tools/validate.yml?branch=main&label=validate" alt="Validate" /></a>
+  <a href="https://github.com/TMHSDigital/Docker-Developer-Tools/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/TMHSDigital/Docker-Developer-Tools/ci.yml?branch=main&label=CI" alt="CI" /></a>
+  <a href="https://github.com/TMHSDigital/Docker-Developer-Tools/actions/workflows/codeql.yml"><img src="https://img.shields.io/github/actions/workflow/status/TMHSDigital/Docker-Developer-Tools/codeql.yml?branch=main&label=CodeQL" alt="CodeQL" /></a>
+  <a href="https://github.com/TMHSDigital/Docker-Developer-Tools/actions/workflows/pages.yml"><img src="https://img.shields.io/github/actions/workflow/status/TMHSDigital/Docker-Developer-Tools/pages.yml?branch=main&label=pages" alt="Pages" /></a>
+  <a href="https://github.com/TMHSDigital/Docker-Developer-Tools/actions/workflows/links.yml"><img src="https://img.shields.io/github/actions/workflow/status/TMHSDigital/Docker-Developer-Tools/links.yml?branch=main&label=links" alt="Links" /></a>
+  <a href="https://github.com/TMHSDigital/Docker-Developer-Tools/releases/latest"><img src="https://img.shields.io/github/v/release/TMHSDigital/Docker-Developer-Tools" alt="Release" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-CC--BY--NC--ND--4.0-blue" alt="License" /></a>
-  <img src="https://img.shields.io/badge/version-1.0.0-green" alt="Version" />
+</p>
+<p align="center">
   <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/v/@tmhs/docker-mcp" alt="npm" /></a>
   <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/dm/@tmhs/docker-mcp" alt="npm downloads" /></a>
   <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/unpacked-size/@tmhs/docker-mcp" alt="npm size" /></a>
   <a href="https://github.com/TMHSDigital/Docker-Developer-Tools/stargazers"><img src="https://img.shields.io/github/stars/TMHSDigital/Docker-Developer-Tools" alt="Stars" /></a>
+  <a href="https://github.com/TMHSDigital/Docker-Developer-Tools/issues"><img src="https://img.shields.io/github/issues/TMHSDigital/Docker-Developer-Tools" alt="Issues" /></a>
   <img src="https://img.shields.io/github/last-commit/TMHSDigital/Docker-Developer-Tools" alt="Last Commit" />
   <img src="https://img.shields.io/badge/Cursor-Plugin-purple" alt="Cursor Plugin" />
   <img src="https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white" alt="Docker" />

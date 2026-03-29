@@ -1,46 +1,71 @@
 name-template: "v$RESOLVED_VERSION"
 tag-template: "v$RESOLVED_VERSION"
+template: |
+  ## What's Changed
+
+  $CHANGES
+
+  **Full Changelog**: https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION
 categories:
-  - title: "Skills"
+  - title: "New MCP Tools"
+    labels:
+      - "new-tool"
+      - "mcp"
+  - title: "Skills & Rules"
     labels:
       - "skill"
-  - title: "Rules"
-    labels:
       - "rule"
-  - title: "MCP Tools"
-    labels:
-      - "mcp-tool"
-  - title: "Enhancements"
-    labels:
-      - "enhancement"
   - title: "Bug Fixes"
     labels:
       - "bug"
+      - "fix"
   - title: "Documentation"
     labels:
       - "documentation"
-  - title: "Maintenance"
+      - "docs"
+  - title: "CI / Infrastructure"
     labels:
-      - "maintenance"
+      - "ci"
+      - "infrastructure"
       - "dependencies"
-change-template: "- $TITLE @$AUTHOR (#$NUMBER)"
+  - title: "Other Changes"
+    labels:
+      - "*"
+change-template: "- $TITLE (#$NUMBER) @$AUTHOR"
 change-title-escapes: '\<*_&'
 version-resolver:
   major:
     labels:
       - "major"
+      - "breaking"
   minor:
     labels:
       - "minor"
+      - "feature"
+      - "new-tool"
   patch:
     labels:
       - "patch"
+      - "bug"
+      - "fix"
+      - "docs"
   default: patch
-template: |
-  ## Changes
-
-  $CHANGES
-
-  ## Contributors
-
-  $CONTRIBUTORS
+exclude-labels:
+  - "skip-changelog"
+autolabeler:
+  - label: "documentation"
+    files:
+      - "*.md"
+      - "docs/**"
+  - label: "ci"
+    files:
+      - ".github/**"
+  - label: "mcp"
+    files:
+      - "mcp-server/**"
+  - label: "skill"
+    files:
+      - "skills/**"
+  - label: "rule"
+    files:
+      - "rules/**"

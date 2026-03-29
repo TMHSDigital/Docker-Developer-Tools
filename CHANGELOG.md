@@ -109,7 +109,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `docker_exec` - execute a command in a running container (with workdir, user, and env options)
 
 #### Documentation
-- Comprehensive roadmap rewrite with 59 planned MCP tools across v0.2.0 through v0.7.0
+- Comprehensive roadmap rewrite with ~150 planned MCP tools across v0.2.0 through v0.12.0
 - Safety considerations section for destructive tools (dry-run defaults, explicit identifiers)
 
 ### Changed

@@ -287,9 +287,13 @@ Then add the JSON config from the [MCP Server section](#companion-docker-mcp-ser
 | **v0.4.0** | Compose | +8 | up, down, ps, logs, build, restart, pull, exec |
 | **v0.5.0** | Volumes, Networks, Cleanup | +12 | volume/network CRUD, system/container/image prune |
 | **v0.6.0** | Advanced and Observability | +6 | cp, stats, top, events, update, wait |
-| **v0.7.0** | Buildx and Multi-platform | +5 | Multi-arch builds, builder management |
-| **v0.8.0** | Polish | +0 | Cross-references, pitfalls, documentation |
-| **v1.0.0** | Stable | +0 | Production release, npm publish (~59 MCP tools) |
+| **v0.7.0** | Buildx, Manifests, Registry | +13 | Buildx tools, manifest lists, builder management |
+| **v0.8.0** | Compose Completeness | +16 | All remaining compose commands (config, cp, kill, scale, etc.) |
+| **v0.9.0** | Container/Image Gaps, Context, Auth | +14 | diff, export, port, rename, history, import, contexts, login |
+| **v0.10.0** | Swarm Orchestration | +24 | Swarm init/join, services, nodes, scaling, rollback |
+| **v0.11.0** | Swarm Stacks, Configs, Secrets, Trust | +18 | Stack deploy, config/secret CRUD, content trust |
+| **v0.12.0** | Niche, Scout, Extras | +10 | Version info, Scout CVEs, plugins, compose watch |
+| **v1.0.0** | Stable | +0 | Production release (~150 MCP tools) |
 
 </details>
 

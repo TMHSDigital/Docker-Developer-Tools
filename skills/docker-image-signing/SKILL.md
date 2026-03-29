@@ -7,6 +7,26 @@ description: Docker Content Trust - image signing, verification, key management,
 
 Enable, manage, and enforce Docker Content Trust (DCT) for image signing and verification across development and CI/CD workflows.
 
+## Workflow Diagram
+
+```mermaid
+flowchart TD
+    A[Build and push image] --> B{DCT enabled?}
+    B -->|No| C["Set DOCKER_CONTENT_TRUST=1"]
+    C --> D
+    B -->|Yes| D{Signing key exists?}
+    D -->|No| E[Generate key pair]
+    E -->|docker_trustKey generate| F[Back up root key offline]
+    F --> G
+    D -->|Yes| G[Sign the image]
+    G -->|docker_trustSign| H[Verify signatures]
+    H -->|docker_trustInspect| I{Signatures valid?}
+    I -->|Yes| J[Image is trusted - safe to deploy]
+    I -->|No| K[Revoke compromised image]
+    K -->|docker_trustRevoke| L[Re-sign with new key]
+    L --> G
+```
+
 ## Trigger
 
 Activate when the user:

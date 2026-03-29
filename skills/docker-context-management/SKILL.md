@@ -7,6 +7,24 @@ description: Manage Docker contexts for multi-host and remote Docker engine work
 
 Manage Docker contexts to connect to remote Docker hosts, switch between environments (dev/staging/prod), and orchestrate multi-host workflows.
 
+## Workflow Diagram
+
+```mermaid
+flowchart TD
+    A[Check active context] -->|docker_contextShow| B{Need different host?}
+    B -->|No| C[Use current context]
+    B -->|Yes| D{Context exists?}
+    D -->|Yes| E[Switch context]
+    D -->|No| F[Create context]
+    F -->|ssh:// or tcp://| E
+    E -->|docker_contextUse| G[Verify connection]
+    G -->|docker_systemInfo| H{Connected?}
+    H -->|Yes| I[Run commands on remote host]
+    H -->|No| J[Check credentials / firewall]
+    J --> F
+    I --> K[Switch back to default when done]
+```
+
 ## Trigger
 
 Activate when the user:

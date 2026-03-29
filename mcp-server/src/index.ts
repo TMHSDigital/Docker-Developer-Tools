@@ -156,7 +156,7 @@ import { register as registerPluginEnable } from "./tools/pluginEnable.js";
 
 const server = new McpServer({
   name: "docker-mcp",
-  version: "0.12.0",
+  version: "1.0.0",
 });
 
 registerListContainers(server);

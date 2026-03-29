@@ -122,6 +122,23 @@ export function errorResponse(error: unknown): {
   content: { type: "text"; text: string }[];
   isError: true;
 } {
+  if (error instanceof DockerError) {
+    const parts: string[] = [`[${error.name}] ${error.message}`];
+
+    if (error.command) {
+      parts.push(`Command: docker ${error.command}`);
+    }
+
+    const suggestion = getErrorSuggestion(error);
+    if (suggestion) {
+      parts.push(`Suggestion: ${suggestion}`);
+    }
+
+    return {
+      content: [{ type: "text" as const, text: parts.join("\n") }],
+      isError: true,
+    };
+  }
   if (error instanceof Error) {
     return {
       content: [{ type: "text" as const, text: error.message }],
@@ -132,4 +149,29 @@ export function errorResponse(error: unknown): {
     content: [{ type: "text" as const, text: "An unknown error occurred." }],
     isError: true,
   };
+}
+
+function getErrorSuggestion(error: DockerError): string | null {
+  if (error instanceof DockerNotFoundError) {
+    return "Install Docker (https://docs.docker.com/get-docker/) and ensure 'docker' is on your PATH.";
+  }
+  if (error instanceof DockerNotRunningError) {
+    return "Start Docker Desktop or run 'sudo systemctl start docker' on Linux.";
+  }
+  if (error instanceof ContainerNotFoundError) {
+    return "Run docker_listContainers with all=true to see all containers including stopped ones.";
+  }
+  if (error instanceof ImageNotFoundError) {
+    return "Run docker_listImages to see available local images, or docker_pull to download from a registry.";
+  }
+  if (error instanceof VolumeNotFoundError) {
+    return "Run docker_listVolumes to see available volumes.";
+  }
+  if (error instanceof NetworkNotFoundError) {
+    return "Run docker_listNetworks to see available networks.";
+  }
+  if (error instanceof PermissionDeniedError) {
+    return "Add your user to the docker group: 'sudo usermod -aG docker $USER' then log out and back in.";
+  }
+  return null;
 }

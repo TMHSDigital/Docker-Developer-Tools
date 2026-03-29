@@ -7,6 +7,32 @@ description: Docker Swarm mode orchestration - cluster management, service deplo
 
 Manage Docker Swarm clusters, deploy and scale services, administer nodes, and perform rolling updates and rollbacks.
 
+## Workflow Diagram
+
+```mermaid
+flowchart TD
+    A[Start] --> B{Swarm initialized?}
+    B -->|No| C[Initialize cluster]
+    C -->|docker_swarmInit| D[Add nodes]
+    D -->|docker_swarmJoin| E[Cluster ready]
+    B -->|Yes| E
+    E --> F[Deploy service]
+    F -->|docker_serviceCreate| G[Monitor tasks]
+    G -->|docker_servicePs| H{Healthy?}
+    H -->|No| I[Check logs]
+    I -->|docker_serviceLogs| J[Fix and update]
+    J -->|docker_serviceUpdate| G
+    H -->|Yes| K{Scale needed?}
+    K -->|Yes| L[Scale replicas]
+    L -->|docker_serviceScale| G
+    K -->|No| M{Update needed?}
+    M -->|Yes| N[Rolling update]
+    N -->|docker_serviceUpdate| O{Update OK?}
+    O -->|No| P[Rollback]
+    P -->|docker_serviceRollback| G
+    O -->|Yes| G
+```
+
 ## Trigger
 
 Activate when the user:

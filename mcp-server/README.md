@@ -48,7 +48,7 @@ Or if installed globally:
 }
 ```
 
-## Tools (140)
+## Tools (150)
 
 ### Read / Inspect (10)
 

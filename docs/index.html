@@ -40,10 +40,10 @@ img{max-width:100%;display:block}
 /* NAV */
 .nav{position:sticky;top:0;z-index:100;background:rgba(10,17,23,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between}
 .nav-logo{font-weight:800;font-size:1.1rem;color:var(--text);display:flex;align-items:center;gap:10px}
-.nav-logo .whale{font-size:1.4rem}
+.nav-logo img{width:28px;height:28px}
 .nav-links{display:flex;gap:28px;list-style:none}
 .nav-links a{color:var(--text-dim);font-size:.875rem;font-weight:500;transition:color .2s}
-.nav-links a:hover{color:var(--blue)}
+.nav-links a:hover,.nav-links a.active{color:var(--blue)}
 .hamburger{display:none;background:none;border:none;color:var(--text);font-size:1.5rem;cursor:pointer}
 
 /* MOBILE NAV */
@@ -57,7 +57,8 @@ img{max-width:100%;display:block}
 
 /* HERO */
 .hero{text-align:center;padding:100px 24px 72px}
-.hero-logo{width:96px;height:96px;margin:0 auto 28px;background:linear-gradient(135deg,var(--blue),var(--accent));border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:3rem;box-shadow:0 16px 48px rgba(13,183,237,.2)}
+.hero-logo{width:96px;height:96px;margin:0 auto 28px;background:linear-gradient(135deg,var(--blue),var(--accent));border-radius:24px;display:flex;align-items:center;justify-content:center;box-shadow:0 16px 48px rgba(13,183,237,.2);overflow:hidden}
+.hero-logo img{width:64px;height:64px;object-fit:contain;filter:brightness(0) invert(1)}
 .hero h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:800;letter-spacing:-.02em;margin-bottom:12px}
 .hero h1 span{color:var(--blue)}
 .hero .tagline{color:var(--text-dim);font-size:1.15rem;max-width:540px;margin:0 auto 28px}
@@ -81,7 +82,8 @@ section{padding:72px 0}
 .audience-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .audience-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px;transition:transform .25s,border-color .25s}
 .audience-card:hover{transform:translateY(-4px);border-color:var(--blue)}
-.audience-card .icon{font-size:2rem;margin-bottom:16px}
+.audience-card .card-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:rgba(13,183,237,.1);border:1px solid rgba(13,183,237,.2)}
+.audience-card .card-icon svg{width:20px;height:20px;stroke:var(--blue);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .audience-card h3{font-size:1.1rem;font-weight:700;margin-bottom:8px}
 .audience-card p{color:var(--text-dim);font-size:.9rem;line-height:1.7}
 
@@ -132,7 +134,7 @@ section{padding:72px 0}
 .rule-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:transform .25s,border-color .25s}
 .rule-card:hover{transform:translateY(-3px);border-color:var(--blue)}
 .rule-card h3{font-size:.95rem;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px}
-.rule-card h3 .rule-icon{color:var(--blue)}
+.rule-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .rule-card .rule-scope{font-family:var(--font-mono);font-size:.75rem;color:var(--accent);background:rgba(6,109,165,.12);padding:3px 8px;border-radius:4px;margin-bottom:8px;display:inline-block}
 .rule-card p{color:var(--text-dim);font-size:.85rem}
 
@@ -143,6 +145,25 @@ section{padding:72px 0}
 .tools-table td{padding:14px 16px;border-bottom:1px solid var(--border)}
 .tools-table tr:hover td{background:var(--surface)}
 .tools-table .tool-name{font-family:var(--font-mono);color:var(--blue);font-weight:500;font-size:.85rem}
+.tools-table tr.hidden-row{display:none}
+
+/* TOOL SEARCH */
+.tool-search-wrap{max-width:480px;margin:0 auto 32px;position:relative}
+.tool-search{width:100%;padding:12px 16px 12px 44px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:.9rem;font-family:var(--font-sans);outline:none;transition:border-color .2s}
+.tool-search:focus{border-color:var(--blue)}
+.tool-search::placeholder{color:var(--text-dim)}
+.tool-search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;stroke:var(--text-dim);fill:none;stroke-width:2}
+.tool-search-hint{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:var(--surface2);border:1px solid var(--border);color:var(--text-dim);padding:2px 8px;border-radius:4px;font-size:.7rem;font-family:var(--font-mono);pointer-events:none}
+.tool-search-count{text-align:center;color:var(--text-dim);font-size:.82rem;margin-top:8px}
+
+/* TOOL CATEGORY CARDS */
+.tool-category{margin-top:32px}
+.tool-category h3{font-size:1rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.tool-count{font-size:.75rem;font-weight:600;color:var(--blue);background:rgba(13,183,237,.1);padding:2px 10px;border-radius:999px}
+.tool-category table{width:100%;border-collapse:collapse;font-size:.9rem;margin-bottom:8px}
+.tool-category th{text-align:left;padding:10px 16px;background:var(--surface);color:var(--text-dim);font-weight:600;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;border-bottom:2px solid var(--border)}
+.tool-category td{padding:10px 16px;border-bottom:1px solid var(--border)}
+.tool-category tr:hover td{background:var(--surface)}
 
 /* GET STARTED */
 .install-steps{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:24px}
@@ -176,6 +197,12 @@ section{padding:72px 0}
 .tag.upcoming-tag{background:rgba(6,109,165,.15);color:var(--accent)}
 .timeline-item p{color:var(--text-dim);font-size:.88rem}
 
+/* BACK TO TOP */
+.back-to-top{position:fixed;bottom:32px;right:32px;width:44px;height:44px;border-radius:50%;background:var(--accent);border:1px solid var(--border);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;z-index:50;box-shadow:0 4px 16px rgba(0,0,0,.3)}
+.back-to-top.visible{opacity:1;pointer-events:auto}
+.back-to-top:hover{background:var(--blue);transform:scale(1.1)}
+.back-to-top svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+
 /* FOOTER */
 .footer{border-top:1px solid var(--border);padding:48px 24px 32px;text-align:center}
 .footer-shields{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:20px}
@@ -200,6 +227,7 @@ section{padding:72px 0}
   .hero{padding:72px 24px 48px}
   .stat-number{font-size:2.25rem}
   section{padding:48px 0}
+  .back-to-top{bottom:20px;right:20px;width:40px;height:40px}
 }
 @media(min-width:769px) and (max-width:1024px){
   .audience-grid{grid-template-columns:repeat(2,1fr)}
@@ -211,14 +239,14 @@ section{padding:72px 0}
 <!-- NAV -->
 <nav class="nav">
   <div class="nav-logo">
-    <span class="whale">🐳</span> Docker Dev Tools
+    <img src="assets/logo-64.png" alt="Docker" width="28" height="28"> Docker Dev Tools
   </div>
   <ul class="nav-links">
-    <li><a href="#features">Features</a></li>
-    <li><a href="#rules">Rules</a></li>
-    <li><a href="#mcp-tools">MCP Tools</a></li>
-    <li><a href="#get-started">Install</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#features" data-section="features">Features</a></li>
+    <li><a href="#rules" data-section="rules">Rules</a></li>
+    <li><a href="#mcp-tools" data-section="mcp-tools">MCP Tools</a></li>
+    <li><a href="#get-started" data-section="get-started">Install</a></li>
+    <li><a href="#roadmap" data-section="roadmap">Roadmap</a></li>
     <li><a href="https://github.com/TMHSDigital/Docker-Developer-Tools" target="_blank" rel="noopener">GitHub</a></li>
   </ul>
   <button class="hamburger" aria-label="Open menu" onclick="document.getElementById('mobileMenu').classList.add('open')">&#9776;</button>
@@ -236,12 +264,12 @@ section{padding:72px 0}
 </div>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-logo">🐳</div>
+<section class="hero" id="hero">
+  <div class="hero-logo"><img src="assets/logo-256.png" alt="Docker Logo" width="64" height="64"></div>
   <h1><span>Docker</span> Developer Tools</h1>
   <p class="tagline">Expert Docker workflows, live container data, and real-time linting - all inside Cursor IDE.</p>
   <div class="pills">
-    <span class="pill blue">v0.12.0</span>
+    <span class="pill blue">v1.0.0</span>
     <span class="pill">CC BY-NC-ND 4.0</span>
     <span class="pill">Cursor Plugin</span>
   </div>
@@ -259,7 +287,7 @@ section{padding:72px 0}
       <div class="stat-label">Rules</div>
     </div>
     <div class="stat-card">
-      <div class="stat-number" data-target="140">0</div>
+      <div class="stat-number" data-target="150">0</div>
       <div class="stat-label">MCP Tools</div>
     </div>
   </div>
@@ -272,17 +300,17 @@ section{padding:72px 0}
     <p class="section-subtitle reveal">Built for developers who ship with containers every day.</p>
     <div class="audience-grid">
       <div class="audience-card reveal">
-        <div class="icon">&#128421;</div>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
         <h3>Backend Developers</h3>
         <p>Get Dockerfile best practices, multi-stage build guidance, and image optimization tips without leaving your editor. Debug container issues in seconds.</p>
       </div>
       <div class="audience-card reveal">
-        <div class="icon">&#9881;&#65039;</div>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
         <h3>DevOps Engineers</h3>
         <p>Compose validation, CI/CD pipeline templates, registry workflows, and security hardening - all context-aware and tuned to your running environment.</p>
       </div>
       <div class="audience-card reveal">
-        <div class="icon">&#128736;&#65039;</div>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
         <h3>Full-Stack Developers</h3>
         <p>Spin up development environments, manage volumes and networks, and troubleshoot port conflicts without memorizing Docker CLI flags.</p>
       </div>
@@ -305,7 +333,7 @@ section{padding:72px 0}
       <div class="step reveal">
         <div class="step-num">2</div>
         <h3>Cursor Loads a Skill</h3>
-        <p>The plugin matches your query to one of 12 specialized skills, each loaded with Docker best practices and structured guidance.</p>
+        <p>The plugin matches your query to one of 17 specialized skills, each loaded with Docker best practices and structured guidance.</p>
         <span class="step-arrow">&rarr;</span>
       </div>
       <div class="step reveal">
@@ -353,7 +381,7 @@ section{padding:72px 0}
 <!-- FEATURES ACCORDION -->
 <section id="features">
   <div class="container">
-    <h2 class="section-title reveal">12 Skills, Organized</h2>
+    <h2 class="section-title reveal">17 Skills, Organized</h2>
     <p class="section-subtitle reveal">Each skill is a focused knowledge module loaded on demand.</p>
     <div class="accordion reveal">
 
@@ -399,19 +427,20 @@ section{padding:72px 0}
 
       <div class="accordion-item">
         <button class="accordion-btn" onclick="toggleAccordion(this)">
-          <span><span class="cat-badge">Security</span>&ensp;Hardening &amp; Secrets</span>
+          <span><span class="cat-badge">Security</span>&ensp;Hardening, Secrets &amp; Signing</span>
           <span class="accordion-chevron">&#9660;</span>
         </button>
         <div class="accordion-panel">
           <div class="accordion-panel-inner">
             <span class="skill-tag">docker-security</span>
+            <span class="skill-tag">docker-image-signing</span>
           </div>
         </div>
       </div>
 
       <div class="accordion-item">
         <button class="accordion-btn" onclick="toggleAccordion(this)">
-          <span><span class="cat-badge">DevOps</span>&ensp;CI/CD &amp; Registry</span>
+          <span><span class="cat-badge">DevOps</span>&ensp;CI/CD, Registry &amp; Environments</span>
           <span class="accordion-chevron">&#9660;</span>
         </button>
         <div class="accordion-panel">
@@ -419,6 +448,7 @@ section{padding:72px 0}
             <span class="skill-tag">docker-ci-cd</span>
             <span class="skill-tag">docker-registry</span>
             <span class="skill-tag">docker-development-env</span>
+            <span class="skill-tag">docker-context-management</span>
           </div>
         </div>
       </div>
@@ -435,6 +465,31 @@ section{padding:72px 0}
         </div>
       </div>
 
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+          <span><span class="cat-badge">Advanced</span>&ensp;Multi-Platform &amp; Workflows</span>
+          <span class="accordion-chevron">&#9660;</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="accordion-panel-inner">
+            <span class="skill-tag">docker-advanced-workflows</span>
+            <span class="skill-tag">docker-multi-platform</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+          <span><span class="cat-badge">Orchestration</span>&ensp;Swarm Management</span>
+          <span class="accordion-chevron">&#9660;</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="accordion-panel-inner">
+            <span class="skill-tag">docker-swarm</span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -442,53 +497,58 @@ section{padding:72px 0}
 <!-- RULES GRID -->
 <section id="rules" style="background:var(--surface)">
   <div class="container">
-    <h2 class="section-title reveal">9 Always-On Rules</h2>
+    <h2 class="section-title reveal">10 Always-On Rules</h2>
     <p class="section-subtitle reveal">Automatic linting and guardrails that catch issues before they ship.</p>
     <div class="rules-grid">
       <div class="rule-card reveal">
-        <h3><span class="rule-icon">&#128269;</span> dockerfile-lint</h3>
+        <h3><span class="rule-dot" style="background:var(--blue)"></span> dockerfile-lint</h3>
         <span class="rule-scope">**/Dockerfile*</span>
         <p>Flags Dockerfile antipatterns like running as root, missing health checks, and inefficient layer ordering.</p>
       </div>
       <div class="rule-card reveal">
-        <h3><span class="rule-icon">&#128274;</span> docker-secrets</h3>
+        <h3><span class="rule-dot" style="background:#f0883e"></span> docker-secrets</h3>
         <span class="rule-scope">Global (always active)</span>
         <p>Detects hardcoded passwords, API keys, and tokens. Recommends environment variables or Docker secrets.</p>
       </div>
       <div class="rule-card reveal">
-        <h3><span class="rule-icon">&#9989;</span> compose-validation</h3>
+        <h3><span class="rule-dot" style="background:#7ee787"></span> compose-validation</h3>
         <span class="rule-scope">**/docker-compose*.yml</span>
         <p>Validates compose file structure, service dependencies, and network configurations.</p>
       </div>
       <div class="rule-card reveal">
-        <h3><span class="rule-icon">&#128202;</span> docker-resource-limits</h3>
+        <h3><span class="rule-dot" style="background:#d2a8ff"></span> docker-resource-limits</h3>
         <span class="rule-scope">Docker-related files</span>
         <p>Flags missing CPU and memory limits that could lead to resource exhaustion in production.</p>
       </div>
       <div class="rule-card reveal">
-        <h3><span class="rule-icon">&#128204;</span> docker-image-pinning</h3>
+        <h3><span class="rule-dot" style="background:#79c0ff"></span> docker-image-pinning</h3>
         <span class="rule-scope">Dockerfiles, compose files</span>
         <p>Catches unpinned image tags like <code>:latest</code> that create non-reproducible builds.</p>
       </div>
       <div class="rule-card reveal">
-        <h3><span class="rule-icon">&#128268;</span> docker-port-conflicts</h3>
+        <h3><span class="rule-dot" style="background:#ffa657"></span> docker-port-conflicts</h3>
         <span class="rule-scope">Dockerfiles, compose files</span>
         <p>Detects duplicate port mappings and common port conflicts across services.</p>
       </div>
       <div class="rule-card reveal">
-        <h3><span class="rule-icon">&#128220;</span> docker-logging</h3>
+        <h3><span class="rule-dot" style="background:#ff7b72"></span> docker-logging</h3>
         <span class="rule-scope">Dockerfiles, compose files</span>
         <p>Flags missing logging drivers and log rotation settings that can fill disks.</p>
       </div>
       <div class="rule-card reveal">
-        <h3><span class="rule-icon">&#9881;</span> buildx-best-practices</h3>
+        <h3><span class="rule-dot" style="background:#3fb950"></span> buildx-best-practices</h3>
         <span class="rule-scope">Dockerfiles, compose files</span>
         <p>Flags multi-platform build issues, missing cache configuration, and architecture-specific hardcoding.</p>
       </div>
       <div class="rule-card reveal">
-        <h3><span class="rule-icon">&#9878;</span> compose-scaling</h3>
+        <h3><span class="rule-dot" style="background:#e3b341"></span> compose-scaling</h3>
         <span class="rule-scope">**/docker-compose*.yml</span>
         <p>Flags scaling blockers: container_name, fixed host ports, missing resource limits, missing restart policy.</p>
+      </div>
+      <div class="rule-card reveal">
+        <h3><span class="rule-dot" style="background:#f85149"></span> swarm-security</h3>
+        <span class="rule-scope">Docker-related files</span>
+        <p>Flags missing autolock, unrotated certificates, unencrypted overlay networks, and exposed management ports.</p>
       </div>
     </div>
   </div>
@@ -498,9 +558,15 @@ section{padding:72px 0}
 <section id="mcp-tools">
   <div class="container">
     <h2 class="section-title reveal">150 MCP Tools</h2>
-    <p class="section-subtitle reveal">Live Docker data, container lifecycle, image pipeline, complete Compose V2, volume/network CRUD, resource cleanup, buildx, manifests, context management, and registry authentication via the companion MCP server.</p>
+    <p class="section-subtitle reveal">Live Docker data, container lifecycle, image pipeline, complete Compose V2, volume/network CRUD, resource cleanup, buildx, manifests, context management, Swarm orchestration, and more via the companion MCP server.</p>
+    <div class="tool-search-wrap reveal">
+      <svg class="tool-search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" class="tool-search" id="toolSearch" placeholder="Search 150 tools by name or description..." aria-label="Search tools">
+      <span class="tool-search-hint">/</span>
+      <div class="tool-search-count" id="toolSearchCount"></div>
+    </div>
     <div class="tools-table-wrap reveal">
-      <table class="tools-table">
+      <table class="tools-table" id="toolsTable">
         <thead>
           <tr><th>Tool</th><th>Description</th></tr>
         </thead>
@@ -621,9 +687,7 @@ section{padding:72px 0}
     </div>
     <div class="tool-category reveal">
       <h3>Swarm Cluster <span class="tool-count">8 tools</span></h3>
-      <table>
-        <thead><tr><th>Tool</th><th>Description</th></tr></thead>
-        <tbody>
+      <table><thead><tr><th>Tool</th><th>Description</th></tr></thead><tbody>
           <tr><td class="tool-name">docker_swarmInit</td><td>Initialize a new Swarm cluster</td></tr>
           <tr><td class="tool-name">docker_swarmJoin</td><td>Join a Swarm as worker or manager</td></tr>
           <tr><td class="tool-name">docker_swarmLeave</td><td>Leave the Swarm</td></tr>
@@ -632,14 +696,11 @@ section{padding:72px 0}
           <tr><td class="tool-name">docker_swarmUnlock</td><td>Unlock a locked Swarm manager</td></tr>
           <tr><td class="tool-name">docker_swarmUnlockKey</td><td>Display or rotate the unlock key</td></tr>
           <tr><td class="tool-name">docker_swarmCa</td><td>Display and rotate root CA certificate</td></tr>
-        </tbody>
-      </table>
+      </tbody></table>
     </div>
     <div class="tool-category reveal">
       <h3>Swarm Services <span class="tool-count">9 tools</span></h3>
-      <table>
-        <thead><tr><th>Tool</th><th>Description</th></tr></thead>
-        <tbody>
+      <table><thead><tr><th>Tool</th><th>Description</th></tr></thead><tbody>
           <tr><td class="tool-name">docker_serviceCreate</td><td>Create a replicated or global service</td></tr>
           <tr><td class="tool-name">docker_serviceUpdate</td><td>Update a service</td></tr>
           <tr><td class="tool-name">docker_serviceRm</td><td>Remove services</td></tr>
@@ -649,14 +710,11 @@ section{padding:72px 0}
           <tr><td class="tool-name">docker_servicePs</td><td>List tasks of a service</td></tr>
           <tr><td class="tool-name">docker_serviceScale</td><td>Scale services</td></tr>
           <tr><td class="tool-name">docker_serviceRollback</td><td>Rollback a service</td></tr>
-        </tbody>
-      </table>
+      </tbody></table>
     </div>
     <div class="tool-category reveal">
       <h3>Swarm Nodes <span class="tool-count">7 tools</span></h3>
-      <table>
-        <thead><tr><th>Tool</th><th>Description</th></tr></thead>
-        <tbody>
+      <table><thead><tr><th>Tool</th><th>Description</th></tr></thead><tbody>
           <tr><td class="tool-name">docker_nodeLs</td><td>List nodes in the Swarm</td></tr>
           <tr><td class="tool-name">docker_nodeInspect</td><td>Inspect a node</td></tr>
           <tr><td class="tool-name">docker_nodePs</td><td>List tasks on a node</td></tr>
@@ -664,92 +722,75 @@ section{padding:72px 0}
           <tr><td class="tool-name">docker_nodeUpdate</td><td>Update node metadata</td></tr>
           <tr><td class="tool-name">docker_nodePromote</td><td>Promote workers to managers</td></tr>
           <tr><td class="tool-name">docker_nodeDemote</td><td>Demote managers to workers</td></tr>
-        </tbody>
-      </table>
+      </tbody></table>
     </div>
     <div class="tool-category reveal">
       <h3>Swarm Stacks <span class="tool-count">6 tools</span></h3>
-      <table>
-        <thead><tr><th>Tool</th><th>Description</th></tr></thead>
-        <tbody>
+      <table><thead><tr><th>Tool</th><th>Description</th></tr></thead><tbody>
           <tr><td class="tool-name">docker_stackDeploy</td><td>Deploy or update a stack</td></tr>
           <tr><td class="tool-name">docker_stackRm</td><td>Remove stacks</td></tr>
           <tr><td class="tool-name">docker_stackLs</td><td>List stacks</td></tr>
           <tr><td class="tool-name">docker_stackPs</td><td>List tasks in a stack</td></tr>
           <tr><td class="tool-name">docker_stackServices</td><td>List services in a stack</td></tr>
           <tr><td class="tool-name">docker_stackConfig</td><td>Output merged stack config</td></tr>
-        </tbody>
-      </table>
+      </tbody></table>
     </div>
     <div class="tool-category reveal">
       <h3>Swarm Configs <span class="tool-count">4 tools</span></h3>
-      <table>
-        <thead><tr><th>Tool</th><th>Description</th></tr></thead>
-        <tbody>
+      <table><thead><tr><th>Tool</th><th>Description</th></tr></thead><tbody>
           <tr><td class="tool-name">docker_configCreate</td><td>Create a Swarm config</td></tr>
           <tr><td class="tool-name">docker_configInspect</td><td>Inspect a config</td></tr>
           <tr><td class="tool-name">docker_configLs</td><td>List configs</td></tr>
           <tr><td class="tool-name">docker_configRm</td><td>Remove configs</td></tr>
-        </tbody>
-      </table>
+      </tbody></table>
     </div>
     <div class="tool-category reveal">
       <h3>Swarm Secrets <span class="tool-count">4 tools</span></h3>
-      <table>
-        <thead><tr><th>Tool</th><th>Description</th></tr></thead>
-        <tbody>
+      <table><thead><tr><th>Tool</th><th>Description</th></tr></thead><tbody>
           <tr><td class="tool-name">docker_secretCreate</td><td>Create a Swarm secret</td></tr>
           <tr><td class="tool-name">docker_secretInspect</td><td>Inspect a secret (metadata only)</td></tr>
           <tr><td class="tool-name">docker_secretLs</td><td>List secrets</td></tr>
           <tr><td class="tool-name">docker_secretRm</td><td>Remove secrets</td></tr>
-        </tbody>
-      </table>
+      </tbody></table>
     </div>
     <div class="tool-category reveal">
       <h3>Docker Content Trust <span class="tool-count">4 tools</span></h3>
-      <table>
-        <thead><tr><th>Tool</th><th>Description</th></tr></thead>
-        <tbody>
+      <table><thead><tr><th>Tool</th><th>Description</th></tr></thead><tbody>
           <tr><td class="tool-name">docker_trustInspect</td><td>Inspect trust data for an image</td></tr>
           <tr><td class="tool-name">docker_trustSign</td><td>Sign an image</td></tr>
           <tr><td class="tool-name">docker_trustRevoke</td><td>Revoke trust for an image</td></tr>
           <tr><td class="tool-name">docker_trustKey</td><td>Manage signing keys</td></tr>
-        </tbody>
-      </table>
-      <h3 class="tool-category">Utility (2)</h3>
-      <table>
-        <thead><tr><th>Tool</th><th>Description</th></tr></thead>
-        <tbody>
+      </tbody></table>
+    </div>
+    <div class="tool-category reveal">
+      <h3>Utility <span class="tool-count">2 tools</span></h3>
+      <table><thead><tr><th>Tool</th><th>Description</th></tr></thead><tbody>
           <tr><td class="tool-name">docker_version</td><td>Show Docker client and server version info</td></tr>
           <tr><td class="tool-name">docker_composeVersion</td><td>Show Docker Compose version info</td></tr>
-        </tbody>
-      </table>
-      <h3 class="tool-category">Compose Extras (1)</h3>
-      <table>
-        <thead><tr><th>Tool</th><th>Description</th></tr></thead>
-        <tbody>
+      </tbody></table>
+    </div>
+    <div class="tool-category reveal">
+      <h3>Compose Extras <span class="tool-count">1 tool</span></h3>
+      <table><thead><tr><th>Tool</th><th>Description</th></tr></thead><tbody>
           <tr><td class="tool-name">docker_composeWatch</td><td>Watch build context and auto-rebuild on file changes</td></tr>
-        </tbody>
-      </table>
-      <h3 class="tool-category">Docker Scout (3)</h3>
-      <table>
-        <thead><tr><th>Tool</th><th>Description</th></tr></thead>
-        <tbody>
+      </tbody></table>
+    </div>
+    <div class="tool-category reveal">
+      <h3>Docker Scout <span class="tool-count">3 tools</span></h3>
+      <table><thead><tr><th>Tool</th><th>Description</th></tr></thead><tbody>
           <tr><td class="tool-name">docker_scoutQuickview</td><td>Quick overview of image vulnerabilities</td></tr>
           <tr><td class="tool-name">docker_scoutCves</td><td>List CVEs found in an image</td></tr>
           <tr><td class="tool-name">docker_scoutRecommendations</td><td>Get base image update recommendations</td></tr>
-        </tbody>
-      </table>
-      <h3 class="tool-category">Plugin Management (4)</h3>
-      <table>
-        <thead><tr><th>Tool</th><th>Description</th></tr></thead>
-        <tbody>
+      </tbody></table>
+    </div>
+    <div class="tool-category reveal">
+      <h3>Plugin Management <span class="tool-count">4 tools</span></h3>
+      <table><thead><tr><th>Tool</th><th>Description</th></tr></thead><tbody>
           <tr><td class="tool-name">docker_pluginLs</td><td>List installed Docker plugins</td></tr>
           <tr><td class="tool-name">docker_pluginInstall</td><td>Install a Docker plugin from a registry</td></tr>
           <tr><td class="tool-name">docker_pluginRm</td><td>Remove one or more Docker plugins</td></tr>
           <tr><td class="tool-name">docker_pluginEnable</td><td>Enable a disabled Docker plugin</td></tr>
-        </tbody>
-      </table>
+      </tbody></table>
     </div>
   </div>
 </section>
@@ -898,7 +939,7 @@ section{padding:72px 0}
         <p>Compose Completeness - 16 tools: config, cp, create, events, images, kill, ls, pause/unpause, port, rm, run, scale, start, stop, top.</p>
       </div>
 
-      <div class="timeline-item current">
+      <div class="timeline-item">
         <div class="timeline-dot"></div>
         <h3>v0.9.0 <span class="tag upcoming-tag">Released</span></h3>
         <p>Container/Image Gaps, Context, Auth - 14 tools: diff, export, port, rename, history, import, context management, registry login/logout.</p>
@@ -912,25 +953,30 @@ section{padding:72px 0}
 
       <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <h3>v0.11.0</h3>
+        <h3>v0.11.0 <span class="tag upcoming-tag">Released</span></h3>
         <p>Swarm Stacks, Configs, Secrets, Trust - 18 tools: stack deploy, config/secret CRUD, Docker Content Trust.</p>
       </div>
 
       <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <h3>v0.12.0 <span class="tag current-tag">Current</span></h3>
+        <h3>v0.12.0 <span class="tag upcoming-tag">Released</span></h3>
         <p>Niche, Scout, Extras - 10 tools: version info, Scout CVEs/recommendations, compose watch, plugin management.</p>
       </div>
 
-      <div class="timeline-item">
+      <div class="timeline-item current">
         <div class="timeline-dot"></div>
-        <h3>v1.0.0 <span class="tag upcoming-tag">Planned</span></h3>
-        <p>Stable release - finalized APIs, full test coverage, comprehensive docs, 150 MCP tools.</p>
+        <h3>v1.0.0 <span class="tag current-tag">Current</span></h3>
+        <p>Stable release - finalized APIs, enhanced error messages, comprehensive docs, workflow diagrams, 150 MCP tools.</p>
       </div>
 
     </div>
   </div>
 </section>
+
+<!-- BACK TO TOP -->
+<button class="back-to-top" id="backToTop" aria-label="Back to top" onclick="window.scrollTo({top:0})">
+  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
 
 <!-- FOOTER -->
 <footer class="footer">
@@ -1008,8 +1054,66 @@ const observer=new IntersectionObserver((entries)=>{
     }
   });
 },{threshold:0.15});
-
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+/* Back to top button */
+const backToTop=document.getElementById('backToTop');
+window.addEventListener('scroll',()=>{
+  backToTop.classList.toggle('visible',window.scrollY>600);
+},{passive:true});
+
+/* Active nav highlighting */
+const navLinks=document.querySelectorAll('.nav-links a[data-section]');
+const sections=document.querySelectorAll('section[id]');
+const navObserver=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      navLinks.forEach(a=>{
+        a.classList.toggle('active',a.dataset.section===entry.target.id);
+      });
+    }
+  });
+},{rootMargin:'-80px 0px -60% 0px',threshold:0});
+sections.forEach(s=>navObserver.observe(s));
+
+/* Tool search / filter */
+const toolSearch=document.getElementById('toolSearch');
+const toolSearchCount=document.getElementById('toolSearchCount');
+function filterTools(){
+  const q=toolSearch.value.toLowerCase().trim();
+  const allTables=document.querySelectorAll('#mcp-tools table');
+  let shown=0,total=0;
+  allTables.forEach(table=>{
+    table.querySelectorAll('tbody tr').forEach(row=>{
+      if(row.querySelector('td[colspan]')) return;
+      total++;
+      const text=row.textContent.toLowerCase();
+      const match=!q||text.includes(q);
+      row.classList.toggle('hidden-row',!match);
+      if(match) shown++;
+    });
+  });
+  if(q){
+    toolSearchCount.textContent=shown+' of '+total+' tools';
+  } else {
+    toolSearchCount.textContent='';
+  }
+  document.querySelectorAll('.tool-category').forEach(cat=>{
+    const visibleRows=cat.querySelectorAll('tbody tr:not(.hidden-row):not([colspan])');
+    const hasToolName=Array.from(visibleRows).some(r=>r.querySelector('.tool-name'));
+    cat.style.display=(!q||hasToolName)?'':'none';
+  });
+}
+toolSearch.addEventListener('input',filterTools);
+
+/* Keyboard shortcut: / to focus search */
+document.addEventListener('keydown',(e)=>{
+  if(e.key==='/'&&document.activeElement!==toolSearch&&!e.ctrlKey&&!e.metaKey&&document.activeElement.tagName!=='INPUT'&&document.activeElement.tagName!=='TEXTAREA'){
+    e.preventDefault();
+    toolSearch.focus();
+    toolSearch.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+});
 </script>
 </body>
 </html>

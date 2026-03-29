@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0] - 2026-03-29
+
+### Changed
+
+#### MCP Server - Enhanced Error Messages
+- `errorResponse` now includes error type prefix, the Docker command that failed, and actionable fix suggestions
+- Each error class (DockerNotFound, DockerNotRunning, ContainerNotFound, ImageNotFound, VolumeNotFound, NetworkNotFound, PermissionDenied) returns a targeted suggestion pointing to the relevant MCP tool or fix
+
+#### Skills - Workflow Diagrams
+- Added mermaid workflow diagrams to `docker-context-management`, `docker-image-signing`, and `docker-swarm` skills
+
+#### Tests - Tool Export Smoke Test
+- New integration test (`tool-exports.test.ts`) verifies all 150 tool files export a `register` function
+
+#### Documentation - Full Sweep
+- Fixed skill count (15 to 17) and rule count (9 to 10) in README.md
+- Fixed tool count (140 to 150) in mcp-server/README.md
+- GH Pages site overhaul: removed all emojis, replaced with SVG icons and CSS; added tool search/filter with `/` keyboard shortcut; added back-to-top button; added active nav highlighting via IntersectionObserver; fixed skills accordion (added 5 missing skills); added `swarm-security` rule card; fixed all timeline release tags; updated all counts and version references
+
+---
+
 ## [0.12.0] - 2026-03-29
 
 ### Added

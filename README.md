@@ -11,7 +11,7 @@
 <p align="center">
   <a href="https://github.com/TMHSDigital/Docker-Developer-Tools/actions/workflows/validate.yml"><img src="https://img.shields.io/github/actions/workflow/status/TMHSDigital/Docker-Developer-Tools/validate.yml?branch=main&label=CI" alt="CI" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-CC--BY--NC--ND--4.0-blue" alt="License" /></a>
-  <img src="https://img.shields.io/badge/version-0.12.0-green" alt="Version" />
+  <img src="https://img.shields.io/badge/version-1.0.0-green" alt="Version" />
   <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/v/@tmhs/docker-mcp" alt="npm" /></a>
   <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/dm/@tmhs/docker-mcp" alt="npm downloads" /></a>
   <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/unpacked-size/@tmhs/docker-mcp" alt="npm size" /></a>
@@ -50,7 +50,7 @@ flowchart LR
 ---
 
 <details>
-<summary><strong>15 Skills</strong> - on-demand Docker expertise</summary>
+<summary><strong>17 Skills</strong> - on-demand Docker expertise</summary>
 
 &nbsp;
 
@@ -77,7 +77,7 @@ flowchart LR
 </details>
 
 <details>
-<summary><strong>9 Rules</strong> - automatic best-practice enforcement</summary>
+<summary><strong>10 Rules</strong> - automatic best-practice enforcement</summary>
 
 &nbsp;
 

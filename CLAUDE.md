@@ -8,7 +8,7 @@ Docker Developer Tools is a Cursor IDE plugin that integrates Docker and contain
 
 This is a monorepo - the Cursor plugin (skills and rules) and the companion MCP server live in the same repository. Docker's API is local (Docker Engine socket / CLI), so one repo is simpler for users to install and maintain.
 
-**Version:** 0.12.0
+**Version:** 1.0.0
 **License:** CC-BY-NC-ND-4.0
 **Author:** TMHSDigital
 

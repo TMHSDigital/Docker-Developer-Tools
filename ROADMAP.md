@@ -21,8 +21,8 @@
 | v0.9.0 | Container/Image Gaps, Context, Auth | +14 | 98 | +1 | +0 | Released |
 | v0.10.0 | Swarm Orchestration | +24 | 122 | +1 | +1 | Released |
 | v0.11.0 | Swarm Stacks, Configs, Secrets, Trust | +18 | 140 | +1 | +0 | Released |
-| v0.12.0 | Niche, Scout, and Extras | +10 | 150 | +0 | +0 | (current) |
-| v1.0.0 | Stable | +0 | 150 | +0 | +0 | Planned |
+| v0.12.0 | Niche, Scout, and Extras | +10 | 150 | +0 | +0 | Released |
+| v1.0.0 | Stable | +0 | 150 | +0 | +0 | (current) |
 
 ---
 
@@ -370,16 +370,15 @@ Remaining Docker CLI commands, vulnerability scanning, compose watch, plugin man
 
 ## v1.0.0 - Stable
 
-Production release after community feedback and testing.
+Production-grade stable release.
 
-- Finalize all APIs and tool signatures
-- Complete documentation coverage
-- Performance optimization for MCP tool responses
-- Full test coverage across all components
-- Expand Common Pitfalls sections across all skills
-- Add cross-references between related skills and rules
-- Add workflow diagrams to complex skills
-- Comprehensive error message review for all MCP tools
+- Finalized all APIs and tool signatures across 150 MCP tools
+- Enhanced error messages with error type, failed command, and actionable suggestions
+- Added workflow diagrams to docker-context-management, docker-image-signing, and docker-swarm skills
+- Integration smoke test verifying all 150 tool files export register()
+- Comprehensive GH Pages site overhaul - removed emojis, added tool search/filter, back-to-top, active nav highlighting
+- Fixed documentation inconsistencies across all files (skill/rule counts, tool counts)
+- Full documentation sweep and version consistency
 
 ---
 
@@ -425,6 +424,7 @@ All destructive MCP tools (`rm`, `rmi`, `prune`, `kill`, `down`, `leave`) will:
 - [x] 10 niche/scout/extras tools (version, composeVersion, composeWatch, scoutQuickview/Cves/Recommendations, pluginLs/Install/Rm/Enable)
 - [x] 17 skills covering all Docker workflows
 - [x] 10 rules for Docker validation
+- [x] v1.0.0 stable: enhanced error messages, workflow diagrams, tool export smoke tests, GH Pages overhaul
 
 ---
 

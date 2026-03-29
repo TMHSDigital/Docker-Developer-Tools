@@ -11,7 +11,7 @@
 <p align="center">
   <a href="https://github.com/TMHSDigital/Docker-Developer-Tools/actions/workflows/validate.yml"><img src="https://img.shields.io/github/actions/workflow/status/TMHSDigital/Docker-Developer-Tools/validate.yml?branch=main&label=CI" alt="CI" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-CC--BY--NC--ND--4.0-blue" alt="License" /></a>
-  <img src="https://img.shields.io/badge/version-0.6.0-green" alt="Version" />
+  <img src="https://img.shields.io/badge/version-0.7.0-green" alt="Version" />
   <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/v/@tmhs/docker-mcp" alt="npm" /></a>
   <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/dm/@tmhs/docker-mcp" alt="npm downloads" /></a>
   <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/unpacked-size/@tmhs/docker-mcp" alt="npm size" /></a>
@@ -22,7 +22,7 @@
 </p>
 
 <p align="center">
-  <strong>13 skills</strong>&nbsp;&bull;&nbsp;<strong>7 rules</strong>&nbsp;&bull;&nbsp;<strong>55 MCP tools</strong>
+  <strong>14 skills</strong>&nbsp;&bull;&nbsp;<strong>8 rules</strong>&nbsp;&bull;&nbsp;<strong>68 MCP tools</strong>
 </p>
 
 ---
@@ -50,7 +50,7 @@ flowchart LR
 ---
 
 <details>
-<summary><strong>13 Skills</strong> - on-demand Docker expertise</summary>
+<summary><strong>14 Skills</strong> - on-demand Docker expertise</summary>
 
 &nbsp;
 
@@ -69,11 +69,12 @@ flowchart LR
 | **DevOps** | `docker-development-env` | Dev containers, hot reload, debugger attachment, local stacks |
 | **Debugging** | `container-debugging` | Exec into containers, log analysis, health checks, process inspection |
 | **Advanced** | `docker-advanced-workflows` | Multi-stage pipelines, sidecar patterns, healthchecks, signal handling |
+| **Advanced** | `docker-multi-platform` | Multi-arch builds, buildx configuration, manifest lists, platform targeting |
 
 </details>
 
 <details>
-<summary><strong>7 Rules</strong> - automatic best-practice enforcement</summary>
+<summary><strong>8 Rules</strong> - automatic best-practice enforcement</summary>
 
 &nbsp;
 
@@ -86,6 +87,7 @@ flowchart LR
 | `docker-image-pinning` | Dockerfiles, compose files | Flag unpinned image tags (`:latest` or no tag) |
 | `docker-port-conflicts` | Dockerfiles, compose files | Flag commonly conflicting port mappings |
 | `docker-logging` | Dockerfiles, compose files | Flag missing logging drivers and log rotation |
+| `buildx-best-practices` | Dockerfiles, compose files | Flag multi-platform build issues, missing cache config, arch hardcoding |
 
 </details>
 
@@ -115,7 +117,7 @@ Add to your Cursor MCP config (`.cursor/mcp.json`):
 ```
 
 <details>
-<summary><strong>55 MCP Tools</strong> - full tool reference</summary>
+<summary><strong>68 MCP Tools</strong> - full tool reference</summary>
 
 &nbsp;
 
@@ -214,6 +216,29 @@ Add to your Cursor MCP config (`.cursor/mcp.json`):
 | `docker_update` | Update container resource configuration (CPU, memory, restart policy) |
 | `docker_wait` | Block until a container stops and return its exit code |
 
+**Buildx** (8)
+
+| Tool | What It Does |
+|---|---|
+| `docker_buildxBuild` | Multi-platform builds with buildx (cache export, provenance, push/load) |
+| `docker_buildxLs` | List buildx builder instances |
+| `docker_buildxCreate` | Create a new buildx builder instance |
+| `docker_buildxRm` | Remove a buildx builder instance |
+| `docker_buildxInspect` | Inspect a buildx builder instance |
+| `docker_buildxUse` | Set the default buildx builder |
+| `docker_buildxImagetools` | Inspect or create multi-platform manifest lists via buildx |
+| `docker_builderPrune` | Remove buildx build cache |
+
+**Manifest** (5)
+
+| Tool | What It Does |
+|---|---|
+| `docker_manifestCreate` | Create a local manifest list for multi-architecture images |
+| `docker_manifestInspect` | Display an image manifest or manifest list |
+| `docker_manifestAnnotate` | Add platform information to a manifest list entry |
+| `docker_manifestPush` | Push a manifest list to a registry |
+| `docker_manifestRm` | Remove local manifest lists |
+
 </details>
 
 ---
@@ -271,6 +296,7 @@ Then add the JSON config from the [MCP Server section](#companion-docker-mcp-ser
 | `docker-development-env` | "Create a dev container with hot reload for my Go project" |
 | `container-debugging` | "Show me the logs and processes inside my crashing container" |
 | `docker-advanced-workflows` | "Set up healthchecks and graceful shutdown for my Node.js container" |
+| `docker-multi-platform` | "Build my Go API image for both amd64 and arm64 with buildx" |
 
 </details>
 

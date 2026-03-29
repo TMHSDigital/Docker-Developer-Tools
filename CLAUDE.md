@@ -4,11 +4,11 @@ Project documentation for Claude Code and AI assistants working on this reposito
 
 ## Project Overview
 
-Docker Developer Tools is a Cursor IDE plugin that integrates Docker and container workflows into Cursor's AI chat. It includes 13 skills, 7 rules, and a companion MCP server with 55 tools for live Docker CLI integration.
+Docker Developer Tools is a Cursor IDE plugin that integrates Docker and container workflows into Cursor's AI chat. It includes 14 skills, 8 rules, and a companion MCP server with 68 tools for live Docker CLI integration.
 
 This is a monorepo - the Cursor plugin (skills and rules) and the companion MCP server live in the same repository. Docker's API is local (Docker Engine socket / CLI), so one repo is simpler for users to install and maintain.
 
-**Version:** 0.6.0
+**Version:** 0.7.0
 **License:** CC-BY-NC-ND-4.0
 **Author:** TMHSDigital
 
@@ -35,7 +35,7 @@ Docker-Developer-Tools/
   tests/                     # Python structure tests
 ```
 
-## Skills (13)
+## Skills (14)
 
 | Skill | Description |
 |-------|-------------|
@@ -52,8 +52,9 @@ Docker-Developer-Tools/
 | `docker-development-env` | Development environments with Docker |
 | `docker-resource-management` | Resource limits and monitoring |
 | `docker-advanced-workflows` | Multi-stage pipelines, sidecar patterns, healthchecks, signal handling |
+| `docker-multi-platform` | Multi-arch builds, buildx configuration, manifest lists, platform targeting |
 
-## Rules (7)
+## Rules (8)
 
 | Rule | Scope | Description |
 |------|-------|-------------|
@@ -64,8 +65,9 @@ Docker-Developer-Tools/
 | `docker-image-pinning` | Dockerfiles, compose files | Flag unpinned image tags |
 | `docker-port-conflicts` | Dockerfiles, compose files | Flag port conflicts |
 | `docker-logging` | Dockerfiles, compose files | Flag missing logging drivers and log rotation |
+| `buildx-best-practices` | Dockerfiles, compose files | Flag multi-platform build issues, missing cache config |
 
-## MCP Server (55 tools)
+## MCP Server (68 tools)
 
 The MCP server talks to Docker via CLI exec (`docker` commands) rather than the Docker Engine REST API. It uses stdio transport and requires `docker` to be available on PATH.
 
@@ -163,6 +165,29 @@ The MCP server talks to Docker via CLI exec (`docker` commands) rather than the 
 | `docker_events` | Real-time Docker daemon events |
 | `docker_update` | Update container resource config live |
 | `docker_wait` | Block until container stops, return exit code |
+
+### Buildx (8)
+
+| Tool | Description |
+|------|-------------|
+| `docker_buildxBuild` | Multi-platform builds with cache export and provenance |
+| `docker_buildxLs` | List builder instances |
+| `docker_buildxCreate` | Create a new builder instance |
+| `docker_buildxRm` | Remove a builder instance |
+| `docker_buildxInspect` | Inspect a builder instance |
+| `docker_buildxUse` | Set the default builder instance |
+| `docker_buildxImagetools` | Inspect or create manifest lists via buildx |
+| `docker_builderPrune` | Remove build cache |
+
+### Manifest (5)
+
+| Tool | Description |
+|------|-------------|
+| `docker_manifestCreate` | Create a local manifest list for multi-arch images |
+| `docker_manifestInspect` | Display an image manifest or manifest list |
+| `docker_manifestAnnotate` | Add platform info to a manifest list entry |
+| `docker_manifestPush` | Push a manifest list to a registry |
+| `docker_manifestRm` | Remove local manifest lists |
 
 ## Development Workflow
 
@@ -288,3 +313,16 @@ Full checklist with copy-paste commands: [CONTRIBUTING.md - Release Checklist](C
 | `docker events --format json` | `docker_events` |
 | `docker update` | `docker_update` |
 | `docker wait` | `docker_wait` |
+| `docker buildx build --platform` | `docker_buildxBuild` |
+| `docker buildx ls` | `docker_buildxLs` |
+| `docker buildx create` | `docker_buildxCreate` |
+| `docker buildx rm` | `docker_buildxRm` |
+| `docker buildx inspect` | `docker_buildxInspect` |
+| `docker buildx use` | `docker_buildxUse` |
+| `docker buildx imagetools` | `docker_buildxImagetools` |
+| `docker buildx prune -f` | `docker_builderPrune` |
+| `docker manifest create` | `docker_manifestCreate` |
+| `docker manifest inspect` | `docker_manifestInspect` |
+| `docker manifest annotate` | `docker_manifestAnnotate` |
+| `docker manifest push` | `docker_manifestPush` |
+| `docker manifest rm` | `docker_manifestRm` |

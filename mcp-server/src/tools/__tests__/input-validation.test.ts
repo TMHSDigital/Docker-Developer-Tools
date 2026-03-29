@@ -1371,3 +1371,392 @@ describe("docker_wait input validation", () => {
     expect(result.containerId).toBe("batch-job-1");
   });
 });
+
+// ── v0.7.0 Buildx and Manifest tools ──────────────────────────────
+
+describe("docker_buildxBuild input validation", () => {
+  const schema = z.object({
+    context: z.string().min(1),
+    tag: z.array(z.string()).optional(),
+    file: z.string().optional(),
+    platform: z.array(z.string()).optional(),
+    builder: z.string().optional(),
+    buildArgs: z.array(z.string()).optional(),
+    target: z.string().optional(),
+    noCache: z.boolean().optional().default(false),
+    pull: z.boolean().optional().default(false),
+    push: z.boolean().optional().default(false),
+    load: z.boolean().optional().default(false),
+    cacheFrom: z.array(z.string()).optional(),
+    cacheTo: z.array(z.string()).optional(),
+    provenance: z.boolean().optional(),
+    labels: z.array(z.string()).optional(),
+  });
+
+  it("requires context", () => {
+    expect(() => schema.parse({})).toThrow();
+  });
+
+  it("rejects empty context", () => {
+    expect(() => schema.parse({ context: "" })).toThrow();
+  });
+
+  it("accepts minimal context only", () => {
+    const result = schema.parse({ context: "." });
+    expect(result.context).toBe(".");
+    expect(result.noCache).toBe(false);
+    expect(result.push).toBe(false);
+    expect(result.load).toBe(false);
+  });
+
+  it("accepts multi-platform build with all options", () => {
+    const result = schema.parse({
+      context: "./app",
+      tag: ["myapp:latest", "myapp:v1.0"],
+      platform: ["linux/amd64", "linux/arm64"],
+      builder: "mybuilder",
+      buildArgs: ["NODE_ENV=production"],
+      target: "runtime",
+      noCache: true,
+      push: true,
+      cacheFrom: ["type=registry,ref=myapp:cache"],
+      cacheTo: ["type=registry,ref=myapp:cache"],
+      provenance: true,
+      labels: ["version=1.0"],
+    });
+    expect(result.platform).toEqual(["linux/amd64", "linux/arm64"]);
+    expect(result.push).toBe(true);
+    expect(result.provenance).toBe(true);
+  });
+});
+
+describe("docker_buildxLs input validation", () => {
+  const schema = z.object({});
+
+  it("accepts empty input", () => {
+    const result = schema.parse({});
+    expect(result).toEqual({});
+  });
+});
+
+describe("docker_buildxCreate input validation", () => {
+  const schema = z.object({
+    name: z.string().optional(),
+    driver: z.string().optional(),
+    use: z.boolean().optional().default(false),
+    platform: z.array(z.string()).optional(),
+    buildkitdFlags: z.string().optional(),
+    driverOpts: z.array(z.string()).optional(),
+  });
+
+  it("accepts empty input (all optional)", () => {
+    const result = schema.parse({});
+    expect(result.use).toBe(false);
+  });
+
+  it("accepts full configuration", () => {
+    const result = schema.parse({
+      name: "multiarch",
+      driver: "docker-container",
+      use: true,
+      platform: ["linux/amd64", "linux/arm64"],
+      driverOpts: ["network=host"],
+    });
+    expect(result.name).toBe("multiarch");
+    expect(result.driver).toBe("docker-container");
+    expect(result.use).toBe(true);
+  });
+});
+
+describe("docker_buildxRm input validation", () => {
+  const schema = z.object({
+    name: z.string().min(1),
+    force: z.boolean().optional().default(false),
+    allInactive: z.boolean().optional().default(false),
+  });
+
+  it("requires name", () => {
+    expect(() => schema.parse({})).toThrow();
+  });
+
+  it("rejects empty name", () => {
+    expect(() => schema.parse({ name: "" })).toThrow();
+  });
+
+  it("accepts name only", () => {
+    const result = schema.parse({ name: "old-builder" });
+    expect(result.name).toBe("old-builder");
+    expect(result.force).toBe(false);
+  });
+
+  it("accepts force and allInactive", () => {
+    const result = schema.parse({ name: "old-builder", force: true, allInactive: true });
+    expect(result.force).toBe(true);
+    expect(result.allInactive).toBe(true);
+  });
+});
+
+describe("docker_buildxInspect input validation", () => {
+  const schema = z.object({
+    name: z.string().optional(),
+    bootstrap: z.boolean().optional().default(false),
+  });
+
+  it("accepts empty input (defaults to current builder)", () => {
+    const result = schema.parse({});
+    expect(result.bootstrap).toBe(false);
+  });
+
+  it("accepts name with bootstrap", () => {
+    const result = schema.parse({ name: "mybuilder", bootstrap: true });
+    expect(result.name).toBe("mybuilder");
+    expect(result.bootstrap).toBe(true);
+  });
+});
+
+describe("docker_buildxUse input validation", () => {
+  const schema = z.object({
+    name: z.string().min(1),
+    global: z.boolean().optional().default(false),
+    setDefault: z.boolean().optional().default(false),
+  });
+
+  it("requires name", () => {
+    expect(() => schema.parse({})).toThrow();
+  });
+
+  it("rejects empty name", () => {
+    expect(() => schema.parse({ name: "" })).toThrow();
+  });
+
+  it("accepts name only", () => {
+    const result = schema.parse({ name: "multiarch" });
+    expect(result.name).toBe("multiarch");
+    expect(result.global).toBe(false);
+  });
+
+  it("accepts global flag", () => {
+    const result = schema.parse({ name: "multiarch", global: true });
+    expect(result.global).toBe(true);
+  });
+});
+
+describe("docker_buildxImagetools input validation", () => {
+  const schema = z.object({
+    action: z.enum(["inspect", "create"]),
+    sources: z.array(z.string()).min(1),
+    tag: z.array(z.string()).optional(),
+    dryRun: z.boolean().optional().default(false),
+  });
+
+  it("requires action and sources", () => {
+    expect(() => schema.parse({})).toThrow();
+    expect(() => schema.parse({ action: "inspect" })).toThrow();
+  });
+
+  it("rejects empty sources", () => {
+    expect(() => schema.parse({ action: "inspect", sources: [] })).toThrow();
+  });
+
+  it("rejects invalid action", () => {
+    expect(() => schema.parse({ action: "delete", sources: ["img"] })).toThrow();
+  });
+
+  it("accepts inspect action", () => {
+    const result = schema.parse({ action: "inspect", sources: ["myapp:latest"] });
+    expect(result.action).toBe("inspect");
+    expect(result.sources).toEqual(["myapp:latest"]);
+  });
+
+  it("accepts create action with tags", () => {
+    const result = schema.parse({
+      action: "create",
+      sources: ["myapp:amd64", "myapp:arm64"],
+      tag: ["myapp:latest"],
+      dryRun: true,
+    });
+    expect(result.action).toBe("create");
+    expect(result.tag).toEqual(["myapp:latest"]);
+    expect(result.dryRun).toBe(true);
+  });
+});
+
+describe("docker_builderPrune input validation", () => {
+  const schema = z.object({
+    all: z.boolean().optional().default(false),
+    filter: z.string().optional(),
+    keepStorage: z.string().optional(),
+  });
+
+  it("accepts empty input", () => {
+    const result = schema.parse({});
+    expect(result.all).toBe(false);
+  });
+
+  it("accepts all options", () => {
+    const result = schema.parse({
+      all: true,
+      filter: "until=24h",
+      keepStorage: "10GB",
+    });
+    expect(result.all).toBe(true);
+    expect(result.filter).toBe("until=24h");
+    expect(result.keepStorage).toBe("10GB");
+  });
+});
+
+describe("docker_manifestCreate input validation", () => {
+  const schema = z.object({
+    name: z.string().min(1),
+    images: z.array(z.string()).min(1),
+    amend: z.boolean().optional().default(false),
+  });
+
+  it("requires name and images", () => {
+    expect(() => schema.parse({})).toThrow();
+    expect(() => schema.parse({ name: "myapp:latest" })).toThrow();
+  });
+
+  it("rejects empty name", () => {
+    expect(() => schema.parse({ name: "", images: ["img1"] })).toThrow();
+  });
+
+  it("rejects empty images array", () => {
+    expect(() => schema.parse({ name: "myapp:latest", images: [] })).toThrow();
+  });
+
+  it("accepts valid manifest creation", () => {
+    const result = schema.parse({
+      name: "myregistry/myapp:latest",
+      images: ["myregistry/myapp:amd64", "myregistry/myapp:arm64"],
+    });
+    expect(result.name).toBe("myregistry/myapp:latest");
+    expect(result.images).toHaveLength(2);
+    expect(result.amend).toBe(false);
+  });
+
+  it("accepts amend flag", () => {
+    const result = schema.parse({
+      name: "myapp:latest",
+      images: ["myapp:s390x"],
+      amend: true,
+    });
+    expect(result.amend).toBe(true);
+  });
+});
+
+describe("docker_manifestInspect input validation", () => {
+  const schema = z.object({
+    name: z.string().min(1),
+    verbose: z.boolean().optional().default(false),
+  });
+
+  it("requires name", () => {
+    expect(() => schema.parse({})).toThrow();
+  });
+
+  it("rejects empty name", () => {
+    expect(() => schema.parse({ name: "" })).toThrow();
+  });
+
+  it("accepts name only", () => {
+    const result = schema.parse({ name: "myapp:latest" });
+    expect(result.name).toBe("myapp:latest");
+    expect(result.verbose).toBe(false);
+  });
+
+  it("accepts verbose flag", () => {
+    const result = schema.parse({ name: "myapp:latest", verbose: true });
+    expect(result.verbose).toBe(true);
+  });
+});
+
+describe("docker_manifestAnnotate input validation", () => {
+  const schema = z.object({
+    name: z.string().min(1),
+    image: z.string().min(1),
+    os: z.string().optional(),
+    arch: z.string().optional(),
+    variant: z.string().optional(),
+    osFeatures: z.array(z.string()).optional(),
+  });
+
+  it("requires name and image", () => {
+    expect(() => schema.parse({})).toThrow();
+    expect(() => schema.parse({ name: "myapp:latest" })).toThrow();
+  });
+
+  it("rejects empty name or image", () => {
+    expect(() => schema.parse({ name: "", image: "img" })).toThrow();
+    expect(() => schema.parse({ name: "list", image: "" })).toThrow();
+  });
+
+  it("accepts name and image only", () => {
+    const result = schema.parse({ name: "myapp:latest", image: "myapp:arm64" });
+    expect(result.name).toBe("myapp:latest");
+    expect(result.image).toBe("myapp:arm64");
+  });
+
+  it("accepts full platform annotation", () => {
+    const result = schema.parse({
+      name: "myapp:latest",
+      image: "myapp:armv7",
+      os: "linux",
+      arch: "arm",
+      variant: "v7",
+    });
+    expect(result.os).toBe("linux");
+    expect(result.arch).toBe("arm");
+    expect(result.variant).toBe("v7");
+  });
+});
+
+describe("docker_manifestPush input validation", () => {
+  const schema = z.object({
+    name: z.string().min(1),
+    purge: z.boolean().optional().default(false),
+  });
+
+  it("requires name", () => {
+    expect(() => schema.parse({})).toThrow();
+  });
+
+  it("rejects empty name", () => {
+    expect(() => schema.parse({ name: "" })).toThrow();
+  });
+
+  it("accepts name only", () => {
+    const result = schema.parse({ name: "myapp:latest" });
+    expect(result.name).toBe("myapp:latest");
+    expect(result.purge).toBe(false);
+  });
+
+  it("accepts purge flag", () => {
+    const result = schema.parse({ name: "myapp:latest", purge: true });
+    expect(result.purge).toBe(true);
+  });
+});
+
+describe("docker_manifestRm input validation", () => {
+  const schema = z.object({
+    names: z.array(z.string()).min(1),
+  });
+
+  it("requires names", () => {
+    expect(() => schema.parse({})).toThrow();
+  });
+
+  it("rejects empty names array", () => {
+    expect(() => schema.parse({ names: [] })).toThrow();
+  });
+
+  it("accepts single name", () => {
+    const result = schema.parse({ names: ["myapp:latest"] });
+    expect(result.names).toEqual(["myapp:latest"]);
+  });
+
+  it("accepts multiple names", () => {
+    const result = schema.parse({ names: ["myapp:latest", "myapp:v1.0"] });
+    expect(result.names).toHaveLength(2);
+  });
+});

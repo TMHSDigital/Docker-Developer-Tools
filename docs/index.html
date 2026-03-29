@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Docker Developer Tools - Cursor Plugin</title>
-<meta name="description" content="Expert Docker workflows inside Cursor IDE. 13 skills, 7 rules, 55 MCP tools.">
+<meta name="description" content="Expert Docker workflows inside Cursor IDE. 14 skills, 8 rules, 68 MCP tools.">
 <meta name="theme-color" content="#0db7ed">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Docker Developer Tools - Cursor Plugin">
-<meta property="og:description" content="Expert Docker workflows inside Cursor IDE. 13 skills, 7 rules, 55 MCP tools.">
+<meta property="og:description" content="Expert Docker workflows inside Cursor IDE. 14 skills, 8 rules, 68 MCP tools.">
 <meta property="og:image" content="docs/assets/og-card.jpg">
 <meta property="og:url" content="https://tmhsdigital.github.io/Docker-Developer-Tools/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -241,7 +241,7 @@ section{padding:72px 0}
   <h1><span>Docker</span> Developer Tools</h1>
   <p class="tagline">Expert Docker workflows, live container data, and real-time linting - all inside Cursor IDE.</p>
   <div class="pills">
-    <span class="pill blue">v0.6.0</span>
+    <span class="pill blue">v0.7.0</span>
     <span class="pill">CC BY-NC-ND 4.0</span>
     <span class="pill">Cursor Plugin</span>
   </div>
@@ -251,15 +251,15 @@ section{padding:72px 0}
 <div class="container">
   <div class="stats reveal">
     <div class="stat-card">
-      <div class="stat-number" data-target="13">0</div>
+      <div class="stat-number" data-target="14">0</div>
       <div class="stat-label">Skills</div>
     </div>
     <div class="stat-card">
-      <div class="stat-number" data-target="7">0</div>
+      <div class="stat-number" data-target="8">0</div>
       <div class="stat-label">Rules</div>
     </div>
     <div class="stat-card">
-      <div class="stat-number" data-target="55">0</div>
+      <div class="stat-number" data-target="68">0</div>
       <div class="stat-label">MCP Tools</div>
     </div>
   </div>
@@ -442,7 +442,7 @@ section{padding:72px 0}
 <!-- RULES GRID -->
 <section id="rules" style="background:var(--surface)">
   <div class="container">
-    <h2 class="section-title reveal">6 Always-On Rules</h2>
+    <h2 class="section-title reveal">8 Always-On Rules</h2>
     <p class="section-subtitle reveal">Automatic linting and guardrails that catch issues before they ship.</p>
     <div class="rules-grid">
       <div class="rule-card reveal">
@@ -475,6 +475,16 @@ section{padding:72px 0}
         <span class="rule-scope">Dockerfiles, compose files</span>
         <p>Detects duplicate port mappings and common port conflicts across services.</p>
       </div>
+      <div class="rule-card reveal">
+        <h3><span class="rule-icon">&#128220;</span> docker-logging</h3>
+        <span class="rule-scope">Dockerfiles, compose files</span>
+        <p>Flags missing logging drivers and log rotation settings that can fill disks.</p>
+      </div>
+      <div class="rule-card reveal">
+        <h3><span class="rule-icon">&#9881;</span> buildx-best-practices</h3>
+        <span class="rule-scope">Dockerfiles, compose files</span>
+        <p>Flags multi-platform build issues, missing cache configuration, and architecture-specific hardcoding.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -482,8 +492,8 @@ section{padding:72px 0}
 <!-- MCP TOOLS TABLE -->
 <section id="mcp-tools">
   <div class="container">
-    <h2 class="section-title reveal">55 MCP Tools</h2>
-    <p class="section-subtitle reveal">Live Docker data, container lifecycle, image pipeline, Compose V2, volume/network CRUD, and resource cleanup via the companion MCP server.</p>
+    <h2 class="section-title reveal">68 MCP Tools</h2>
+    <p class="section-subtitle reveal">Live Docker data, container lifecycle, image pipeline, Compose V2, volume/network CRUD, resource cleanup, buildx multi-platform builds, and manifest management via the companion MCP server.</p>
     <div class="tools-table-wrap reveal">
       <table class="tools-table">
         <thead>
@@ -552,6 +562,21 @@ section{padding:72px 0}
           <tr><td class="tool-name">docker_events</td><td>Real-time events from the Docker daemon</td></tr>
           <tr><td class="tool-name">docker_update</td><td>Update container resource config (CPU, memory, restart policy)</td></tr>
           <tr><td class="tool-name">docker_wait</td><td>Block until container stops and return exit code</td></tr>
+          <tr><td colspan="2" style="padding:20px 16px 10px;font-weight:700;color:var(--blue);font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;border-bottom:2px solid var(--border)">Buildx</td></tr>
+          <tr><td class="tool-name">docker_buildxBuild</td><td>Multi-platform builds with cache export, provenance, and push/load</td></tr>
+          <tr><td class="tool-name">docker_buildxLs</td><td>List buildx builder instances</td></tr>
+          <tr><td class="tool-name">docker_buildxCreate</td><td>Create a new buildx builder instance</td></tr>
+          <tr><td class="tool-name">docker_buildxRm</td><td>Remove a buildx builder instance</td></tr>
+          <tr><td class="tool-name">docker_buildxInspect</td><td>Inspect a buildx builder instance</td></tr>
+          <tr><td class="tool-name">docker_buildxUse</td><td>Set the default buildx builder</td></tr>
+          <tr><td class="tool-name">docker_buildxImagetools</td><td>Inspect or create multi-platform manifest lists via buildx</td></tr>
+          <tr><td class="tool-name">docker_builderPrune</td><td>Remove buildx build cache</td></tr>
+          <tr><td colspan="2" style="padding:20px 16px 10px;font-weight:700;color:var(--blue);font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;border-bottom:2px solid var(--border)">Manifest</td></tr>
+          <tr><td class="tool-name">docker_manifestCreate</td><td>Create a local manifest list for multi-arch images</td></tr>
+          <tr><td class="tool-name">docker_manifestInspect</td><td>Display an image manifest or manifest list</td></tr>
+          <tr><td class="tool-name">docker_manifestAnnotate</td><td>Add platform info to a manifest list entry</td></tr>
+          <tr><td class="tool-name">docker_manifestPush</td><td>Push a manifest list to a registry</td></tr>
+          <tr><td class="tool-name">docker_manifestRm</td><td>Remove local manifest lists</td></tr>
         </tbody>
       </table>
     </div>
@@ -684,15 +709,15 @@ section{padding:72px 0}
         <p>Volumes, Networks, Cleanup - 13 tools: volume/network CRUD, system/container/image prune. Infrastructure management.</p>
       </div>
 
-      <div class="timeline-item current">
+      <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <h3>v0.6.0 <span class="tag current-tag">Current</span></h3>
+        <h3>v0.6.0 <span class="tag upcoming-tag">Released</span></h3>
         <p>Advanced and Observability - 6 tools: cp, stats, top, events, update, wait. Live monitoring and file transfer.</p>
       </div>
 
-      <div class="timeline-item">
+      <div class="timeline-item current">
         <div class="timeline-dot"></div>
-        <h3>v0.7.0 <span class="tag upcoming-tag">Planned</span></h3>
+        <h3>v0.7.0 <span class="tag current-tag">Current</span></h3>
         <p>Buildx, Manifests, and Registry - 13 tools: buildx build/inspect/use, manifest create/inspect/annotate/push, builder prune.</p>
       </div>
 

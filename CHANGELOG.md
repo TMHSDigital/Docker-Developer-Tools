@@ -5,6 +5,31 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.0] - 2026-03-29
+
+### Added
+
+#### MCP Server - Buildx and Manifest Tools (+13, total 68)
+- `docker_buildxBuild` - multi-platform builds with buildx (cache export, provenance, push/load, platform targeting)
+- `docker_buildxLs` - list buildx builder instances
+- `docker_buildxCreate` - create a new buildx builder instance (driver, platform, buildkitd flags)
+- `docker_buildxRm` - remove a buildx builder instance (force, all-inactive options)
+- `docker_buildxInspect` - inspect a buildx builder instance (with optional bootstrap)
+- `docker_buildxUse` - set the default buildx builder instance
+- `docker_buildxImagetools` - inspect or create multi-platform manifest lists via buildx imagetools
+- `docker_builderPrune` - remove buildx build cache (all, filter, keep-storage options)
+- `docker_manifestCreate` - create a local manifest list for multi-architecture images
+- `docker_manifestInspect` - display an image manifest or manifest list (verbose option)
+- `docker_manifestAnnotate` - add platform information (os, arch, variant) to a manifest list entry
+- `docker_manifestPush` - push a manifest list to a registry (with optional purge)
+- `docker_manifestRm` - remove local manifest lists
+
+#### Plugin
+- `docker-multi-platform` skill - multi-arch builds, buildx builder configuration, manifest lists, platform targeting, cross-compilation patterns
+- `buildx-best-practices` rule - flag multi-platform build issues, missing cache configuration, architecture-specific hardcoding, missing provenance
+
+---
+
 ## [0.6.0] - 2026-03-29
 
 ### Added
@@ -182,6 +207,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Python test suite: plugin manifest, skills, rules, docs consistency, internal links, roadmap
 - Vitest test suite: error classes, docker-api utilities, input validation
 
+[0.7.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.7.0
 [0.6.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.6.0
 [0.5.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.5.0
 [0.4.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.4.0

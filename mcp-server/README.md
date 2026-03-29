@@ -1,6 +1,6 @@
 # @tmhs/docker-mcp
 
-MCP server for Docker CLI integration - 55 tools for containers, images, Compose, volumes, networks, cleanup, observability, and system info.
+MCP server for Docker CLI integration - 68 tools for containers, images, Compose, volumes, networks, cleanup, observability, buildx, manifests, and system info.
 
 Part of the [Docker Developer Tools](https://github.com/TMHSDigital/Docker-Developer-Tools) Cursor plugin.
 
@@ -48,7 +48,7 @@ Or if installed globally:
 }
 ```
 
-## Tools (55)
+## Tools (68)
 
 ### Read / Inspect (10)
 
@@ -144,6 +144,29 @@ Or if installed globally:
 | `docker_events` | Real-time Docker daemon events |
 | `docker_update` | Update container resource config |
 | `docker_wait` | Wait for container to stop |
+
+### Buildx (8)
+
+| Tool | Description |
+|------|-------------|
+| `docker_buildxBuild` | Multi-platform builds with buildx |
+| `docker_buildxLs` | List builder instances |
+| `docker_buildxCreate` | Create a new builder instance |
+| `docker_buildxRm` | Remove a builder instance |
+| `docker_buildxInspect` | Inspect a builder instance |
+| `docker_buildxUse` | Set the default builder |
+| `docker_buildxImagetools` | Inspect or create manifest lists via buildx |
+| `docker_builderPrune` | Remove build cache |
+
+### Manifest (5)
+
+| Tool | Description |
+|------|-------------|
+| `docker_manifestCreate` | Create a manifest list for multi-arch images |
+| `docker_manifestInspect` | Display a manifest or manifest list |
+| `docker_manifestAnnotate` | Add platform info to a manifest entry |
+| `docker_manifestPush` | Push a manifest list to a registry |
+| `docker_manifestRm` | Remove local manifest lists |
 
 ## License
 

@@ -1,0 +1,55 @@
+---
+description: Flag multi-platform build issues, missing cache configuration, and architecture-specific antipatterns in Dockerfiles and Compose files.
+alwaysApply: false
+globs:
+  - "**/Dockerfile*"
+  - "**/docker-compose*.yml"
+  - "**/docker-compose*.yaml"
+  - "**/compose*.yml"
+  - "**/compose*.yaml"
+---
+
+# Buildx Best Practices
+
+## What to Flag
+
+### Architecture-Specific Hardcoding
+
+- Hardcoded architecture strings in download URLs (e.g. `wget https://example.com/amd64/binary`)
+  - Use `TARGETARCH` ARG: `wget https://example.com/${TARGETARCH}/binary`
+- Architecture-specific package names without conditional logic
+- Binary downloads that assume x86_64 without checking `TARGETARCH`
+
+### Missing Platform-Aware Build Patterns
+
+- Multi-stage builds where the build stage lacks `FROM --platform=$BUILDPLATFORM`
+  - Build stages should run on the host platform for speed; only the final stage should match the target
+- `COPY --from=builder` without ensuring the builder stage used the correct platform
+- Missing `ARG TARGETPLATFORM` / `ARG TARGETARCH` when the Dockerfile contains platform-dependent logic
+
+### Cache Configuration
+
+- Buildx builds without `--cache-from` or `--cache-to` in CI environments
+  - Multi-platform builds are expensive; caching to a registry or local backend avoids rebuilding layers
+- Using `--no-cache` in multi-platform builds (rebuilds all platforms from scratch)
+
+### Provenance and Supply Chain
+
+- Production image builds missing `--provenance=true` or SBOM attestation
+  - Provenance records how and where the image was built
+- Pushing multi-platform images without signing or content trust
+
+### Compose Multi-Platform Issues
+
+- Compose services with `platform:` set to a single architecture when the deployment targets multiple
+- Build sections in Compose missing `platforms:` list when building for multi-arch environments
+- Using `build:` in Compose without specifying a buildx builder that supports multi-platform
+
+## What to Do
+
+- Replace hardcoded architecture strings with `TARGETARCH`, `TARGETOS`, `TARGETVARIANT` ARGs
+- Add `FROM --platform=$BUILDPLATFORM` to build stages in multi-stage Dockerfiles
+- Configure cache backends: `--cache-from type=registry,ref=...` and `--cache-to type=registry,ref=...`
+- Enable provenance with `--provenance=true` for production builds
+- Use `docker buildx create --driver docker-container` for builders that support multi-platform output
+- In CI, install QEMU for cross-architecture emulation: `docker run --privileged --rm tonistiigi/binfmt --install all`

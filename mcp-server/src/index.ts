@@ -58,10 +58,23 @@ import { register as registerTop } from "./tools/top.js";
 import { register as registerEvents } from "./tools/events.js";
 import { register as registerUpdate } from "./tools/update.js";
 import { register as registerWait } from "./tools/wait.js";
+import { register as registerBuildxBuild } from "./tools/buildxBuild.js";
+import { register as registerBuildxLs } from "./tools/buildxLs.js";
+import { register as registerBuildxCreate } from "./tools/buildxCreate.js";
+import { register as registerBuildxRm } from "./tools/buildxRm.js";
+import { register as registerBuildxInspect } from "./tools/buildxInspect.js";
+import { register as registerBuildxUse } from "./tools/buildxUse.js";
+import { register as registerBuildxImagetools } from "./tools/buildxImagetools.js";
+import { register as registerBuilderPrune } from "./tools/builderPrune.js";
+import { register as registerManifestCreate } from "./tools/manifestCreate.js";
+import { register as registerManifestInspect } from "./tools/manifestInspect.js";
+import { register as registerManifestAnnotate } from "./tools/manifestAnnotate.js";
+import { register as registerManifestPush } from "./tools/manifestPush.js";
+import { register as registerManifestRm } from "./tools/manifestRm.js";
 
 const server = new McpServer({
   name: "docker-mcp",
-  version: "0.6.0",
+  version: "0.7.0",
 });
 
 registerListContainers(server);
@@ -119,6 +132,19 @@ registerTop(server);
 registerEvents(server);
 registerUpdate(server);
 registerWait(server);
+registerBuildxBuild(server);
+registerBuildxLs(server);
+registerBuildxCreate(server);
+registerBuildxRm(server);
+registerBuildxInspect(server);
+registerBuildxUse(server);
+registerBuildxImagetools(server);
+registerBuilderPrune(server);
+registerManifestCreate(server);
+registerManifestInspect(server);
+registerManifestAnnotate(server);
+registerManifestPush(server);
+registerManifestRm(server);
 
 async function main(): Promise<void> {
   const transport = new StdioServerTransport();

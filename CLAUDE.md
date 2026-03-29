@@ -4,11 +4,11 @@ Project documentation for Claude Code and AI assistants working on this reposito
 
 ## Project Overview
 
-Docker Developer Tools is a Cursor IDE plugin that integrates Docker and container workflows into Cursor's AI chat. It includes 12 skills, 6 rules, and a companion MCP server with 28 tools for live Docker CLI integration.
+Docker Developer Tools is a Cursor IDE plugin that integrates Docker and container workflows into Cursor's AI chat. It includes 12 skills, 6 rules, and a companion MCP server with 36 tools for live Docker CLI integration.
 
 This is a monorepo - the Cursor plugin (skills and rules) and the companion MCP server live in the same repository. Docker's API is local (Docker Engine socket / CLI), so one repo is simpler for users to install and maintain.
 
-**Version:** 0.3.0
+**Version:** 0.4.0
 **License:** CC-BY-NC-ND-4.0
 **Author:** TMHSDigital
 
@@ -63,7 +63,7 @@ Docker-Developer-Tools/
 | `docker-image-pinning` | Dockerfiles, compose files | Flag unpinned image tags |
 | `docker-port-conflicts` | Dockerfiles, compose files | Flag port conflicts |
 
-## MCP Server (28 tools)
+## MCP Server (36 tools)
 
 The MCP server talks to Docker via CLI exec (`docker` commands) rather than the Docker Engine REST API. It uses stdio transport and requires `docker` to be available on PATH.
 
@@ -109,6 +109,19 @@ The MCP server talks to Docker via CLI exec (`docker` commands) rather than the 
 | `docker_commit` | Create image from container changes |
 | `docker_save` | Save images to a tar archive |
 | `docker_load` | Load images from a tar archive |
+
+### Compose (8)
+
+| Tool | Description |
+|------|-------------|
+| `docker_composeUp` | Create and start Compose services (detached) |
+| `docker_composeDown` | Stop and remove containers, networks, volumes, images |
+| `docker_composePs` | List containers for a Compose project |
+| `docker_composeLogs` | View logs for Compose services |
+| `docker_composeBuild` | Build or rebuild Compose service images |
+| `docker_composeRestart` | Restart Compose services |
+| `docker_composePull` | Pull images for Compose services |
+| `docker_composeExec` | Execute a command in a running Compose service |
 
 ## Development Workflow
 
@@ -207,3 +220,11 @@ Full checklist with copy-paste commands: [CONTRIBUTING.md - Release Checklist](C
 | `docker commit` | `docker_commit` |
 | `docker save -o` | `docker_save` |
 | `docker load -i` | `docker_load` |
+| `docker compose up -d` | `docker_composeUp` |
+| `docker compose down` | `docker_composeDown` |
+| `docker compose ps --format json` | `docker_composePs` |
+| `docker compose logs` | `docker_composeLogs` |
+| `docker compose build` | `docker_composeBuild` |
+| `docker compose restart` | `docker_composeRestart` |
+| `docker compose pull` | `docker_composePull` |
+| `docker compose exec` | `docker_composeExec` |

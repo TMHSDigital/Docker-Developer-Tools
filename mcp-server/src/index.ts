@@ -31,10 +31,18 @@ import { register as registerRmi } from "./tools/rmi.js";
 import { register as registerCommit } from "./tools/commit.js";
 import { register as registerSave } from "./tools/save.js";
 import { register as registerLoad } from "./tools/load.js";
+import { register as registerComposeUp } from "./tools/composeUp.js";
+import { register as registerComposeDown } from "./tools/composeDown.js";
+import { register as registerComposePs } from "./tools/composePs.js";
+import { register as registerComposeLogs } from "./tools/composeLogs.js";
+import { register as registerComposeBuild } from "./tools/composeBuild.js";
+import { register as registerComposeRestart } from "./tools/composeRestart.js";
+import { register as registerComposePull } from "./tools/composePull.js";
+import { register as registerComposeExec } from "./tools/composeExec.js";
 
 const server = new McpServer({
   name: "docker-mcp",
-  version: "0.3.0",
+  version: "0.4.0",
 });
 
 registerListContainers(server);
@@ -65,6 +73,14 @@ registerRmi(server);
 registerCommit(server);
 registerSave(server);
 registerLoad(server);
+registerComposeUp(server);
+registerComposeDown(server);
+registerComposePs(server);
+registerComposeLogs(server);
+registerComposeBuild(server);
+registerComposeRestart(server);
+registerComposePull(server);
+registerComposeExec(server);
 
 async function main(): Promise<void> {
   const transport = new StdioServerTransport();

@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Docker Developer Tools - Cursor Plugin</title>
-<meta name="description" content="Expert Docker workflows inside Cursor IDE. 12 skills, 6 rules, 28 MCP tools.">
+<meta name="description" content="Expert Docker workflows inside Cursor IDE. 12 skills, 6 rules, 36 MCP tools.">
 <meta name="theme-color" content="#0db7ed">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Docker Developer Tools - Cursor Plugin">
-<meta property="og:description" content="Expert Docker workflows inside Cursor IDE. 12 skills, 6 rules, 28 MCP tools.">
+<meta property="og:description" content="Expert Docker workflows inside Cursor IDE. 12 skills, 6 rules, 36 MCP tools.">
 <meta property="og:image" content="docs/assets/og-card.jpg">
 <meta property="og:url" content="https://tmhsdigital.github.io/Docker-Developer-Tools/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -241,7 +241,7 @@ section{padding:72px 0}
   <h1><span>Docker</span> Developer Tools</h1>
   <p class="tagline">Expert Docker workflows, live container data, and real-time linting - all inside Cursor IDE.</p>
   <div class="pills">
-    <span class="pill blue">v0.3.0</span>
+    <span class="pill blue">v0.4.0</span>
     <span class="pill">CC BY-NC-ND 4.0</span>
     <span class="pill">Cursor Plugin</span>
   </div>
@@ -259,7 +259,7 @@ section{padding:72px 0}
       <div class="stat-label">Rules</div>
     </div>
     <div class="stat-card">
-      <div class="stat-number" data-target="28">0</div>
+      <div class="stat-number" data-target="36">0</div>
       <div class="stat-label">MCP Tools</div>
     </div>
   </div>
@@ -482,8 +482,8 @@ section{padding:72px 0}
 <!-- MCP TOOLS TABLE -->
 <section id="mcp-tools">
   <div class="container">
-    <h2 class="section-title reveal">28 MCP Tools</h2>
-    <p class="section-subtitle reveal">Live Docker data, container lifecycle, and full image pipeline via the companion MCP server.</p>
+    <h2 class="section-title reveal">36 MCP Tools</h2>
+    <p class="section-subtitle reveal">Live Docker data, container lifecycle, image pipeline, and Compose V2 management via the companion MCP server.</p>
     <div class="tools-table-wrap reveal">
       <table class="tools-table">
         <thead>
@@ -520,6 +520,15 @@ section{padding:72px 0}
           <tr><td class="tool-name">docker_commit</td><td>Create a new image from a container's changes</td></tr>
           <tr><td class="tool-name">docker_save</td><td>Save one or more images to a tar archive</td></tr>
           <tr><td class="tool-name">docker_load</td><td>Load images from a tar archive</td></tr>
+          <tr><td colspan="2" style="padding:20px 16px 10px;font-weight:700;color:var(--blue);font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;border-bottom:2px solid var(--border)">Compose</td></tr>
+          <tr><td class="tool-name">docker_composeUp</td><td>Create and start Compose services (detached, build, profiles)</td></tr>
+          <tr><td class="tool-name">docker_composeDown</td><td>Stop and remove containers, networks, volumes, and images</td></tr>
+          <tr><td class="tool-name">docker_composePs</td><td>List containers for a Compose project</td></tr>
+          <tr><td class="tool-name">docker_composeLogs</td><td>View logs for Compose services</td></tr>
+          <tr><td class="tool-name">docker_composeBuild</td><td>Build or rebuild Compose service images</td></tr>
+          <tr><td class="tool-name">docker_composeRestart</td><td>Restart Compose services</td></tr>
+          <tr><td class="tool-name">docker_composePull</td><td>Pull images for Compose services</td></tr>
+          <tr><td class="tool-name">docker_composeExec</td><td>Execute a command in a running Compose service container</td></tr>
         </tbody>
       </table>
     </div>
@@ -634,16 +643,16 @@ section{padding:72px 0}
         <p>Container Lifecycle - 10 tools: run, create, start, stop, restart, kill, rm, pause, unpause, exec.</p>
       </div>
 
-      <div class="timeline-item current">
+      <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <h3>v0.3.0 <span class="tag current-tag">Current</span></h3>
+        <h3>v0.3.0 <span class="tag upcoming-tag">Released</span></h3>
         <p>Image and Build - 8 new tools: pull, push, build, tag, rmi, commit, save, load. Complete image pipeline from registry to archive.</p>
       </div>
 
-      <div class="timeline-item">
+      <div class="timeline-item current">
         <div class="timeline-dot"></div>
-        <h3>v0.4.0 <span class="tag upcoming-tag">Planned</span></h3>
-        <p>Compose - up, down, ps, logs, build, restart, pull, exec. Full Docker Compose V2 management.</p>
+        <h3>v0.4.0 <span class="tag current-tag">Current</span></h3>
+        <p>Compose - 8 tools: up, down, ps, logs, build, restart, pull, exec. Full Docker Compose V2 management. Published to npm.</p>
       </div>
 
       <div class="timeline-item">

@@ -11,7 +11,7 @@
 <p align="center">
   <a href="https://github.com/TMHSDigital/Docker-Developer-Tools/actions/workflows/validate.yml"><img src="https://img.shields.io/github/actions/workflow/status/TMHSDigital/Docker-Developer-Tools/validate.yml?branch=main&label=CI" alt="CI" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-CC--BY--NC--ND--4.0-blue" alt="License" /></a>
-  <img src="https://img.shields.io/badge/version-0.3.0-green" alt="Version" />
+  <img src="https://img.shields.io/badge/version-0.4.0-green" alt="Version" />
   <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/v/@tmhs/docker-mcp" alt="npm" /></a>
   <a href="https://github.com/TMHSDigital/Docker-Developer-Tools/stargazers"><img src="https://img.shields.io/github/stars/TMHSDigital/Docker-Developer-Tools" alt="Stars" /></a>
   <img src="https://img.shields.io/github/last-commit/TMHSDigital/Docker-Developer-Tools" alt="Last Commit" />
@@ -20,7 +20,7 @@
 </p>
 
 <p align="center">
-  <strong>12 skills</strong>&nbsp;&bull;&nbsp;<strong>6 rules</strong>&nbsp;&bull;&nbsp;<strong>28 MCP tools</strong>
+  <strong>12 skills</strong>&nbsp;&bull;&nbsp;<strong>6 rules</strong>&nbsp;&bull;&nbsp;<strong>36 MCP tools</strong>
 </p>
 
 ---
@@ -111,7 +111,7 @@ Add to your Cursor MCP config (`.cursor/mcp.json`):
 ```
 
 <details>
-<summary><strong>28 MCP Tools</strong> - full tool reference</summary>
+<summary><strong>36 MCP Tools</strong> - full tool reference</summary>
 
 &nbsp;
 
@@ -157,6 +157,19 @@ Add to your Cursor MCP config (`.cursor/mcp.json`):
 | `docker_commit` | Create a new image from a container's changes |
 | `docker_save` | Save one or more images to a tar archive |
 | `docker_load` | Load images from a tar archive |
+
+**Compose** (8)
+
+| Tool | What It Does |
+|---|---|
+| `docker_composeUp` | Create and start Compose services (detached, build, profiles) |
+| `docker_composeDown` | Stop and remove containers, networks, volumes, and images |
+| `docker_composePs` | List containers for a Compose project |
+| `docker_composeLogs` | View logs for Compose services |
+| `docker_composeBuild` | Build or rebuild Compose service images |
+| `docker_composeRestart` | Restart Compose services |
+| `docker_composePull` | Pull images for Compose services |
+| `docker_composeExec` | Execute a command in a running Compose service container |
 
 </details>
 

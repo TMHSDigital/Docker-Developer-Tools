@@ -680,3 +680,241 @@ describe("docker_load input validation", () => {
     expect(() => schema.parse({})).toThrow();
   });
 });
+
+describe("docker_composeUp input validation", () => {
+  const schema = z.object({
+    file: z.string().optional(),
+    projectDir: z.string().optional(),
+    services: z.array(z.string()).optional(),
+    build: z.boolean().optional().default(false),
+    pull: z.string().optional(),
+    forceRecreate: z.boolean().optional().default(false),
+    removeOrphans: z.boolean().optional().default(false),
+    profiles: z.array(z.string()).optional(),
+  });
+
+  it("accepts empty (all defaults)", () => {
+    const result = schema.parse({});
+    expect(result.build).toBe(false);
+    expect(result.forceRecreate).toBe(false);
+  });
+
+  it("accepts file and services", () => {
+    const result = schema.parse({
+      file: "docker-compose.prod.yml",
+      services: ["web", "db"],
+    });
+    expect(result.file).toBe("docker-compose.prod.yml");
+    expect(result.services).toEqual(["web", "db"]);
+  });
+
+  it("accepts full options", () => {
+    const result = schema.parse({
+      file: "compose.yml",
+      projectDir: "/app",
+      services: ["api"],
+      build: true,
+      pull: "always",
+      forceRecreate: true,
+      removeOrphans: true,
+      profiles: ["debug"],
+    });
+    expect(result.build).toBe(true);
+    expect(result.pull).toBe("always");
+    expect(result.profiles).toEqual(["debug"]);
+  });
+});
+
+describe("docker_composeDown input validation", () => {
+  const schema = z.object({
+    file: z.string().optional(),
+    projectDir: z.string().optional(),
+    removeVolumes: z.boolean().optional().default(false),
+    removeImages: z.string().optional(),
+    timeout: z.number().optional(),
+  });
+
+  it("accepts empty (all defaults)", () => {
+    const result = schema.parse({});
+    expect(result.removeVolumes).toBe(false);
+  });
+
+  it("accepts removeVolumes and removeImages", () => {
+    const result = schema.parse({
+      removeVolumes: true,
+      removeImages: "all",
+      timeout: 30,
+    });
+    expect(result.removeVolumes).toBe(true);
+    expect(result.removeImages).toBe("all");
+    expect(result.timeout).toBe(30);
+  });
+});
+
+describe("docker_composePs input validation", () => {
+  const schema = z.object({
+    file: z.string().optional(),
+    projectDir: z.string().optional(),
+    services: z.array(z.string()).optional(),
+    all: z.boolean().optional().default(false),
+  });
+
+  it("accepts empty", () => {
+    const result = schema.parse({});
+    expect(result.all).toBe(false);
+  });
+
+  it("accepts services and all flag", () => {
+    const result = schema.parse({
+      services: ["web"],
+      all: true,
+    });
+    expect(result.services).toEqual(["web"]);
+    expect(result.all).toBe(true);
+  });
+});
+
+describe("docker_composeLogs input validation", () => {
+  const schema = z.object({
+    file: z.string().optional(),
+    projectDir: z.string().optional(),
+    services: z.array(z.string()).optional(),
+    tail: z.number().optional(),
+    since: z.string().optional(),
+    timestamps: z.boolean().optional().default(false),
+  });
+
+  it("accepts empty", () => {
+    const result = schema.parse({});
+    expect(result.timestamps).toBe(false);
+  });
+
+  it("accepts tail, since, and timestamps", () => {
+    const result = schema.parse({
+      services: ["api", "worker"],
+      tail: 100,
+      since: "10m",
+      timestamps: true,
+    });
+    expect(result.tail).toBe(100);
+    expect(result.since).toBe("10m");
+    expect(result.timestamps).toBe(true);
+  });
+});
+
+describe("docker_composeBuild input validation", () => {
+  const schema = z.object({
+    file: z.string().optional(),
+    projectDir: z.string().optional(),
+    services: z.array(z.string()).optional(),
+    noCache: z.boolean().optional().default(false),
+    pull: z.boolean().optional().default(false),
+  });
+
+  it("accepts empty", () => {
+    const result = schema.parse({});
+    expect(result.noCache).toBe(false);
+    expect(result.pull).toBe(false);
+  });
+
+  it("accepts noCache and pull", () => {
+    const result = schema.parse({
+      services: ["app"],
+      noCache: true,
+      pull: true,
+    });
+    expect(result.noCache).toBe(true);
+    expect(result.pull).toBe(true);
+  });
+});
+
+describe("docker_composeRestart input validation", () => {
+  const schema = z.object({
+    file: z.string().optional(),
+    projectDir: z.string().optional(),
+    services: z.array(z.string()).optional(),
+    timeout: z.number().optional(),
+  });
+
+  it("accepts empty", () => {
+    const result = schema.parse({});
+    expect(result.timeout).toBeUndefined();
+  });
+
+  it("accepts services and timeout", () => {
+    const result = schema.parse({
+      services: ["web", "api"],
+      timeout: 30,
+    });
+    expect(result.services).toEqual(["web", "api"]);
+    expect(result.timeout).toBe(30);
+  });
+});
+
+describe("docker_composePull input validation", () => {
+  const schema = z.object({
+    file: z.string().optional(),
+    projectDir: z.string().optional(),
+    services: z.array(z.string()).optional(),
+  });
+
+  it("accepts empty", () => {
+    const result = schema.parse({});
+    expect(result.services).toBeUndefined();
+  });
+
+  it("accepts services", () => {
+    const result = schema.parse({ services: ["db", "cache"] });
+    expect(result.services).toEqual(["db", "cache"]);
+  });
+});
+
+describe("docker_composeExec input validation", () => {
+  const schema = z.object({
+    file: z.string().optional(),
+    projectDir: z.string().optional(),
+    service: z.string().min(1),
+    command: z.array(z.string()).min(1),
+    user: z.string().optional(),
+    workdir: z.string().optional(),
+    env: z.array(z.string()).optional(),
+  });
+
+  it("accepts service and command", () => {
+    const result = schema.parse({
+      service: "web",
+      command: ["ls", "-la"],
+    });
+    expect(result.service).toBe("web");
+    expect(result.command).toEqual(["ls", "-la"]);
+  });
+
+  it("rejects empty service", () => {
+    expect(() =>
+      schema.parse({ service: "", command: ["ls"] }),
+    ).toThrow();
+  });
+
+  it("rejects empty command array", () => {
+    expect(() =>
+      schema.parse({ service: "web", command: [] }),
+    ).toThrow();
+  });
+
+  it("rejects missing service", () => {
+    expect(() => schema.parse({ command: ["ls"] })).toThrow();
+  });
+
+  it("accepts user, workdir, and env", () => {
+    const result = schema.parse({
+      service: "app",
+      command: ["bash"],
+      user: "root",
+      workdir: "/app",
+      env: ["DEBUG=1"],
+    });
+    expect(result.user).toBe("root");
+    expect(result.workdir).toBe("/app");
+    expect(result.env).toEqual(["DEBUG=1"]);
+  });
+});

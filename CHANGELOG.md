@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2026-03-29
+
+### Added
+
+#### MCP Server - Docker Compose Tools (+8, total 36)
+- `docker_composeUp` - create and start Compose services (detached, build, pull, profiles, force-recreate)
+- `docker_composeDown` - stop and remove containers, networks, optionally volumes and images
+- `docker_composePs` - list containers for a Compose project (JSON output)
+- `docker_composeLogs` - view logs for Compose services (tail, since, timestamps)
+- `docker_composeBuild` - build or rebuild Compose service images (no-cache, pull)
+- `docker_composeRestart` - restart Compose services with optional timeout
+- `docker_composePull` - pull images for Compose services
+- `docker_composeExec` - execute a command in a running Compose service container (user, workdir, env)
+
+#### npm Publishing
+- Published `@tmhs/docker-mcp` to npm registry
+- Added GitHub Actions workflow for automated npm publishing on release
+- Added dedicated npm package README with installation and configuration guide
+
+---
+
 ## [0.3.0] - 2026-03-29
 
 ### Added
@@ -111,6 +132,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Python test suite: plugin manifest, skills, rules, docs consistency, internal links, roadmap
 - Vitest test suite: error classes, docker-api utilities, input validation
 
+[0.4.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.4.0
 [0.3.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.3.0
 [0.2.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.2.0
 [0.1.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.1.0

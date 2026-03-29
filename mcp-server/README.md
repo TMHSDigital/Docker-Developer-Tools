@@ -1,6 +1,6 @@
 # @tmhs/docker-mcp
 
-MCP server for Docker CLI integration - 98 tools for containers, images, complete Compose V2, volumes, networks, cleanup, observability, buildx, manifests, contexts, registry auth, and system info.
+MCP server for Docker CLI integration - 122 tools for containers, images, complete Compose V2, volumes, networks, cleanup, observability, buildx, manifests, contexts, registry auth, Swarm orchestration, and system info.
 
 Part of the [Docker Developer Tools](https://github.com/TMHSDigital/Docker-Developer-Tools) Cursor plugin.
 
@@ -48,7 +48,7 @@ Or if installed globally:
 }
 ```
 
-## Tools (98)
+## Tools (122)
 
 ### Read / Inspect (10)
 
@@ -217,6 +217,45 @@ Or if installed globally:
 |------|-------------|
 | `docker_login` | Authenticate to a registry |
 | `docker_logout` | Log out from a registry |
+
+### Swarm Cluster (8)
+
+| Tool | Description |
+|------|-------------|
+| `docker_swarmInit` | Initialize a new Swarm cluster |
+| `docker_swarmJoin` | Join a Swarm as worker or manager |
+| `docker_swarmLeave` | Leave the Swarm |
+| `docker_swarmJoinToken` | Display or rotate join tokens |
+| `docker_swarmUpdate` | Update Swarm configuration |
+| `docker_swarmUnlock` | Unlock a locked Swarm manager |
+| `docker_swarmUnlockKey` | Display or rotate the unlock key |
+| `docker_swarmCa` | Display and rotate root CA certificate |
+
+### Swarm Services (9)
+
+| Tool | Description |
+|------|-------------|
+| `docker_serviceCreate` | Create a replicated or global service |
+| `docker_serviceUpdate` | Update a service |
+| `docker_serviceRm` | Remove services |
+| `docker_serviceLs` | List services |
+| `docker_serviceInspect` | Inspect a service |
+| `docker_serviceLogs` | Fetch service logs |
+| `docker_servicePs` | List tasks of a service |
+| `docker_serviceScale` | Scale services |
+| `docker_serviceRollback` | Rollback a service |
+
+### Swarm Nodes (7)
+
+| Tool | Description |
+|------|-------------|
+| `docker_nodeLs` | List nodes in the Swarm |
+| `docker_nodeInspect` | Inspect a node |
+| `docker_nodePs` | List tasks on a node |
+| `docker_nodeRm` | Remove nodes |
+| `docker_nodeUpdate` | Update node metadata |
+| `docker_nodePromote` | Promote workers to managers |
+| `docker_nodeDemote` | Demote managers to workers |
 
 ## License
 

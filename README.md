@@ -11,7 +11,7 @@
 <p align="center">
   <a href="https://github.com/TMHSDigital/Docker-Developer-Tools/actions/workflows/validate.yml"><img src="https://img.shields.io/github/actions/workflow/status/TMHSDigital/Docker-Developer-Tools/validate.yml?branch=main&label=CI" alt="CI" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-CC--BY--NC--ND--4.0-blue" alt="License" /></a>
-  <img src="https://img.shields.io/badge/version-0.9.0-green" alt="Version" />
+  <img src="https://img.shields.io/badge/version-0.10.0-green" alt="Version" />
   <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/v/@tmhs/docker-mcp" alt="npm" /></a>
   <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/dm/@tmhs/docker-mcp" alt="npm downloads" /></a>
   <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/unpacked-size/@tmhs/docker-mcp" alt="npm size" /></a>
@@ -22,7 +22,7 @@
 </p>
 
 <p align="center">
-  <strong>15 skills</strong>&nbsp;&bull;&nbsp;<strong>9 rules</strong>&nbsp;&bull;&nbsp;<strong>98 MCP tools</strong>
+  <strong>16 skills</strong>&nbsp;&bull;&nbsp;<strong>10 rules</strong>&nbsp;&bull;&nbsp;<strong>122 MCP tools</strong>
 </p>
 
 ---
@@ -71,6 +71,7 @@ flowchart LR
 | **Advanced** | `docker-advanced-workflows` | Multi-stage pipelines, sidecar patterns, healthchecks, signal handling |
 | **Advanced** | `docker-multi-platform` | Multi-arch builds, buildx configuration, manifest lists, platform targeting |
 | **Advanced** | `docker-context-management` | Remote Docker hosts, SSH/TLS contexts, multi-host workflows |
+| **Orchestration** | `docker-swarm` | Swarm cluster management, service deployment, scaling, node administration |
 
 </details>
 
@@ -90,6 +91,7 @@ flowchart LR
 | `docker-logging` | Dockerfiles, compose files | Flag missing logging drivers and log rotation |
 | `buildx-best-practices` | Dockerfiles, compose files | Flag multi-platform build issues, missing cache config, arch hardcoding |
 | `compose-scaling` | Compose files | Flag scaling blockers: container_name, fixed host ports, missing limits |
+| `swarm-security` | Docker-related files | Flag missing autolock, unrotated certs, unencrypted overlays, exposed ports |
 
 </details>
 
@@ -291,6 +293,45 @@ Add to your Cursor MCP config (`.cursor/mcp.json`):
 | `docker_login` | Authenticate to a Docker container registry |
 | `docker_logout` | Log out from a Docker container registry |
 
+**Swarm Cluster** (8)
+
+| Tool | What It Does |
+|---|---|
+| `docker_swarmInit` | Initialize a new Docker Swarm cluster |
+| `docker_swarmJoin` | Join an existing Swarm as worker or manager |
+| `docker_swarmLeave` | Leave the Docker Swarm |
+| `docker_swarmJoinToken` | Display or rotate join tokens |
+| `docker_swarmUpdate` | Update Swarm configuration |
+| `docker_swarmUnlock` | Unlock a locked Swarm manager |
+| `docker_swarmUnlockKey` | Display or rotate the unlock key |
+| `docker_swarmCa` | Display and rotate the root CA certificate |
+
+**Swarm Services** (9)
+
+| Tool | What It Does |
+|---|---|
+| `docker_serviceCreate` | Create a replicated or global Swarm service |
+| `docker_serviceUpdate` | Update a service (image, replicas, env, resources) |
+| `docker_serviceRm` | Remove Swarm services |
+| `docker_serviceLs` | List Swarm services |
+| `docker_serviceInspect` | Inspect detailed service configuration |
+| `docker_serviceLogs` | Fetch service or task logs |
+| `docker_servicePs` | List tasks of a service |
+| `docker_serviceScale` | Scale services to target replica count |
+| `docker_serviceRollback` | Revert a service to its previous version |
+
+**Swarm Nodes** (7)
+
+| Tool | What It Does |
+|---|---|
+| `docker_nodeLs` | List nodes in the Swarm |
+| `docker_nodeInspect` | Inspect detailed node information |
+| `docker_nodePs` | List tasks running on a node |
+| `docker_nodeRm` | Remove nodes from the Swarm |
+| `docker_nodeUpdate` | Update node availability, role, or labels |
+| `docker_nodePromote` | Promote workers to managers |
+| `docker_nodeDemote` | Demote managers to workers |
+
 </details>
 
 ---
@@ -350,6 +391,7 @@ Then add the JSON config from the [MCP Server section](#companion-docker-mcp-ser
 | `docker-advanced-workflows` | "Set up healthchecks and graceful shutdown for my Node.js container" |
 | `docker-multi-platform` | "Build my Go API image for both amd64 and arm64 with buildx" |
 | `docker-context-management` | "Set up a Docker context for my remote staging server via SSH" |
+| `docker-swarm` | "Initialize a Swarm cluster and deploy a 3-replica nginx service" |
 
 </details>
 

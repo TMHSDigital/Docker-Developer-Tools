@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Docker Developer Tools - Cursor Plugin</title>
-<meta name="description" content="Expert Docker workflows inside Cursor IDE. 15 skills, 9 rules, 98 MCP tools.">
+<meta name="description" content="Expert Docker workflows inside Cursor IDE. 16 skills, 10 rules, 122 MCP tools.">
 <meta name="theme-color" content="#0db7ed">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Docker Developer Tools - Cursor Plugin">
-<meta property="og:description" content="Expert Docker workflows inside Cursor IDE. 15 skills, 9 rules, 98 MCP tools.">
+<meta property="og:description" content="Expert Docker workflows inside Cursor IDE. 16 skills, 10 rules, 122 MCP tools.">
 <meta property="og:image" content="docs/assets/og-card.jpg">
 <meta property="og:url" content="https://tmhsdigital.github.io/Docker-Developer-Tools/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -241,7 +241,7 @@ section{padding:72px 0}
   <h1><span>Docker</span> Developer Tools</h1>
   <p class="tagline">Expert Docker workflows, live container data, and real-time linting - all inside Cursor IDE.</p>
   <div class="pills">
-    <span class="pill blue">v0.9.0</span>
+    <span class="pill blue">v0.10.0</span>
     <span class="pill">CC BY-NC-ND 4.0</span>
     <span class="pill">Cursor Plugin</span>
   </div>
@@ -251,15 +251,15 @@ section{padding:72px 0}
 <div class="container">
   <div class="stats reveal">
     <div class="stat-card">
-      <div class="stat-number" data-target="15">0</div>
+      <div class="stat-number" data-target="16">0</div>
       <div class="stat-label">Skills</div>
     </div>
     <div class="stat-card">
-      <div class="stat-number" data-target="9">0</div>
+      <div class="stat-number" data-target="10">0</div>
       <div class="stat-label">Rules</div>
     </div>
     <div class="stat-card">
-      <div class="stat-number" data-target="98">0</div>
+      <div class="stat-number" data-target="122">0</div>
       <div class="stat-label">MCP Tools</div>
     </div>
   </div>
@@ -497,7 +497,7 @@ section{padding:72px 0}
 <!-- MCP TOOLS TABLE -->
 <section id="mcp-tools">
   <div class="container">
-    <h2 class="section-title reveal">98 MCP Tools</h2>
+    <h2 class="section-title reveal">122 MCP Tools</h2>
     <p class="section-subtitle reveal">Live Docker data, container lifecycle, image pipeline, complete Compose V2, volume/network CRUD, resource cleanup, buildx, manifests, context management, and registry authentication via the companion MCP server.</p>
     <div class="tools-table-wrap reveal">
       <table class="tools-table">
@@ -616,6 +616,54 @@ section{padding:72px 0}
           <tr><td colspan="2" style="padding:20px 16px 10px;font-weight:700;color:var(--blue);font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;border-bottom:2px solid var(--border)">Registry Authentication</td></tr>
           <tr><td class="tool-name">docker_login</td><td>Authenticate to a container registry</td></tr>
           <tr><td class="tool-name">docker_logout</td><td>Log out from a container registry</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tool-category reveal">
+      <h3>Swarm Cluster <span class="tool-count">8 tools</span></h3>
+      <table>
+        <thead><tr><th>Tool</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td class="tool-name">docker_swarmInit</td><td>Initialize a new Swarm cluster</td></tr>
+          <tr><td class="tool-name">docker_swarmJoin</td><td>Join a Swarm as worker or manager</td></tr>
+          <tr><td class="tool-name">docker_swarmLeave</td><td>Leave the Swarm</td></tr>
+          <tr><td class="tool-name">docker_swarmJoinToken</td><td>Display or rotate join tokens</td></tr>
+          <tr><td class="tool-name">docker_swarmUpdate</td><td>Update Swarm configuration</td></tr>
+          <tr><td class="tool-name">docker_swarmUnlock</td><td>Unlock a locked Swarm manager</td></tr>
+          <tr><td class="tool-name">docker_swarmUnlockKey</td><td>Display or rotate the unlock key</td></tr>
+          <tr><td class="tool-name">docker_swarmCa</td><td>Display and rotate root CA certificate</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tool-category reveal">
+      <h3>Swarm Services <span class="tool-count">9 tools</span></h3>
+      <table>
+        <thead><tr><th>Tool</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td class="tool-name">docker_serviceCreate</td><td>Create a replicated or global service</td></tr>
+          <tr><td class="tool-name">docker_serviceUpdate</td><td>Update a service</td></tr>
+          <tr><td class="tool-name">docker_serviceRm</td><td>Remove services</td></tr>
+          <tr><td class="tool-name">docker_serviceLs</td><td>List services</td></tr>
+          <tr><td class="tool-name">docker_serviceInspect</td><td>Inspect a service</td></tr>
+          <tr><td class="tool-name">docker_serviceLogs</td><td>Fetch service logs</td></tr>
+          <tr><td class="tool-name">docker_servicePs</td><td>List tasks of a service</td></tr>
+          <tr><td class="tool-name">docker_serviceScale</td><td>Scale services</td></tr>
+          <tr><td class="tool-name">docker_serviceRollback</td><td>Rollback a service</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tool-category reveal">
+      <h3>Swarm Nodes <span class="tool-count">7 tools</span></h3>
+      <table>
+        <thead><tr><th>Tool</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td class="tool-name">docker_nodeLs</td><td>List nodes in the Swarm</td></tr>
+          <tr><td class="tool-name">docker_nodeInspect</td><td>Inspect a node</td></tr>
+          <tr><td class="tool-name">docker_nodePs</td><td>List tasks on a node</td></tr>
+          <tr><td class="tool-name">docker_nodeRm</td><td>Remove nodes</td></tr>
+          <tr><td class="tool-name">docker_nodeUpdate</td><td>Update node metadata</td></tr>
+          <tr><td class="tool-name">docker_nodePromote</td><td>Promote workers to managers</td></tr>
+          <tr><td class="tool-name">docker_nodeDemote</td><td>Demote managers to workers</td></tr>
         </tbody>
       </table>
     </div>
@@ -768,13 +816,13 @@ section{padding:72px 0}
 
       <div class="timeline-item current">
         <div class="timeline-dot"></div>
-        <h3>v0.9.0 <span class="tag current-tag">Current</span></h3>
+        <h3>v0.9.0 <span class="tag upcoming-tag">Released</span></h3>
         <p>Container/Image Gaps, Context, Auth - 14 tools: diff, export, port, rename, history, import, context management, registry login/logout.</p>
       </div>
 
       <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <h3>v0.10.0 <span class="tag upcoming-tag">Planned</span></h3>
+        <h3>v0.10.0 <span class="tag current-tag">Current</span></h3>
         <p>Swarm Orchestration - 24 tools: swarm init/join/leave, service CRUD and scaling, node management and promotion.</p>
       </div>
 

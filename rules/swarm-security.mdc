@@ -1,0 +1,32 @@
+---
+description: Flag Docker Swarm security issues - missing autolock, unrotated certificates, unencrypted overlays, exposed ports, and missing resource limits
+alwaysApply: false
+globs:
+  - "**/Dockerfile*"
+  - "**/docker-compose*.yml"
+  - "**/docker-compose*.yaml"
+  - "**/compose*.yml"
+  - "**/compose*.yaml"
+  - "**/docker-stack*.yml"
+  - "**/docker-stack*.yaml"
+---
+
+# Swarm Security
+
+Flag security issues in Docker Swarm configurations and deployments.
+
+## Rules
+
+1. **Autolock disabled** - Swarm managers should enable autolock to protect encryption keys at rest. Without it, a compromised manager disk exposes all cluster secrets. Recommend `docker swarm update --autolock=true`.
+
+2. **Default certificate expiry** - The default node certificate expiry is 90 days. For high-security environments, consider shorter rotation with `docker swarm ca --cert-expiry`.
+
+3. **Unencrypted overlay networks** - Overlay networks carry inter-node traffic in the clear by default. Use `--opt encrypted` when creating overlay networks for sensitive services.
+
+4. **Exposed manager ports** - Swarm management port (2377) should not be exposed to the public internet. Restrict with firewall rules to trusted nodes only.
+
+5. **Services without resource limits** - Swarm services should set `--limit-cpu` and `--limit-memory` to prevent a single service from exhausting node resources and affecting other services.
+
+6. **Join tokens in code** - Swarm join tokens should never appear in source code, Dockerfiles, or compose files. Rotate tokens regularly and distribute out-of-band.
+
+7. **Missing healthchecks on services** - Swarm services should define healthchecks so the orchestrator can detect and replace unhealthy tasks automatically.

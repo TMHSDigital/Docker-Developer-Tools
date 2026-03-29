@@ -5,6 +5,42 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.10.0] - 2026-03-29
+
+### Added
+
+#### MCP Server - Swarm Orchestration (+24, total 122)
+- `docker_swarmInit` - initialize a new Docker Swarm cluster
+- `docker_swarmJoin` - join an existing Swarm as worker or manager node
+- `docker_swarmLeave` - leave the Docker Swarm
+- `docker_swarmJoinToken` - display or rotate join tokens for worker or manager nodes
+- `docker_swarmUpdate` - update Swarm configuration (task history, cert expiry, autolock)
+- `docker_swarmUnlock` - unlock a locked Swarm manager node (secure stdin key piping)
+- `docker_swarmUnlockKey` - display or rotate the Swarm unlock key
+- `docker_swarmCa` - display and rotate the cluster root CA certificate (120s timeout)
+- `docker_serviceCreate` - create a replicated or global Swarm service with ports, env, mounts, networks, constraints, and resource limits (120s timeout)
+- `docker_serviceUpdate` - rolling update of service image, replicas, env, labels, and resources (120s timeout)
+- `docker_serviceRm` - remove one or more Swarm services
+- `docker_serviceLs` - list Swarm services with optional filters (JSON format)
+- `docker_serviceInspect` - inspect detailed service configuration (pretty or JSON)
+- `docker_serviceLogs` - fetch service or task logs with tail, since, and timestamp options
+- `docker_servicePs` - list tasks of a service with filters (JSON format)
+- `docker_serviceScale` - scale one or more services to target replica count (120s timeout)
+- `docker_serviceRollback` - revert a service to its previous configuration (120s timeout)
+- `docker_nodeLs` - list nodes in the Swarm with filters (JSON format)
+- `docker_nodeInspect` - inspect detailed node information (pretty or JSON)
+- `docker_nodePs` - list tasks running on a node with filters (JSON format)
+- `docker_nodeRm` - remove one or more nodes from the Swarm
+- `docker_nodeUpdate` - update node availability (active/pause/drain), role, and labels
+- `docker_nodePromote` - promote worker nodes to manager
+- `docker_nodeDemote` - demote manager nodes to worker
+
+#### Skill
+- `docker-swarm` - Swarm mode orchestration covering cluster init, service deployment, scaling, rolling updates, node management, and drain/failover patterns
+
+#### Rule
+- `swarm-security` - flag missing autolock, unrotated certificates, unencrypted overlay networks, exposed manager ports, missing resource limits on services, join tokens in code, and missing healthchecks
+
 ## [0.9.0] - 2026-03-29
 
 ### Added
@@ -259,6 +295,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Python test suite: plugin manifest, skills, rules, docs consistency, internal links, roadmap
 - Vitest test suite: error classes, docker-api utilities, input validation
 
+[0.10.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.10.0
 [0.9.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.9.0
 [0.8.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.8.0
 [0.7.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.7.0

@@ -4,7 +4,7 @@
 
 ## Current Status
 
-**v0.9.0** - Container/Image Gaps, Context, and Auth release with 15 skills, 9 rules, and 98 MCP tools.
+**v0.10.0** - Swarm Orchestration release with 16 skills, 10 rules, and 122 MCP tools.
 
 ## Release Plan
 
@@ -18,8 +18,8 @@
 | v0.6.0 | Advanced and Observability | +6 | 55 | +1 | +1 | Released |
 | v0.7.0 | Buildx, Manifests, and Registry | +13 | 68 | +1 | +1 | Released |
 | v0.8.0 | Compose Completeness | +16 | 84 | +0 | +1 | Released |
-| v0.9.0 | Container/Image Gaps, Context, Auth | +14 | 98 | +1 | +0 | (current) |
-| v0.10.0 | Swarm Orchestration | +24 | 122 | +1 | +1 | Planned |
+| v0.9.0 | Container/Image Gaps, Context, Auth | +14 | 98 | +1 | +0 | Released |
+| v0.10.0 | Swarm Orchestration | +24 | 122 | +1 | +1 | (current) |
 | v0.11.0 | Swarm Stacks, Configs, Secrets, Trust | +18 | 140 | +1 | +0 | Planned |
 | v0.12.0 | Niche, Scout, and Extras | +10 | 150 | +0 | +0 | Planned |
 | v1.0.0 | Stable | +0 | 150 | +0 | +0 | Planned |

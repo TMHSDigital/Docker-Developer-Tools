@@ -101,10 +101,34 @@ import { register as registerContextUse } from "./tools/contextUse.js";
 import { register as registerContextShow } from "./tools/contextShow.js";
 import { register as registerLogin } from "./tools/login.js";
 import { register as registerLogout } from "./tools/logout.js";
+import { register as registerSwarmInit } from "./tools/swarmInit.js";
+import { register as registerSwarmJoin } from "./tools/swarmJoin.js";
+import { register as registerSwarmLeave } from "./tools/swarmLeave.js";
+import { register as registerSwarmJoinToken } from "./tools/swarmJoinToken.js";
+import { register as registerSwarmUpdate } from "./tools/swarmUpdate.js";
+import { register as registerSwarmUnlock } from "./tools/swarmUnlock.js";
+import { register as registerSwarmUnlockKey } from "./tools/swarmUnlockKey.js";
+import { register as registerSwarmCa } from "./tools/swarmCa.js";
+import { register as registerServiceCreate } from "./tools/serviceCreate.js";
+import { register as registerServiceUpdate } from "./tools/serviceUpdate.js";
+import { register as registerServiceRm } from "./tools/serviceRm.js";
+import { register as registerServiceLs } from "./tools/serviceLs.js";
+import { register as registerServiceInspect } from "./tools/serviceInspect.js";
+import { register as registerServiceLogs } from "./tools/serviceLogs.js";
+import { register as registerServicePs } from "./tools/servicePs.js";
+import { register as registerServiceScale } from "./tools/serviceScale.js";
+import { register as registerServiceRollback } from "./tools/serviceRollback.js";
+import { register as registerNodeLs } from "./tools/nodeLs.js";
+import { register as registerNodeInspect } from "./tools/nodeInspect.js";
+import { register as registerNodePs } from "./tools/nodePs.js";
+import { register as registerNodeRm } from "./tools/nodeRm.js";
+import { register as registerNodeUpdate } from "./tools/nodeUpdate.js";
+import { register as registerNodePromote } from "./tools/nodePromote.js";
+import { register as registerNodeDemote } from "./tools/nodeDemote.js";
 
 const server = new McpServer({
   name: "docker-mcp",
-  version: "0.9.0",
+  version: "0.10.0",
 });
 
 registerListContainers(server);
@@ -205,6 +229,30 @@ registerContextUse(server);
 registerContextShow(server);
 registerLogin(server);
 registerLogout(server);
+registerSwarmInit(server);
+registerSwarmJoin(server);
+registerSwarmLeave(server);
+registerSwarmJoinToken(server);
+registerSwarmUpdate(server);
+registerSwarmUnlock(server);
+registerSwarmUnlockKey(server);
+registerSwarmCa(server);
+registerServiceCreate(server);
+registerServiceUpdate(server);
+registerServiceRm(server);
+registerServiceLs(server);
+registerServiceInspect(server);
+registerServiceLogs(server);
+registerServicePs(server);
+registerServiceScale(server);
+registerServiceRollback(server);
+registerNodeLs(server);
+registerNodeInspect(server);
+registerNodePs(server);
+registerNodeRm(server);
+registerNodeUpdate(server);
+registerNodePromote(server);
+registerNodeDemote(server);
 
 async function main(): Promise<void> {
   const transport = new StdioServerTransport();

@@ -2512,3 +2512,488 @@ describe("docker_logout input validation", () => {
     expect(result.server).toBe("ghcr.io");
   });
 });
+
+// ---- v0.10.0 Swarm Cluster ----
+
+describe("docker_swarmInit input validation", () => {
+  const schema = z.object({
+    advertiseAddr: z.string().optional(),
+    listenAddr: z.string().optional(),
+    forceNewCluster: z.boolean().optional().default(false),
+    autolock: z.boolean().optional().default(false),
+  });
+
+  it("accepts empty input", () => {
+    const result = schema.parse({});
+    expect(result.forceNewCluster).toBe(false);
+    expect(result.autolock).toBe(false);
+  });
+
+  it("accepts all options", () => {
+    const result = schema.parse({ advertiseAddr: "eth0:2377", listenAddr: "0.0.0.0:2377", forceNewCluster: true, autolock: true });
+    expect(result.advertiseAddr).toBe("eth0:2377");
+    expect(result.autolock).toBe(true);
+  });
+});
+
+describe("docker_swarmJoin input validation", () => {
+  const schema = z.object({
+    token: z.string().min(1),
+    remoteAddrs: z.string().min(1),
+    advertiseAddr: z.string().optional(),
+    listenAddr: z.string().optional(),
+  });
+
+  it("accepts required fields", () => {
+    const result = schema.parse({ token: "SWMTKN-abc", remoteAddrs: "192.168.1.1:2377" });
+    expect(result.token).toBe("SWMTKN-abc");
+    expect(result.remoteAddrs).toBe("192.168.1.1:2377");
+  });
+
+  it("rejects empty token", () => {
+    expect(() => schema.parse({ token: "", remoteAddrs: "host:2377" })).toThrow();
+  });
+
+  it("rejects missing remoteAddrs", () => {
+    expect(() => schema.parse({ token: "SWMTKN-abc" })).toThrow();
+  });
+});
+
+describe("docker_swarmLeave input validation", () => {
+  const schema = z.object({
+    force: z.boolean().optional().default(false),
+  });
+
+  it("accepts empty input", () => {
+    const result = schema.parse({});
+    expect(result.force).toBe(false);
+  });
+
+  it("accepts force", () => {
+    const result = schema.parse({ force: true });
+    expect(result.force).toBe(true);
+  });
+});
+
+describe("docker_swarmJoinToken input validation", () => {
+  const schema = z.object({
+    role: z.enum(["worker", "manager"]),
+    rotate: z.boolean().optional().default(false),
+  });
+
+  it("accepts worker role", () => {
+    const result = schema.parse({ role: "worker" });
+    expect(result.role).toBe("worker");
+  });
+
+  it("accepts manager role with rotate", () => {
+    const result = schema.parse({ role: "manager", rotate: true });
+    expect(result.rotate).toBe(true);
+  });
+
+  it("rejects invalid role", () => {
+    expect(() => schema.parse({ role: "leader" })).toThrow();
+  });
+});
+
+describe("docker_swarmUpdate input validation", () => {
+  const schema = z.object({
+    taskHistoryLimit: z.number().optional(),
+    snapshotInterval: z.number().optional(),
+    autolock: z.boolean().optional(),
+    certExpiry: z.string().optional(),
+  });
+
+  it("accepts empty input", () => {
+    const result = schema.parse({});
+    expect(result).toEqual({});
+  });
+
+  it("accepts all options", () => {
+    const result = schema.parse({ taskHistoryLimit: 5, snapshotInterval: 10000, autolock: true, certExpiry: "720h" });
+    expect(result.taskHistoryLimit).toBe(5);
+    expect(result.certExpiry).toBe("720h");
+  });
+});
+
+describe("docker_swarmUnlock input validation", () => {
+  const schema = z.object({
+    key: z.string().min(1),
+  });
+
+  it("accepts valid key", () => {
+    const result = schema.parse({ key: "SWMKEY-1-abc" });
+    expect(result.key).toBe("SWMKEY-1-abc");
+  });
+
+  it("rejects empty key", () => {
+    expect(() => schema.parse({ key: "" })).toThrow();
+  });
+});
+
+describe("docker_swarmUnlockKey input validation", () => {
+  const schema = z.object({
+    rotate: z.boolean().optional().default(false),
+  });
+
+  it("accepts empty input", () => {
+    const result = schema.parse({});
+    expect(result.rotate).toBe(false);
+  });
+
+  it("accepts rotate", () => {
+    const result = schema.parse({ rotate: true });
+    expect(result.rotate).toBe(true);
+  });
+});
+
+describe("docker_swarmCa input validation", () => {
+  const schema = z.object({
+    rotate: z.boolean().optional().default(false),
+    certExpiry: z.string().optional(),
+    detach: z.boolean().optional().default(false),
+  });
+
+  it("accepts empty input", () => {
+    const result = schema.parse({});
+    expect(result.rotate).toBe(false);
+  });
+
+  it("accepts all options", () => {
+    const result = schema.parse({ rotate: true, certExpiry: "2160h", detach: true });
+    expect(result.certExpiry).toBe("2160h");
+  });
+});
+
+// ---- v0.10.0 Swarm Services ----
+
+describe("docker_serviceCreate input validation", () => {
+  const schema = z.object({
+    name: z.string().min(1),
+    image: z.string().min(1),
+    replicas: z.number().optional(),
+    mode: z.enum(["replicated", "global"]).optional(),
+    ports: z.array(z.string()).optional(),
+    env: z.array(z.string()).optional(),
+    mounts: z.array(z.string()).optional(),
+    networks: z.array(z.string()).optional(),
+    constraints: z.array(z.string()).optional(),
+    labels: z.array(z.string()).optional(),
+    command: z.array(z.string()).optional(),
+    restartPolicy: z.string().optional(),
+    limitCpu: z.number().optional(),
+    limitMemory: z.string().optional(),
+  });
+
+  it("accepts required fields", () => {
+    const result = schema.parse({ name: "web", image: "nginx:latest" });
+    expect(result.name).toBe("web");
+    expect(result.image).toBe("nginx:latest");
+  });
+
+  it("accepts all options", () => {
+    const result = schema.parse({
+      name: "api", image: "node:20", replicas: 3, mode: "replicated",
+      ports: ["8080:80"], env: ["NODE_ENV=production"], networks: ["backend"],
+      constraints: ["node.role==worker"], labels: ["app=api"], command: ["node", "server.js"],
+      limitCpu: 0.5, limitMemory: "256m",
+    });
+    expect(result.replicas).toBe(3);
+    expect(result.ports).toEqual(["8080:80"]);
+  });
+
+  it("rejects empty name", () => {
+    expect(() => schema.parse({ name: "", image: "nginx" })).toThrow();
+  });
+
+  it("rejects invalid mode", () => {
+    expect(() => schema.parse({ name: "web", image: "nginx", mode: "daemonset" })).toThrow();
+  });
+});
+
+describe("docker_serviceUpdate input validation", () => {
+  const schema = z.object({
+    service: z.string().min(1),
+    image: z.string().optional(),
+    replicas: z.number().optional(),
+    env: z.array(z.string()).optional(),
+    labels: z.array(z.string()).optional(),
+    force: z.boolean().optional().default(false),
+    limitCpu: z.number().optional(),
+    limitMemory: z.string().optional(),
+    args: z.array(z.string()).optional(),
+  });
+
+  it("accepts service only", () => {
+    const result = schema.parse({ service: "web" });
+    expect(result.service).toBe("web");
+  });
+
+  it("accepts all options", () => {
+    const result = schema.parse({ service: "web", image: "nginx:2", replicas: 5, force: true });
+    expect(result.image).toBe("nginx:2");
+    expect(result.force).toBe(true);
+  });
+
+  it("rejects empty service", () => {
+    expect(() => schema.parse({ service: "" })).toThrow();
+  });
+});
+
+describe("docker_serviceRm input validation", () => {
+  const schema = z.object({
+    services: z.array(z.string()).min(1),
+  });
+
+  it("accepts single service", () => {
+    const result = schema.parse({ services: ["web"] });
+    expect(result.services).toEqual(["web"]);
+  });
+
+  it("accepts multiple services", () => {
+    const result = schema.parse({ services: ["web", "api"] });
+    expect(result.services).toHaveLength(2);
+  });
+
+  it("rejects empty array", () => {
+    expect(() => schema.parse({ services: [] })).toThrow();
+  });
+});
+
+describe("docker_serviceLs input validation", () => {
+  const schema = z.object({
+    filter: z.array(z.string()).optional(),
+    format: z.string().optional().default("json"),
+  });
+
+  it("accepts empty input", () => {
+    const result = schema.parse({});
+    expect(result.format).toBe("json");
+  });
+
+  it("accepts filters", () => {
+    const result = schema.parse({ filter: ["name=web"] });
+    expect(result.filter).toEqual(["name=web"]);
+  });
+});
+
+describe("docker_serviceInspect input validation", () => {
+  const schema = z.object({
+    service: z.string().min(1),
+    pretty: z.boolean().optional().default(false),
+  });
+
+  it("accepts service", () => {
+    const result = schema.parse({ service: "web" });
+    expect(result.service).toBe("web");
+  });
+
+  it("rejects empty service", () => {
+    expect(() => schema.parse({ service: "" })).toThrow();
+  });
+});
+
+describe("docker_serviceLogs input validation", () => {
+  const schema = z.object({
+    service: z.string().min(1),
+    tail: z.number().optional(),
+    since: z.string().optional(),
+    timestamps: z.boolean().optional().default(false),
+  });
+
+  it("accepts service only", () => {
+    const result = schema.parse({ service: "web" });
+    expect(result.service).toBe("web");
+  });
+
+  it("accepts all options", () => {
+    const result = schema.parse({ service: "web", tail: 100, since: "10m", timestamps: true });
+    expect(result.tail).toBe(100);
+  });
+});
+
+describe("docker_servicePs input validation", () => {
+  const schema = z.object({
+    service: z.string().min(1),
+    filter: z.array(z.string()).optional(),
+    format: z.string().optional().default("json"),
+  });
+
+  it("accepts service", () => {
+    const result = schema.parse({ service: "web" });
+    expect(result.format).toBe("json");
+  });
+
+  it("accepts filters", () => {
+    const result = schema.parse({ service: "web", filter: ["desired-state=running"] });
+    expect(result.filter).toEqual(["desired-state=running"]);
+  });
+});
+
+describe("docker_serviceScale input validation", () => {
+  const schema = z.object({
+    scales: z.array(z.string()).min(1),
+  });
+
+  it("accepts scale specs", () => {
+    const result = schema.parse({ scales: ["web=5", "api=3"] });
+    expect(result.scales).toHaveLength(2);
+  });
+
+  it("rejects empty array", () => {
+    expect(() => schema.parse({ scales: [] })).toThrow();
+  });
+});
+
+describe("docker_serviceRollback input validation", () => {
+  const schema = z.object({
+    service: z.string().min(1),
+    detach: z.boolean().optional().default(false),
+  });
+
+  it("accepts service", () => {
+    const result = schema.parse({ service: "web" });
+    expect(result.detach).toBe(false);
+  });
+
+  it("accepts with detach", () => {
+    const result = schema.parse({ service: "web", detach: true });
+    expect(result.detach).toBe(true);
+  });
+
+  it("rejects empty service", () => {
+    expect(() => schema.parse({ service: "" })).toThrow();
+  });
+});
+
+// ---- v0.10.0 Swarm Nodes ----
+
+describe("docker_nodeLs input validation", () => {
+  const schema = z.object({
+    filter: z.array(z.string()).optional(),
+    format: z.string().optional().default("json"),
+  });
+
+  it("accepts empty input", () => {
+    const result = schema.parse({});
+    expect(result.format).toBe("json");
+  });
+
+  it("accepts filters", () => {
+    const result = schema.parse({ filter: ["role=manager"] });
+    expect(result.filter).toEqual(["role=manager"]);
+  });
+});
+
+describe("docker_nodeInspect input validation", () => {
+  const schema = z.object({
+    node: z.string().min(1),
+    pretty: z.boolean().optional().default(false),
+  });
+
+  it("accepts node", () => {
+    const result = schema.parse({ node: "node1" });
+    expect(result.node).toBe("node1");
+  });
+
+  it("rejects empty node", () => {
+    expect(() => schema.parse({ node: "" })).toThrow();
+  });
+});
+
+describe("docker_nodePs input validation", () => {
+  const schema = z.object({
+    node: z.string().optional(),
+    filter: z.array(z.string()).optional(),
+    format: z.string().optional().default("json"),
+  });
+
+  it("accepts empty input", () => {
+    const result = schema.parse({});
+    expect(result.format).toBe("json");
+  });
+
+  it("accepts with node", () => {
+    const result = schema.parse({ node: "node1" });
+    expect(result.node).toBe("node1");
+  });
+});
+
+describe("docker_nodeRm input validation", () => {
+  const schema = z.object({
+    nodes: z.array(z.string()).min(1),
+    force: z.boolean().optional().default(false),
+  });
+
+  it("accepts nodes", () => {
+    const result = schema.parse({ nodes: ["node1"] });
+    expect(result.nodes).toEqual(["node1"]);
+  });
+
+  it("accepts with force", () => {
+    const result = schema.parse({ nodes: ["node1", "node2"], force: true });
+    expect(result.force).toBe(true);
+  });
+
+  it("rejects empty array", () => {
+    expect(() => schema.parse({ nodes: [] })).toThrow();
+  });
+});
+
+describe("docker_nodeUpdate input validation", () => {
+  const schema = z.object({
+    node: z.string().min(1),
+    availability: z.enum(["active", "pause", "drain"]).optional(),
+    role: z.enum(["worker", "manager"]).optional(),
+    labels: z.array(z.string()).optional(),
+  });
+
+  it("accepts node only", () => {
+    const result = schema.parse({ node: "node1" });
+    expect(result.node).toBe("node1");
+  });
+
+  it("accepts all options", () => {
+    const result = schema.parse({ node: "node1", availability: "drain", role: "manager", labels: ["env=prod"] });
+    expect(result.availability).toBe("drain");
+    expect(result.role).toBe("manager");
+  });
+
+  it("rejects invalid availability", () => {
+    expect(() => schema.parse({ node: "node1", availability: "standby" })).toThrow();
+  });
+
+  it("rejects invalid role", () => {
+    expect(() => schema.parse({ node: "node1", role: "leader" })).toThrow();
+  });
+});
+
+describe("docker_nodePromote input validation", () => {
+  const schema = z.object({
+    nodes: z.array(z.string()).min(1),
+  });
+
+  it("accepts nodes", () => {
+    const result = schema.parse({ nodes: ["worker1", "worker2"] });
+    expect(result.nodes).toHaveLength(2);
+  });
+
+  it("rejects empty array", () => {
+    expect(() => schema.parse({ nodes: [] })).toThrow();
+  });
+});
+
+describe("docker_nodeDemote input validation", () => {
+  const schema = z.object({
+    nodes: z.array(z.string()).min(1),
+  });
+
+  it("accepts nodes", () => {
+    const result = schema.parse({ nodes: ["manager2"] });
+    expect(result.nodes).toEqual(["manager2"]);
+  });
+
+  it("rejects empty array", () => {
+    expect(() => schema.parse({ nodes: [] })).toThrow();
+  });
+});

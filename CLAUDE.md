@@ -4,11 +4,11 @@ Project documentation for Claude Code and AI assistants working on this reposito
 
 ## Project Overview
 
-Docker Developer Tools is a Cursor IDE plugin that integrates Docker and container workflows into Cursor's AI chat. It includes 15 skills, 9 rules, and a companion MCP server with 98 tools for live Docker CLI integration.
+Docker Developer Tools is a Cursor IDE plugin that integrates Docker and container workflows into Cursor's AI chat. It includes 16 skills, 10 rules, and a companion MCP server with 122 tools for live Docker CLI integration.
 
 This is a monorepo - the Cursor plugin (skills and rules) and the companion MCP server live in the same repository. Docker's API is local (Docker Engine socket / CLI), so one repo is simpler for users to install and maintain.
 
-**Version:** 0.9.0
+**Version:** 0.10.0
 **License:** CC-BY-NC-ND-4.0
 **Author:** TMHSDigital
 
@@ -35,7 +35,7 @@ Docker-Developer-Tools/
   tests/                     # Python structure tests
 ```
 
-## Skills (15)
+## Skills (16)
 
 | Skill | Description |
 |-------|-------------|
@@ -54,8 +54,9 @@ Docker-Developer-Tools/
 | `docker-advanced-workflows` | Multi-stage pipelines, sidecar patterns, healthchecks, signal handling |
 | `docker-multi-platform` | Multi-arch builds, buildx configuration, manifest lists, platform targeting |
 | `docker-context-management` | Remote Docker hosts, SSH/TLS contexts, multi-host workflows |
+| `docker-swarm` | Swarm cluster management, service deployment, scaling, node administration |
 
-## Rules (9)
+## Rules (10)
 
 | Rule | Scope | Description |
 |------|-------|-------------|
@@ -68,8 +69,9 @@ Docker-Developer-Tools/
 | `docker-logging` | Dockerfiles, compose files | Flag missing logging drivers and log rotation |
 | `buildx-best-practices` | Dockerfiles, compose files | Flag multi-platform build issues, missing cache config |
 | `compose-scaling` | Compose files | Flag scaling blockers: container_name, fixed host ports, missing limits |
+| `swarm-security` | Docker-related files | Flag missing autolock, unrotated certs, unencrypted overlays, exposed ports |
 
-## MCP Server (98 tools)
+## MCP Server (122 tools)
 
 The MCP server talks to Docker via CLI exec (`docker` commands) rather than the Docker Engine REST API. It uses stdio transport and requires `docker` to be available on PATH.
 
@@ -241,6 +243,45 @@ The MCP server talks to Docker via CLI exec (`docker` commands) rather than the 
 | `docker_login` | Authenticate to a container registry |
 | `docker_logout` | Log out from a container registry |
 
+### Swarm Cluster (8)
+
+| Tool | Description |
+|------|-------------|
+| `docker_swarmInit` | Initialize a new Swarm cluster |
+| `docker_swarmJoin` | Join a Swarm as worker or manager |
+| `docker_swarmLeave` | Leave the Swarm |
+| `docker_swarmJoinToken` | Display or rotate join tokens |
+| `docker_swarmUpdate` | Update Swarm configuration |
+| `docker_swarmUnlock` | Unlock a locked Swarm manager |
+| `docker_swarmUnlockKey` | Display or rotate the unlock key |
+| `docker_swarmCa` | Display and rotate root CA certificate |
+
+### Swarm Services (9)
+
+| Tool | Description |
+|------|-------------|
+| `docker_serviceCreate` | Create a replicated or global service |
+| `docker_serviceUpdate` | Update a service |
+| `docker_serviceRm` | Remove services |
+| `docker_serviceLs` | List services |
+| `docker_serviceInspect` | Inspect a service |
+| `docker_serviceLogs` | Fetch service logs |
+| `docker_servicePs` | List tasks of a service |
+| `docker_serviceScale` | Scale services |
+| `docker_serviceRollback` | Rollback a service |
+
+### Swarm Nodes (7)
+
+| Tool | Description |
+|------|-------------|
+| `docker_nodeLs` | List nodes in the Swarm |
+| `docker_nodeInspect` | Inspect a node |
+| `docker_nodePs` | List tasks on a node |
+| `docker_nodeRm` | Remove nodes |
+| `docker_nodeUpdate` | Update node metadata |
+| `docker_nodePromote` | Promote workers to managers |
+| `docker_nodeDemote` | Demote managers to workers |
+
 ## Development Workflow
 
 ### Plugin development (symlink)
@@ -408,3 +449,27 @@ Full checklist with copy-paste commands: [CONTRIBUTING.md - Release Checklist](C
 | `docker context show` | `docker_contextShow` |
 | `docker login --password-stdin` | `docker_login` |
 | `docker logout` | `docker_logout` |
+| `docker swarm init` | `docker_swarmInit` |
+| `docker swarm join` | `docker_swarmJoin` |
+| `docker swarm leave` | `docker_swarmLeave` |
+| `docker swarm join-token` | `docker_swarmJoinToken` |
+| `docker swarm update` | `docker_swarmUpdate` |
+| `docker swarm unlock` | `docker_swarmUnlock` |
+| `docker swarm unlock-key` | `docker_swarmUnlockKey` |
+| `docker swarm ca` | `docker_swarmCa` |
+| `docker service create` | `docker_serviceCreate` |
+| `docker service update` | `docker_serviceUpdate` |
+| `docker service rm` | `docker_serviceRm` |
+| `docker service ls --format json` | `docker_serviceLs` |
+| `docker service inspect` | `docker_serviceInspect` |
+| `docker service logs` | `docker_serviceLogs` |
+| `docker service ps --format json` | `docker_servicePs` |
+| `docker service scale` | `docker_serviceScale` |
+| `docker service rollback` | `docker_serviceRollback` |
+| `docker node ls --format json` | `docker_nodeLs` |
+| `docker node inspect` | `docker_nodeInspect` |
+| `docker node ps --format json` | `docker_nodePs` |
+| `docker node rm` | `docker_nodeRm` |
+| `docker node update` | `docker_nodeUpdate` |
+| `docker node promote` | `docker_nodePromote` |
+| `docker node demote` | `docker_nodeDemote` |

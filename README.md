@@ -13,6 +13,8 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-CC--BY--NC--ND--4.0-blue" alt="License" /></a>
   <img src="https://img.shields.io/badge/version-0.5.0-green" alt="Version" />
   <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/v/@tmhs/docker-mcp" alt="npm" /></a>
+  <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/dm/@tmhs/docker-mcp" alt="npm downloads" /></a>
+  <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/unpacked-size/@tmhs/docker-mcp" alt="npm size" /></a>
   <a href="https://github.com/TMHSDigital/Docker-Developer-Tools/stargazers"><img src="https://img.shields.io/github/stars/TMHSDigital/Docker-Developer-Tools" alt="Stars" /></a>
   <img src="https://img.shields.io/github/last-commit/TMHSDigital/Docker-Developer-Tools" alt="Last Commit" />
   <img src="https://img.shields.io/badge/Cursor-Plugin-purple" alt="Cursor Plugin" />

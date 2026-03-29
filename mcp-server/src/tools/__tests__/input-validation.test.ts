@@ -3110,13 +3110,19 @@ describe("docker_stackConfig input validation", () => {
 describe("docker_configCreate input validation", () => {
   const schema = z.object({
     name: z.string().min(1),
-    file: z.string().min(1),
+    file: z.string().optional(),
+    data: z.string().optional(),
     labels: z.array(z.string()).optional(),
   });
 
-  it("accepts required fields", () => {
+  it("accepts with file", () => {
     const result = schema.parse({ name: "my-config", file: "/path/to/config" });
     expect(result.name).toBe("my-config");
+  });
+
+  it("accepts with inline data", () => {
+    const result = schema.parse({ name: "my-config", data: "key=value" });
+    expect(result.data).toBe("key=value");
   });
 
   it("accepts with labels", () => {
@@ -3182,13 +3188,19 @@ describe("docker_configRm input validation", () => {
 describe("docker_secretCreate input validation", () => {
   const schema = z.object({
     name: z.string().min(1),
-    file: z.string().min(1),
+    file: z.string().optional(),
+    data: z.string().optional(),
     labels: z.array(z.string()).optional(),
   });
 
-  it("accepts required fields", () => {
+  it("accepts with file", () => {
     const result = schema.parse({ name: "my-secret", file: "/path/to/secret" });
     expect(result.name).toBe("my-secret");
+  });
+
+  it("accepts with inline data", () => {
+    const result = schema.parse({ name: "my-secret", data: "s3cret" });
+    expect(result.data).toBe("s3cret");
   });
 
   it("accepts with labels", () => {
@@ -3197,7 +3209,7 @@ describe("docker_secretCreate input validation", () => {
   });
 
   it("rejects empty name", () => {
-    expect(() => schema.parse({ name: "", file: "f" })).toThrow();
+    expect(() => schema.parse({ name: "", data: "x" })).toThrow();
   });
 });
 

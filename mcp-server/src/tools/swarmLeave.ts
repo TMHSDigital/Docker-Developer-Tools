@@ -15,7 +15,7 @@ export function register(server: McpServer): void {
       try {
         const cmdArgs = ["swarm", "leave"];
         if (args.force) cmdArgs.push("--force");
-        const output = await execDocker(cmdArgs);
+        const output = await execDocker(cmdArgs, { timeout: 120_000 });
         return { content: [{ type: "text" as const, text: output.trim() || "Node left the swarm" }] };
       } catch (error) {
         return errorResponse(error);

@@ -104,7 +104,7 @@ export async function execDocker(
       throw new VolumeNotFoundError(match?.[1] ?? "unknown");
     }
 
-    if (stderr.includes("No such network") || stderr.includes("network") && stderr.includes("not found")) {
+    if (stderr.includes("No such network") || /network\s+\S+\s+not found/.test(stderr)) {
       const match = stderr.match(/No such network:\s*(\S+)/) ?? stderr.match(/network\s+(\S+)\s+not found/);
       throw new NetworkNotFoundError(match?.[1] ?? "unknown");
     }

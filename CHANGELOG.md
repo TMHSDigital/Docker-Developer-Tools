@@ -5,6 +5,31 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2026-03-29
+
+### Added
+
+#### MCP Server - Container Lifecycle Tools (+10, total 20)
+- `docker_run` - create and start a container from an image (detached, with ports, env, volumes, network, labels, restart policy)
+- `docker_create` - create a container without starting it
+- `docker_start` - start a stopped container
+- `docker_stop` - stop a running container with optional grace period
+- `docker_restart` - restart a container with optional grace period
+- `docker_kill` - send a signal to a running container (default: SIGKILL)
+- `docker_rm` - remove a container (with optional force and volume removal)
+- `docker_pause` - pause all processes in a running container
+- `docker_unpause` - unpause a paused container
+- `docker_exec` - execute a command in a running container (with workdir, user, and env options)
+
+#### Documentation
+- Comprehensive roadmap rewrite with 59 planned MCP tools across v0.2.0 through v0.7.0
+- Safety considerations section for destructive tools (dry-run defaults, explicit identifiers)
+
+### Changed
+- Bumped `docker_diskUsage` timeout from 30s to 120s for large Docker installs
+
+---
+
 ## [0.1.0] - 2026-03-29
 
 ### Added
@@ -70,4 +95,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Python test suite: plugin manifest, skills, rules, docs consistency, internal links, roadmap
 - Vitest test suite: error classes, docker-api utilities, input validation
 
+[0.2.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.2.0
 [0.1.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.1.0

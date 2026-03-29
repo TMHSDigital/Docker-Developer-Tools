@@ -4,11 +4,11 @@ Project documentation for Claude Code and AI assistants working on this reposito
 
 ## Project Overview
 
-Docker Developer Tools is a Cursor IDE plugin that integrates Docker and container workflows into Cursor's AI chat. It includes 12 skills, 6 rules, and a companion MCP server with 10 tools for live Docker CLI integration.
+Docker Developer Tools is a Cursor IDE plugin that integrates Docker and container workflows into Cursor's AI chat. It includes 12 skills, 6 rules, and a companion MCP server with 20 tools for live Docker CLI integration.
 
 This is a monorepo - the Cursor plugin (skills and rules) and the companion MCP server live in the same repository. Docker's API is local (Docker Engine socket / CLI), so one repo is simpler for users to install and maintain.
 
-**Version:** 0.1.0
+**Version:** 0.2.0
 **License:** CC-BY-NC-ND-4.0
 **Author:** TMHSDigital
 
@@ -63,9 +63,11 @@ Docker-Developer-Tools/
 | `docker-image-pinning` | Dockerfiles, compose files | Flag unpinned image tags |
 | `docker-port-conflicts` | Dockerfiles, compose files | Flag port conflicts |
 
-## MCP Server (10 tools)
+## MCP Server (20 tools)
 
 The MCP server talks to Docker via CLI exec (`docker` commands) rather than the Docker Engine REST API. It uses stdio transport and requires `docker` to be available on PATH.
+
+### Read / Inspect (10)
 
 | Tool | Description |
 |------|-------------|
@@ -79,6 +81,21 @@ The MCP server talks to Docker via CLI exec (`docker` commands) rather than the 
 | `docker_systemInfo` | Docker system info |
 | `docker_diskUsage` | Disk usage breakdown |
 | `docker_searchHub` | Search Docker Hub |
+
+### Container Lifecycle (10)
+
+| Tool | Description |
+|------|-------------|
+| `docker_run` | Create and start a container from an image |
+| `docker_create` | Create a container without starting it |
+| `docker_start` | Start a stopped container |
+| `docker_stop` | Stop a running container |
+| `docker_restart` | Restart a container |
+| `docker_kill` | Send a signal to a running container |
+| `docker_rm` | Remove a container |
+| `docker_pause` | Pause all processes in a container |
+| `docker_unpause` | Unpause a paused container |
+| `docker_exec` | Execute a command in a running container |
 
 ## Development Workflow
 
@@ -140,3 +157,13 @@ pytest tests/ -v --tb=short
 | `docker info --format json` | `docker_systemInfo` |
 | `docker system df --format json` | `docker_diskUsage` |
 | `docker search --format json` | `docker_searchHub` |
+| `docker run -d` | `docker_run` |
+| `docker create` | `docker_create` |
+| `docker start` | `docker_start` |
+| `docker stop` | `docker_stop` |
+| `docker restart` | `docker_restart` |
+| `docker kill` | `docker_kill` |
+| `docker rm` | `docker_rm` |
+| `docker pause` | `docker_pause` |
+| `docker unpause` | `docker_unpause` |
+| `docker exec` | `docker_exec` |

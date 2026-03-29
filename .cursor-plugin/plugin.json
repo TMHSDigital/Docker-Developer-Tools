@@ -1,8 +1,8 @@
 {
   "name": "docker-developer-tools",
   "displayName": "Docker Developer Tools",
-  "version": "0.1.0",
-  "description": "A Cursor plugin for Docker and container workflows - 12 skills, 6 rules, and 10 MCP tools for building, debugging, optimizing, and managing Docker containers, images, networks, and volumes. Includes a companion MCP server (docker-mcp) for live Docker CLI integration.",
+  "version": "0.2.0",
+  "description": "A Cursor plugin for Docker and container workflows - 12 skills, 6 rules, and 20 MCP tools for building, debugging, optimizing, and managing Docker containers, images, networks, and volumes. Includes a companion MCP server (docker-mcp) for live Docker CLI integration.",
   "author": {
     "name": "TMHSDigital",
     "url": "https://github.com/TMHSDigital"

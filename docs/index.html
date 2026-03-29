@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Docker Developer Tools - Cursor Plugin</title>
-<meta name="description" content="Expert Docker workflows inside Cursor IDE. 12 skills, 6 rules, 10 MCP tools.">
+<meta name="description" content="Expert Docker workflows inside Cursor IDE. 12 skills, 6 rules, 20 MCP tools.">
 <meta name="theme-color" content="#0db7ed">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Docker Developer Tools - Cursor Plugin">
-<meta property="og:description" content="Expert Docker workflows inside Cursor IDE. 12 skills, 6 rules, 10 MCP tools.">
+<meta property="og:description" content="Expert Docker workflows inside Cursor IDE. 12 skills, 6 rules, 20 MCP tools.">
 <meta property="og:image" content="docs/assets/og-card.jpg">
 <meta property="og:url" content="https://tmhsdigital.github.io/Docker-Developer-Tools/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -241,7 +241,7 @@ section{padding:72px 0}
   <h1><span>Docker</span> Developer Tools</h1>
   <p class="tagline">Expert Docker workflows, live container data, and real-time linting - all inside Cursor IDE.</p>
   <div class="pills">
-    <span class="pill blue">v0.1.0</span>
+    <span class="pill blue">v0.2.0</span>
     <span class="pill">CC BY-NC-ND 4.0</span>
     <span class="pill">Cursor Plugin</span>
   </div>
@@ -259,7 +259,7 @@ section{padding:72px 0}
       <div class="stat-label">Rules</div>
     </div>
     <div class="stat-card">
-      <div class="stat-number" data-target="10">0</div>
+      <div class="stat-number" data-target="20">0</div>
       <div class="stat-label">MCP Tools</div>
     </div>
   </div>
@@ -482,8 +482,8 @@ section{padding:72px 0}
 <!-- MCP TOOLS TABLE -->
 <section id="mcp-tools">
   <div class="container">
-    <h2 class="section-title reveal">10 MCP Tools</h2>
-    <p class="section-subtitle reveal">Live Docker data, piped straight into AI context via the companion MCP server.</p>
+    <h2 class="section-title reveal">20 MCP Tools</h2>
+    <p class="section-subtitle reveal">Live Docker data and full container lifecycle management via the companion MCP server.</p>
     <div class="tools-table-wrap reveal">
       <table class="tools-table">
         <thead>
@@ -500,6 +500,17 @@ section{padding:72px 0}
           <tr><td class="tool-name">docker_systemInfo</td><td>Docker engine info - version, OS, storage driver, resource totals</td></tr>
           <tr><td class="tool-name">docker_diskUsage</td><td>Disk usage breakdown by images, containers, volumes, and build cache</td></tr>
           <tr><td class="tool-name">docker_searchHub</td><td>Search Docker Hub for images by keyword</td></tr>
+          <tr><td colspan="2" style="padding:20px 16px 10px;font-weight:700;color:var(--blue);font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;border-bottom:2px solid var(--border)">Container Lifecycle</td></tr>
+          <tr><td class="tool-name">docker_run</td><td>Create and start a container from an image (ports, env, volumes, network)</td></tr>
+          <tr><td class="tool-name">docker_create</td><td>Create a container without starting it</td></tr>
+          <tr><td class="tool-name">docker_start</td><td>Start a stopped container</td></tr>
+          <tr><td class="tool-name">docker_stop</td><td>Stop a running container with optional grace period</td></tr>
+          <tr><td class="tool-name">docker_restart</td><td>Restart a container with optional grace period</td></tr>
+          <tr><td class="tool-name">docker_kill</td><td>Send a signal to a running container (default: SIGKILL)</td></tr>
+          <tr><td class="tool-name">docker_rm</td><td>Remove a container (with optional force and volume removal)</td></tr>
+          <tr><td class="tool-name">docker_pause</td><td>Pause all processes in a running container</td></tr>
+          <tr><td class="tool-name">docker_unpause</td><td>Unpause a paused container</td></tr>
+          <tr><td class="tool-name">docker_exec</td><td>Execute a command in a running container</td></tr>
         </tbody>
       </table>
     </div>
@@ -602,34 +613,40 @@ section{padding:72px 0}
     <p class="section-subtitle reveal">What's shipped and what's coming next.</p>
     <div class="timeline reveal">
 
-      <div class="timeline-item current">
-        <div class="timeline-dot"></div>
-        <h3>v0.1.0 <span class="tag current-tag">Current</span></h3>
-        <p>Initial release - 12 skills, 6 rules, 10 MCP tools. Core Dockerfile, Compose, debugging, and optimization workflows.</p>
-      </div>
-
       <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <h3>v0.2.0 <span class="tag upcoming-tag">Planned</span></h3>
-        <p>Compose and Build - compose status/config MCP tools, image build and tag tools, Kubernetes migration skill.</p>
+        <h3>v0.1.0 <span class="tag upcoming-tag">Released</span></h3>
+        <p>Foundation - 12 skills, 6 rules, 10 read-only MCP tools. Core Dockerfile, Compose, debugging, and optimization workflows.</p>
+      </div>
+
+      <div class="timeline-item current">
+        <div class="timeline-dot"></div>
+        <h3>v0.2.0 <span class="tag current-tag">Current</span></h3>
+        <p>Container Lifecycle - 10 new tools: run, create, start, stop, restart, kill, rm, pause, unpause, exec. The plugin can now act, not just observe.</p>
       </div>
 
       <div class="timeline-item">
         <div class="timeline-dot"></div>
         <h3>v0.3.0 <span class="tag upcoming-tag">Planned</span></h3>
-        <p>Container Ops - start, stop, remove, and exec MCP tools for container lifecycle management.</p>
+        <p>Image and Build - pull, push, build, tag, rmi, commit, save, load. Complete image pipeline.</p>
       </div>
 
       <div class="timeline-item">
         <div class="timeline-dot"></div>
         <h3>v0.4.0 <span class="tag upcoming-tag">Planned</span></h3>
-        <p>Advanced - prune, stats, export, and push MCP tools. Monitoring skill and logging rule.</p>
+        <p>Compose - up, down, ps, logs, build, restart, pull, exec. Full Docker Compose V2 management.</p>
       </div>
 
       <div class="timeline-item">
         <div class="timeline-dot"></div>
         <h3>v0.5.0 <span class="tag upcoming-tag">Planned</span></h3>
-        <p>Polish - cross-references, expanded pitfalls, improved MCP Usage examples, workflow diagrams.</p>
+        <p>Volumes, Networks, Cleanup - volume/network CRUD, system/container/image prune. Infrastructure management.</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <h3>v0.6.0 - v0.7.0 <span class="tag upcoming-tag">Planned</span></h3>
+        <p>Advanced, Observability, Buildx - cp, stats, top, events, multi-platform builds. Targeting ~59 total MCP tools.</p>
       </div>
 
       <div class="timeline-item">

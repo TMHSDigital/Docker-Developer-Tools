@@ -1,7 +1,7 @@
 {
   "name": "@tmhs/docker-mcp",
-  "version": "0.1.0",
-  "description": "MCP server for Docker CLI integration - 10 read-only tools for containers, images, volumes, networks, and system info.",
+  "version": "0.2.0",
+  "description": "MCP server for Docker CLI integration - 20 tools for containers, images, volumes, networks, and system info. Includes container lifecycle management (run, stop, exec, rm, and more).",
   "type": "module",
   "main": "dist/index.js",
   "bin": {

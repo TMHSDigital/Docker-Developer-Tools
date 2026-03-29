@@ -13,10 +13,20 @@ import { register as registerListNetworks } from "./tools/listNetworks.js";
 import { register as registerSystemInfo } from "./tools/systemInfo.js";
 import { register as registerDiskUsage } from "./tools/diskUsage.js";
 import { register as registerSearchHub } from "./tools/searchHub.js";
+import { register as registerRun } from "./tools/run.js";
+import { register as registerCreate } from "./tools/create.js";
+import { register as registerStart } from "./tools/start.js";
+import { register as registerStop } from "./tools/stop.js";
+import { register as registerRestart } from "./tools/restart.js";
+import { register as registerKill } from "./tools/kill.js";
+import { register as registerRm } from "./tools/rm.js";
+import { register as registerPause } from "./tools/pause.js";
+import { register as registerUnpause } from "./tools/unpause.js";
+import { register as registerExec } from "./tools/exec.js";
 
 const server = new McpServer({
   name: "docker-mcp",
-  version: "0.1.0",
+  version: "0.2.0",
 });
 
 registerListContainers(server);
@@ -29,6 +39,16 @@ registerListNetworks(server);
 registerSystemInfo(server);
 registerDiskUsage(server);
 registerSearchHub(server);
+registerRun(server);
+registerCreate(server);
+registerStart(server);
+registerStop(server);
+registerRestart(server);
+registerKill(server);
+registerRm(server);
+registerPause(server);
+registerUnpause(server);
+registerExec(server);
 
 async function main(): Promise<void> {
   const transport = new StdioServerTransport();

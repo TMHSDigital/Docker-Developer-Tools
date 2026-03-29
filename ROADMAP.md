@@ -4,14 +4,14 @@
 
 ## Current Status
 
-**v0.1.0** - Foundation release with 12 skills, 6 rules, and 10 read-only MCP tools.
+**v0.2.0** - Container Lifecycle release with 12 skills, 6 rules, and 20 MCP tools (10 read-only + 10 container lifecycle).
 
 ## Release Plan
 
 | Version | Theme | New MCP Tools | Cumulative | Skills | Rules | Status |
 |---------|-------|---------------|------------|--------|-------|--------|
-| v0.1.0 | Foundation (read-only) | 10 | 10 | 12 | 6 | (current) |
-| v0.2.0 | Container Lifecycle | +10 | 20 | +1 | +0 | Planned |
+| v0.1.0 | Foundation (read-only) | 10 | 10 | 12 | 6 | Released |
+| v0.2.0 | Container Lifecycle | +10 | 20 | +0 | +0 | (current) |
 | v0.3.0 | Image and Build | +8 | 28 | +2 | +0 | Planned |
 | v0.4.0 | Compose | +8 | 36 | +1 | +1 | Planned |
 | v0.5.0 | Volumes, Networks, Cleanup | +12 | 48 | +0 | +0 | Planned |
@@ -218,6 +218,8 @@ All destructive MCP tools (`rm`, `rmi`, `prune`, `kill`, `down`) will:
 
 - [x] Plugin scaffold (plugin.json, directory structure)
 - [x] MCP server with 10 read-only tools
+- [x] 10 container lifecycle tools (run, create, start, stop, restart, kill, rm, pause, unpause, exec)
+- [x] Comprehensive roadmap rewrite (59 planned MCP tools)
 - [x] 12 skills covering core Docker workflows
 - [x] 6 rules for Dockerfile and compose validation
 - [x] Python test suite for structure validation

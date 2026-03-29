@@ -16,9 +16,13 @@
 | v0.4.0 | Compose | +8 | 36 | +1 | +1 | Released |
 | v0.5.0 | Volumes, Networks, Cleanup | +13 | 49 | +0 | +0 | Released |
 | v0.6.0 | Advanced and Observability | +6 | 55 | +1 | +1 | (current) |
-| v0.7.0 | Buildx and Multi-platform | +5 | 60 | +0 | +0 | Planned |
-| v0.8.0 | Polish | +0 | 60 | +0 | +0 | Planned |
-| v1.0.0 | Stable | +0 | 60 | +0 | +0 | Planned |
+| v0.7.0 | Buildx, Manifests, and Registry | +13 | 68 | +1 | +1 | Planned |
+| v0.8.0 | Compose Completeness | +16 | 84 | +0 | +1 | Planned |
+| v0.9.0 | Container/Image Gaps, Context, Auth | +14 | 98 | +1 | +0 | Planned |
+| v0.10.0 | Swarm Orchestration | +24 | 122 | +1 | +1 | Planned |
+| v0.11.0 | Swarm Stacks, Configs, Secrets, Trust | +18 | 140 | +1 | +0 | Planned |
+| v0.12.0 | Niche, Scout, and Extras | +10 | 150 | +0 | +0 | Planned |
+| v1.0.0 | Stable | +0 | 150 | +0 | +0 | Planned |
 
 ---
 
@@ -166,28 +170,201 @@ File transfer, live monitoring, and container runtime updates.
 
 ---
 
-## v0.7.0 - Buildx and Multi-platform
+## v0.7.0 - Buildx, Manifests, and Registry
 
-Extended build capabilities for multi-architecture images and builder management.
+Extended build capabilities, multi-architecture image manifests, and builder management.
 
-### MCP Tools (+5)
+### MCP Tools (+13)
+
+#### Buildx (8)
 - `docker_buildxBuild` - multi-platform builds with cache export and provenance
 - `docker_buildxLs` - list builder instances
 - `docker_buildxCreate` - create a new builder instance
 - `docker_buildxRm` - remove a builder instance
+- `docker_buildxInspect` - inspect a builder instance
+- `docker_buildxUse` - set the default builder instance
+- `docker_buildxImagetools` - create and inspect manifest lists via buildx
 - `docker_builderPrune` - remove build cache
+
+#### Manifest (5)
+- `docker_manifestCreate` - create a local manifest list for multi-arch images
+- `docker_manifestInspect` - display an image manifest or manifest list
+- `docker_manifestAnnotate` - add platform info to a manifest list entry
+- `docker_manifestPush` - push a manifest list to a registry
+- `docker_manifestRm` - remove local manifest lists
+
+### Skills
+- `docker-multi-platform` - multi-arch builds, manifest lists, platform targeting, buildx patterns
+
+### Rules
+- `buildx-best-practices` - multi-platform build validation, cache configuration, provenance
 
 ---
 
-## v0.8.0 - Polish
+## v0.8.0 - Compose Completeness
 
-Focuses on cross-referencing, common pitfalls, and documentation completeness.
+Every remaining Docker Compose V2 command for full lifecycle control.
 
-- Expand Common Pitfalls sections across all skills
-- Add cross-references between related skills and rules
-- Improve MCP Usage sections with more detailed examples
-- Add workflow diagrams to complex skills
-- Comprehensive error message review for all MCP tools
+### MCP Tools (+16)
+- `docker_composeConfig` - validate, resolve, and render a compose file in canonical format
+- `docker_composeCp` - copy files between a compose service container and the local filesystem
+- `docker_composeCreate` - create service containers without starting them
+- `docker_composeEvents` - receive real-time events from compose containers
+- `docker_composeImages` - list images used by compose service containers
+- `docker_composeKill` - force stop compose service containers
+- `docker_composeLs` - list running compose projects
+- `docker_composePause` - pause compose services
+- `docker_composeUnpause` - unpause compose services
+- `docker_composePort` - print the public port for a port binding
+- `docker_composeRm` - remove stopped compose service containers
+- `docker_composeRun` - run a one-off command on a compose service
+- `docker_composeScale` - scale compose services up or down
+- `docker_composeStart` - start existing compose service containers
+- `docker_composeStop` - stop compose services without removing them
+- `docker_composeTop` - display running processes per compose service
+
+### Rules
+- `compose-scaling` - service scaling best practices, replica constraints, resource allocation
+
+---
+
+## v0.9.0 - Container/Image Gaps, Context, and Auth
+
+Fill remaining container and image command gaps, add remote Docker host management via contexts, and registry authentication.
+
+### MCP Tools (+14)
+
+#### Container gaps (4)
+- `docker_diff` - inspect filesystem changes in a container (added, changed, deleted files)
+- `docker_export` - export a container's filesystem as a tar archive
+- `docker_port` - list port mappings or a specific mapping for a container
+- `docker_rename` - rename a container
+
+#### Image gaps (2)
+- `docker_imageHistory` - show the layer history of an image (commands, sizes, timestamps)
+- `docker_import` - import a tarball to create a filesystem image
+
+#### Context management (6)
+- `docker_contextCreate` - create a context for connecting to remote Docker hosts
+- `docker_contextLs` - list available contexts
+- `docker_contextInspect` - display detailed information on a context
+- `docker_contextRm` - remove one or more contexts
+- `docker_contextUse` - set the current active Docker context
+- `docker_contextShow` - print the name of the current context
+
+#### Registry authentication (2)
+- `docker_login` - authenticate to a container registry
+- `docker_logout` - log out from a container registry
+
+### Skills
+- `docker-context-management` - managing remote Docker hosts, SSH contexts, multi-host workflows
+
+---
+
+## v0.10.0 - Swarm Orchestration
+
+Docker Swarm mode - cluster initialization, service management, and node administration. Swarm is built into Docker Engine (free, no extra install).
+
+### MCP Tools (+24)
+
+#### Swarm cluster (8)
+- `docker_swarmInit` - initialize a new swarm
+- `docker_swarmJoin` - join a swarm as a node or manager
+- `docker_swarmLeave` - leave the swarm
+- `docker_swarmJoinToken` - manage join tokens (worker and manager)
+- `docker_swarmUpdate` - update swarm configuration (task history, snapshot interval)
+- `docker_swarmUnlock` - unlock a locked swarm
+- `docker_swarmUnlockKey` - manage the swarm unlock key
+- `docker_swarmCa` - display and rotate the root CA certificate
+
+#### Swarm services (9)
+- `docker_serviceCreate` - create a new replicated or global service
+- `docker_serviceUpdate` - update a service's image, replicas, resources, or config
+- `docker_serviceRm` - remove one or more services
+- `docker_serviceLs` - list services in the swarm
+- `docker_serviceInspect` - display detailed service information
+- `docker_serviceLogs` - fetch logs from a service or task
+- `docker_servicePs` - list tasks (containers) of a service
+- `docker_serviceScale` - scale one or more services to a target replica count
+- `docker_serviceRollback` - revert a service to its previous configuration
+
+#### Swarm nodes (7)
+- `docker_nodeLs` - list nodes in the swarm
+- `docker_nodeInspect` - display detailed node information
+- `docker_nodePs` - list tasks running on a node
+- `docker_nodeRm` - remove a node from the swarm
+- `docker_nodeUpdate` - update node metadata (labels, availability, role)
+- `docker_nodePromote` - promote a worker node to manager
+- `docker_nodeDemote` - demote a manager node to worker
+
+### Skills
+- `docker-swarm` - Swarm mode orchestration patterns, service deployment, rolling updates, drain and failover
+
+### Rules
+- `swarm-security` - Swarm-specific security checks (autolock, certificate rotation, encrypted overlay networks)
+
+---
+
+## v0.11.0 - Swarm Stacks, Configs, Secrets, and Trust
+
+Stack deployments, Swarm-native configuration management, secret storage, and Docker Content Trust for image signing.
+
+### MCP Tools (+18)
+
+#### Swarm stacks (6)
+- `docker_stackDeploy` - deploy a new stack or update an existing stack from a compose file
+- `docker_stackRm` - remove one or more stacks
+- `docker_stackLs` - list stacks in the swarm
+- `docker_stackPs` - list tasks (containers) in a stack
+- `docker_stackServices` - list services in a stack
+- `docker_stackConfig` - output the final merged config for a stack
+
+#### Swarm configs (4)
+- `docker_configCreate` - create a Swarm config from a file or stdin
+- `docker_configInspect` - display detailed config information
+- `docker_configLs` - list Swarm configs
+- `docker_configRm` - remove one or more Swarm configs
+
+#### Swarm secrets (4)
+- `docker_secretCreate` - create a Swarm secret from a file or stdin
+- `docker_secretInspect` - display detailed secret information (metadata only, not the value)
+- `docker_secretLs` - list Swarm secrets
+- `docker_secretRm` - remove one or more Swarm secrets
+
+#### Docker Content Trust (4)
+- `docker_trustInspect` - inspect trust data for an image
+- `docker_trustSign` - sign an image for Docker Content Trust
+- `docker_trustRevoke` - revoke trust for an image
+- `docker_trustKey` - manage signing keys (generate, load)
+
+### Skills
+- `docker-image-signing` - Docker Content Trust, image verification, signing workflows
+
+---
+
+## v0.12.0 - Niche, Scout, and Extras
+
+Remaining Docker CLI commands, vulnerability scanning, compose watch, plugin management, and version info.
+
+### MCP Tools (+10)
+
+#### Utility (2)
+- `docker_version` - show Docker version information (client and server)
+- `docker_composeVersion` - show Docker Compose version information
+
+#### Compose extras (1)
+- `docker_composeWatch` - watch build context for services and auto-rebuild on file changes
+
+#### Docker Scout (3, requires Docker Scout CLI or Docker Desktop)
+- `docker_scoutQuickview` - quick overview of image vulnerabilities
+- `docker_scoutCves` - list CVEs found in an image
+- `docker_scoutRecommendations` - get base image update recommendations
+
+#### Plugin management (4)
+- `docker_pluginLs` - list installed plugins
+- `docker_pluginInstall` - install a Docker plugin
+- `docker_pluginRm` - remove a plugin
+- `docker_pluginEnable` - enable a disabled plugin
 
 ---
 
@@ -198,19 +375,23 @@ Production release after community feedback and testing.
 - Finalize all APIs and tool signatures
 - Complete documentation coverage
 - Performance optimization for MCP tool responses
-- Publish `@tmhs/docker-mcp` to npm registry
 - Full test coverage across all components
+- Expand Common Pitfalls sections across all skills
+- Add cross-references between related skills and rules
+- Add workflow diagrams to complex skills
+- Comprehensive error message review for all MCP tools
 
 ---
 
 ## Safety Considerations
 
-All destructive MCP tools (`rm`, `rmi`, `prune`, `kill`, `down`) will:
+All destructive MCP tools (`rm`, `rmi`, `prune`, `kill`, `down`, `leave`) will:
 
 - Default to **dry-run** where Docker supports it (`--dry-run` on prune and compose commands)
 - Require explicit identifiers - no blanket wildcards or "remove all" without a filter
 - Return clear confirmation of what was affected in the response
 - Never force-remove by default - `force` must be explicitly opted in
+- Swarm destructive operations (leave, stack rm, service rm) require explicit confirmation parameters
 
 ---
 
@@ -219,12 +400,12 @@ All destructive MCP tools (`rm`, `rmi`, `prune`, `kill`, `down`) will:
 - [x] Plugin scaffold (plugin.json, directory structure)
 - [x] MCP server with 10 read-only tools
 - [x] 10 container lifecycle tools (run, create, start, stop, restart, kill, rm, pause, unpause, exec)
-- [x] Comprehensive roadmap rewrite (59 planned MCP tools)
+- [x] Comprehensive roadmap rewrite with ~150 planned MCP tools
 - [x] 8 image and build tools (pull, push, build, tag, rmi, commit, save, load)
 - [x] 8 compose tools (composeUp, composeDown, composePs, composeLogs, composeBuild, composeRestart, composePull, composeExec)
 - [x] 13 volume, network, and cleanup tools (volumeCreate/Rm/Inspect/Prune, networkCreate/Rm/Connect/Disconnect/Inspect/Prune, systemPrune, containerPrune, imagePrune)
 - [x] VolumeNotFoundError and NetworkNotFoundError error classes
-- [x] npm publish of @tmhs/docker-mcp with GitHub Actions automation
+- [x] npm publish of @tmhs/docker-mcp with GitHub Actions automation (OIDC trusted publishers)
 - [x] 6 advanced/observability tools (cp, stats, top, events, update, wait)
 - [x] 13 skills covering core Docker workflows
 - [x] 7 rules for Dockerfile and compose validation

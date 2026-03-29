@@ -31,17 +31,9 @@ Install the plugin, then ask Cursor anything about Docker:
 
 ```text
 "Write a production Dockerfile for my Node.js app with multi-stage builds"
-```
-
-```text
 "My container keeps restarting - help me debug it"
-```
-
-```text
 "Set up a docker-compose stack with Postgres, Redis, and my API"
 ```
-
----
 
 ## How It Works
 
@@ -55,9 +47,10 @@ flowchart LR
 
 ---
 
-## Features
+<details>
+<summary><strong>12 Skills</strong> - on-demand Docker expertise</summary>
 
-Skills are grouped by category. Each skill is a self-contained guide that Cursor loads on demand.
+&nbsp;
 
 | Category | Skill | Description |
 |---|---|---|
@@ -74,11 +67,12 @@ Skills are grouped by category. Each skill is a self-contained guide that Cursor
 | **DevOps** | `docker-development-env` | Dev containers, hot reload, debugger attachment, local stacks |
 | **Debugging** | `container-debugging` | Exec into containers, log analysis, health checks, process inspection |
 
----
+</details>
 
-## Rules
+<details>
+<summary><strong>6 Rules</strong> - automatic best-practice enforcement</summary>
 
-Rules enforce best practices automatically, without needing to invoke a skill.
+&nbsp;
 
 | Rule | Scope | What It Does |
 |---|---|---|
@@ -88,6 +82,8 @@ Rules enforce best practices automatically, without needing to invoke a skill.
 | `docker-resource-limits` | Docker-related files | Flag missing memory and CPU limits |
 | `docker-image-pinning` | Dockerfiles, compose files | Flag unpinned image tags (`:latest` or no tag) |
 | `docker-port-conflicts` | Dockerfiles, compose files | Flag commonly conflicting port mappings |
+
+</details>
 
 ---
 
@@ -114,9 +110,12 @@ Add to your Cursor MCP config (`.cursor/mcp.json`):
 }
 ```
 
-### Tools
+<details>
+<summary><strong>28 MCP Tools</strong> - full tool reference</summary>
 
-#### Read / Inspect
+&nbsp;
+
+**Read / Inspect** (10)
 
 | Tool | What It Does |
 |---|---|
@@ -131,7 +130,7 @@ Add to your Cursor MCP config (`.cursor/mcp.json`):
 | `docker_systemInfo` | Return Docker daemon version, OS, storage driver, and runtime info |
 | `docker_searchHub` | Search Docker Hub for images by name with filtering options |
 
-#### Container Lifecycle
+**Container Lifecycle** (10)
 
 | Tool | What It Does |
 |---|---|
@@ -146,7 +145,7 @@ Add to your Cursor MCP config (`.cursor/mcp.json`):
 | `docker_unpause` | Unpause a paused container |
 | `docker_exec` | Execute a command in a running container |
 
-#### Image and Build
+**Image and Build** (8)
 
 | Tool | What It Does |
 |---|---|
@@ -159,9 +158,14 @@ Add to your Cursor MCP config (`.cursor/mcp.json`):
 | `docker_save` | Save one or more images to a tar archive |
 | `docker_load` | Load images from a tar archive |
 
+</details>
+
 ---
 
-## Installation
+<details>
+<summary><strong>Installation</strong></summary>
+
+&nbsp;
 
 ### Plugin
 
@@ -189,11 +193,12 @@ npm run build
 
 Then add the JSON config from the [MCP Server section](#companion-docker-mcp-server) to `.cursor/mcp.json`.
 
----
+</details>
 
-## Example Prompts
+<details>
+<summary><strong>Example Prompts</strong> - one per skill</summary>
 
-One prompt per skill showing practical usage:
+&nbsp;
 
 | Skill | Try This |
 |---|---|
@@ -210,9 +215,12 @@ One prompt per skill showing practical usage:
 | `docker-development-env` | "Create a dev container with hot reload for my Go project" |
 | `container-debugging` | "Show me the logs and processes inside my crashing container" |
 
----
+</details>
 
-## Roadmap
+<details>
+<summary><strong>Roadmap</strong></summary>
+
+&nbsp;
 
 | Version | Theme | MCP Tools | Highlights |
 |---|---|---|---|
@@ -226,27 +234,17 @@ One prompt per skill showing practical usage:
 | **v0.8.0** | Polish | +0 | Cross-references, pitfalls, documentation |
 | **v1.0.0** | Stable | +0 | Production release, npm publish (~59 MCP tools) |
 
+</details>
+
 ---
 
 ## Contributing
 
-Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
----
-
-## Support
-
-Found a bug or have a feature request? [Open an issue](https://github.com/TMHSDigital/Docker-Developer-Tools/issues).
-
----
+Contributions welcome - see [CONTRIBUTING.md](CONTRIBUTING.md). Found a bug? [Open an issue](https://github.com/TMHSDigital/Docker-Developer-Tools/issues).
 
 ## License
 
-**CC-BY-NC-ND-4.0**
-
-Copyright 2026 TM Hospitality Strategies. See [LICENSE](LICENSE) for details.
-
----
+**CC-BY-NC-ND-4.0** - Copyright 2026 TM Hospitality Strategies. See [LICENSE](LICENSE).
 
 <p align="center">
   Built by <a href="https://github.com/TMHSDigital">TMHSDigital</a>

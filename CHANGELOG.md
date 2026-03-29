@@ -5,6 +5,31 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.0] - 2026-03-29
+
+### Added
+
+#### MCP Server - Container/Image Gaps, Context, and Auth (+14, total 98)
+- `docker_diff` - inspect filesystem changes in a container (added, changed, deleted files)
+- `docker_export` - export a container's filesystem as a tar archive (with 300s timeout for large filesystems)
+- `docker_port` - list port mappings or a specific mapping for a container (tcp/udp protocol)
+- `docker_rename` - rename a Docker container
+- `docker_imageHistory` - show layer history of an image with commands, sizes, and timestamps (JSON format, no-trunc option)
+- `docker_import` - import a tarball to create a filesystem image (with Dockerfile change instructions, 300s timeout)
+- `docker_contextCreate` - create a Docker context for connecting to remote hosts (SSH, TCP endpoints)
+- `docker_contextLs` - list available Docker contexts (JSON format)
+- `docker_contextInspect` - display detailed information on a Docker context
+- `docker_contextRm` - remove one or more Docker contexts (with force option)
+- `docker_contextUse` - set the current active Docker context
+- `docker_contextShow` - print the name of the current Docker context
+- `docker_login` - authenticate to a container registry (password piped via stdin for security)
+- `docker_logout` - log out from a container registry
+
+#### Plugin
+- `docker-context-management` skill - managing remote Docker hosts, SSH contexts, TLS contexts, multi-host workflows, context switching patterns
+
+---
+
 ## [0.8.0] - 2026-03-29
 
 ### Added
@@ -234,6 +259,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Python test suite: plugin manifest, skills, rules, docs consistency, internal links, roadmap
 - Vitest test suite: error classes, docker-api utilities, input validation
 
+[0.9.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.9.0
 [0.8.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.8.0
 [0.7.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.7.0
 [0.6.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.6.0

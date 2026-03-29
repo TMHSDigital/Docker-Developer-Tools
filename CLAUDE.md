@@ -4,11 +4,11 @@ Project documentation for Claude Code and AI assistants working on this reposito
 
 ## Project Overview
 
-Docker Developer Tools is a Cursor IDE plugin that integrates Docker and container workflows into Cursor's AI chat. It includes 14 skills, 9 rules, and a companion MCP server with 84 tools for live Docker CLI integration.
+Docker Developer Tools is a Cursor IDE plugin that integrates Docker and container workflows into Cursor's AI chat. It includes 15 skills, 9 rules, and a companion MCP server with 98 tools for live Docker CLI integration.
 
 This is a monorepo - the Cursor plugin (skills and rules) and the companion MCP server live in the same repository. Docker's API is local (Docker Engine socket / CLI), so one repo is simpler for users to install and maintain.
 
-**Version:** 0.8.0
+**Version:** 0.9.0
 **License:** CC-BY-NC-ND-4.0
 **Author:** TMHSDigital
 
@@ -35,7 +35,7 @@ Docker-Developer-Tools/
   tests/                     # Python structure tests
 ```
 
-## Skills (14)
+## Skills (15)
 
 | Skill | Description |
 |-------|-------------|
@@ -53,6 +53,7 @@ Docker-Developer-Tools/
 | `docker-resource-management` | Resource limits and monitoring |
 | `docker-advanced-workflows` | Multi-stage pipelines, sidecar patterns, healthchecks, signal handling |
 | `docker-multi-platform` | Multi-arch builds, buildx configuration, manifest lists, platform targeting |
+| `docker-context-management` | Remote Docker hosts, SSH/TLS contexts, multi-host workflows |
 
 ## Rules (9)
 
@@ -68,7 +69,7 @@ Docker-Developer-Tools/
 | `buildx-best-practices` | Dockerfiles, compose files | Flag multi-platform build issues, missing cache config |
 | `compose-scaling` | Compose files | Flag scaling blockers: container_name, fixed host ports, missing limits |
 
-## MCP Server (84 tools)
+## MCP Server (98 tools)
 
 The MCP server talks to Docker via CLI exec (`docker` commands) rather than the Docker Engine REST API. It uses stdio transport and requires `docker` to be available on PATH.
 
@@ -205,6 +206,40 @@ The MCP server talks to Docker via CLI exec (`docker` commands) rather than the 
 | `docker_manifestAnnotate` | Add platform info to a manifest list entry |
 | `docker_manifestPush` | Push a manifest list to a registry |
 | `docker_manifestRm` | Remove local manifest lists |
+
+### Container Gaps (4)
+
+| Tool | Description |
+|------|-------------|
+| `docker_diff` | Inspect filesystem changes in a container |
+| `docker_export` | Export a container's filesystem as a tar archive |
+| `docker_port` | List port mappings for a container |
+| `docker_rename` | Rename a container |
+
+### Image Gaps (2)
+
+| Tool | Description |
+|------|-------------|
+| `docker_imageHistory` | Show layer history of an image |
+| `docker_import` | Import a tarball to create a filesystem image |
+
+### Context Management (6)
+
+| Tool | Description |
+|------|-------------|
+| `docker_contextCreate` | Create a context for remote Docker hosts |
+| `docker_contextLs` | List available contexts |
+| `docker_contextInspect` | Display detailed context information |
+| `docker_contextRm` | Remove one or more contexts |
+| `docker_contextUse` | Set the current active context |
+| `docker_contextShow` | Print the name of the current context |
+
+### Registry Authentication (2)
+
+| Tool | Description |
+|------|-------------|
+| `docker_login` | Authenticate to a container registry |
+| `docker_logout` | Log out from a container registry |
 
 ## Development Workflow
 
@@ -359,3 +394,17 @@ Full checklist with copy-paste commands: [CONTRIBUTING.md - Release Checklist](C
 | `docker manifest annotate` | `docker_manifestAnnotate` |
 | `docker manifest push` | `docker_manifestPush` |
 | `docker manifest rm` | `docker_manifestRm` |
+| `docker diff` | `docker_diff` |
+| `docker export -o` | `docker_export` |
+| `docker port` | `docker_port` |
+| `docker rename` | `docker_rename` |
+| `docker history --format json` | `docker_imageHistory` |
+| `docker import` | `docker_import` |
+| `docker context create` | `docker_contextCreate` |
+| `docker context ls --format json` | `docker_contextLs` |
+| `docker context inspect` | `docker_contextInspect` |
+| `docker context rm` | `docker_contextRm` |
+| `docker context use` | `docker_contextUse` |
+| `docker context show` | `docker_contextShow` |
+| `docker login --password-stdin` | `docker_login` |
+| `docker logout` | `docker_logout` |

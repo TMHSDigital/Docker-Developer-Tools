@@ -11,7 +11,7 @@
 <p align="center">
   <a href="https://github.com/TMHSDigital/Docker-Developer-Tools/actions/workflows/validate.yml"><img src="https://img.shields.io/github/actions/workflow/status/TMHSDigital/Docker-Developer-Tools/validate.yml?branch=main&label=CI" alt="CI" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-CC--BY--NC--ND--4.0-blue" alt="License" /></a>
-  <img src="https://img.shields.io/badge/version-0.8.0-green" alt="Version" />
+  <img src="https://img.shields.io/badge/version-0.9.0-green" alt="Version" />
   <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/v/@tmhs/docker-mcp" alt="npm" /></a>
   <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/dm/@tmhs/docker-mcp" alt="npm downloads" /></a>
   <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/unpacked-size/@tmhs/docker-mcp" alt="npm size" /></a>
@@ -22,7 +22,7 @@
 </p>
 
 <p align="center">
-  <strong>14 skills</strong>&nbsp;&bull;&nbsp;<strong>9 rules</strong>&nbsp;&bull;&nbsp;<strong>84 MCP tools</strong>
+  <strong>15 skills</strong>&nbsp;&bull;&nbsp;<strong>9 rules</strong>&nbsp;&bull;&nbsp;<strong>98 MCP tools</strong>
 </p>
 
 ---
@@ -50,7 +50,7 @@ flowchart LR
 ---
 
 <details>
-<summary><strong>14 Skills</strong> - on-demand Docker expertise</summary>
+<summary><strong>15 Skills</strong> - on-demand Docker expertise</summary>
 
 &nbsp;
 
@@ -70,6 +70,7 @@ flowchart LR
 | **Debugging** | `container-debugging` | Exec into containers, log analysis, health checks, process inspection |
 | **Advanced** | `docker-advanced-workflows` | Multi-stage pipelines, sidecar patterns, healthchecks, signal handling |
 | **Advanced** | `docker-multi-platform` | Multi-arch builds, buildx configuration, manifest lists, platform targeting |
+| **Advanced** | `docker-context-management` | Remote Docker hosts, SSH/TLS contexts, multi-host workflows |
 
 </details>
 
@@ -118,7 +119,7 @@ Add to your Cursor MCP config (`.cursor/mcp.json`):
 ```
 
 <details>
-<summary><strong>84 MCP Tools</strong> - full tool reference</summary>
+<summary><strong>98 MCP Tools</strong> - full tool reference</summary>
 
 &nbsp;
 
@@ -256,6 +257,40 @@ Add to your Cursor MCP config (`.cursor/mcp.json`):
 | `docker_manifestPush` | Push a manifest list to a registry |
 | `docker_manifestRm` | Remove local manifest lists |
 
+**Container Gaps** (4)
+
+| Tool | What It Does |
+|---|---|
+| `docker_diff` | Inspect filesystem changes in a container (added, changed, deleted files) |
+| `docker_export` | Export a container's filesystem as a tar archive |
+| `docker_port` | List port mappings or a specific mapping for a container |
+| `docker_rename` | Rename a Docker container |
+
+**Image Gaps** (2)
+
+| Tool | What It Does |
+|---|---|
+| `docker_imageHistory` | Show layer history of an image (commands, sizes, timestamps) |
+| `docker_import` | Import a tarball to create a Docker filesystem image |
+
+**Context Management** (6)
+
+| Tool | What It Does |
+|---|---|
+| `docker_contextCreate` | Create a Docker context for connecting to remote hosts |
+| `docker_contextLs` | List available Docker contexts |
+| `docker_contextInspect` | Display detailed information on a Docker context |
+| `docker_contextRm` | Remove one or more Docker contexts |
+| `docker_contextUse` | Set the current active Docker context |
+| `docker_contextShow` | Print the name of the current Docker context |
+
+**Registry Authentication** (2)
+
+| Tool | What It Does |
+|---|---|
+| `docker_login` | Authenticate to a Docker container registry |
+| `docker_logout` | Log out from a Docker container registry |
+
 </details>
 
 ---
@@ -314,6 +349,7 @@ Then add the JSON config from the [MCP Server section](#companion-docker-mcp-ser
 | `container-debugging` | "Show me the logs and processes inside my crashing container" |
 | `docker-advanced-workflows` | "Set up healthchecks and graceful shutdown for my Node.js container" |
 | `docker-multi-platform` | "Build my Go API image for both amd64 and arm64 with buildx" |
+| `docker-context-management` | "Set up a Docker context for my remote staging server via SSH" |
 
 </details>
 

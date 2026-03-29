@@ -2197,3 +2197,318 @@ describe("docker_composeTop input validation", () => {
     expect(result.projectDir).toBe("/project");
   });
 });
+
+// ---- v0.9.0 Container Gaps ----
+
+describe("docker_diff input validation", () => {
+  const schema = z.object({
+    containerId: z.string().min(1),
+  });
+
+  it("accepts valid containerId", () => {
+    const result = schema.parse({ containerId: "my-container" });
+    expect(result.containerId).toBe("my-container");
+  });
+
+  it("rejects empty containerId", () => {
+    expect(() => schema.parse({ containerId: "" })).toThrow();
+  });
+
+  it("rejects missing containerId", () => {
+    expect(() => schema.parse({})).toThrow();
+  });
+});
+
+describe("docker_export input validation", () => {
+  const schema = z.object({
+    containerId: z.string().min(1),
+    output: z.string().min(1),
+  });
+
+  it("accepts valid inputs", () => {
+    const result = schema.parse({ containerId: "abc", output: "/tmp/export.tar" });
+    expect(result.containerId).toBe("abc");
+    expect(result.output).toBe("/tmp/export.tar");
+  });
+
+  it("rejects empty containerId", () => {
+    expect(() => schema.parse({ containerId: "", output: "/tmp/out.tar" })).toThrow();
+  });
+
+  it("rejects empty output", () => {
+    expect(() => schema.parse({ containerId: "abc", output: "" })).toThrow();
+  });
+
+  it("rejects missing output", () => {
+    expect(() => schema.parse({ containerId: "abc" })).toThrow();
+  });
+});
+
+describe("docker_port input validation", () => {
+  const schema = z.object({
+    containerId: z.string().min(1),
+    privatePort: z.number().optional(),
+    protocol: z.enum(["tcp", "udp"]).optional(),
+  });
+
+  it("accepts containerId only", () => {
+    const result = schema.parse({ containerId: "web" });
+    expect(result.containerId).toBe("web");
+  });
+
+  it("accepts with privatePort and protocol", () => {
+    const result = schema.parse({ containerId: "web", privatePort: 80, protocol: "tcp" });
+    expect(result.privatePort).toBe(80);
+    expect(result.protocol).toBe("tcp");
+  });
+
+  it("rejects invalid protocol", () => {
+    expect(() => schema.parse({ containerId: "web", protocol: "sctp" })).toThrow();
+  });
+
+  it("rejects empty containerId", () => {
+    expect(() => schema.parse({ containerId: "" })).toThrow();
+  });
+});
+
+describe("docker_rename input validation", () => {
+  const schema = z.object({
+    containerId: z.string().min(1),
+    newName: z.string().min(1),
+  });
+
+  it("accepts valid inputs", () => {
+    const result = schema.parse({ containerId: "old-name", newName: "new-name" });
+    expect(result.containerId).toBe("old-name");
+    expect(result.newName).toBe("new-name");
+  });
+
+  it("rejects empty newName", () => {
+    expect(() => schema.parse({ containerId: "abc", newName: "" })).toThrow();
+  });
+
+  it("rejects missing fields", () => {
+    expect(() => schema.parse({ containerId: "abc" })).toThrow();
+  });
+});
+
+// ---- v0.9.0 Image Gaps ----
+
+describe("docker_imageHistory input validation", () => {
+  const schema = z.object({
+    image: z.string().min(1),
+    noTrunc: z.boolean().optional().default(false),
+    format: z.string().optional().default("json"),
+  });
+
+  it("accepts image only", () => {
+    const result = schema.parse({ image: "nginx:latest" });
+    expect(result.image).toBe("nginx:latest");
+    expect(result.noTrunc).toBe(false);
+    expect(result.format).toBe("json");
+  });
+
+  it("accepts all options", () => {
+    const result = schema.parse({ image: "nginx", noTrunc: true, format: "table" });
+    expect(result.noTrunc).toBe(true);
+    expect(result.format).toBe("table");
+  });
+
+  it("rejects empty image", () => {
+    expect(() => schema.parse({ image: "" })).toThrow();
+  });
+});
+
+describe("docker_import input validation", () => {
+  const schema = z.object({
+    source: z.string().min(1),
+    repository: z.string().optional(),
+    tag: z.string().optional(),
+    message: z.string().optional(),
+    changes: z.array(z.string()).optional(),
+  });
+
+  it("accepts source only", () => {
+    const result = schema.parse({ source: "/tmp/export.tar" });
+    expect(result.source).toBe("/tmp/export.tar");
+  });
+
+  it("accepts all options", () => {
+    const result = schema.parse({
+      source: "https://example.com/rootfs.tar",
+      repository: "myimage",
+      tag: "v1",
+      message: "Imported from backup",
+      changes: ["CMD /bin/bash", "ENV FOO=bar"],
+    });
+    expect(result.repository).toBe("myimage");
+    expect(result.tag).toBe("v1");
+    expect(result.changes).toHaveLength(2);
+  });
+
+  it("rejects empty source", () => {
+    expect(() => schema.parse({ source: "" })).toThrow();
+  });
+});
+
+// ---- v0.9.0 Context Management ----
+
+describe("docker_contextCreate input validation", () => {
+  const schema = z.object({
+    name: z.string().min(1),
+    description: z.string().optional(),
+    dockerEndpoint: z.string().min(1),
+    defaultStack: z.string().optional(),
+  });
+
+  it("accepts required fields", () => {
+    const result = schema.parse({ name: "prod", dockerEndpoint: "ssh://user@host" });
+    expect(result.name).toBe("prod");
+    expect(result.dockerEndpoint).toBe("ssh://user@host");
+  });
+
+  it("accepts all fields", () => {
+    const result = schema.parse({
+      name: "staging",
+      description: "Staging server",
+      dockerEndpoint: "tcp://host:2376",
+      defaultStack: "swarm",
+    });
+    expect(result.description).toBe("Staging server");
+  });
+
+  it("rejects empty name", () => {
+    expect(() => schema.parse({ name: "", dockerEndpoint: "ssh://h" })).toThrow();
+  });
+
+  it("rejects empty dockerEndpoint", () => {
+    expect(() => schema.parse({ name: "x", dockerEndpoint: "" })).toThrow();
+  });
+});
+
+describe("docker_contextLs input validation", () => {
+  const schema = z.object({
+    format: z.string().optional().default("json"),
+  });
+
+  it("accepts empty input", () => {
+    const result = schema.parse({});
+    expect(result.format).toBe("json");
+  });
+
+  it("accepts custom format", () => {
+    const result = schema.parse({ format: "table" });
+    expect(result.format).toBe("table");
+  });
+});
+
+describe("docker_contextInspect input validation", () => {
+  const schema = z.object({
+    name: z.string().min(1),
+  });
+
+  it("accepts valid name", () => {
+    const result = schema.parse({ name: "default" });
+    expect(result.name).toBe("default");
+  });
+
+  it("rejects empty name", () => {
+    expect(() => schema.parse({ name: "" })).toThrow();
+  });
+});
+
+describe("docker_contextRm input validation", () => {
+  const schema = z.object({
+    names: z.array(z.string()).min(1),
+    force: z.boolean().optional().default(false),
+  });
+
+  it("accepts single name", () => {
+    const result = schema.parse({ names: ["old-ctx"] });
+    expect(result.names).toEqual(["old-ctx"]);
+    expect(result.force).toBe(false);
+  });
+
+  it("accepts multiple names with force", () => {
+    const result = schema.parse({ names: ["a", "b"], force: true });
+    expect(result.names).toHaveLength(2);
+    expect(result.force).toBe(true);
+  });
+
+  it("rejects empty names array", () => {
+    expect(() => schema.parse({ names: [] })).toThrow();
+  });
+});
+
+describe("docker_contextUse input validation", () => {
+  const schema = z.object({
+    name: z.string().min(1),
+  });
+
+  it("accepts valid name", () => {
+    const result = schema.parse({ name: "prod" });
+    expect(result.name).toBe("prod");
+  });
+
+  it("rejects empty name", () => {
+    expect(() => schema.parse({ name: "" })).toThrow();
+  });
+});
+
+describe("docker_contextShow input validation", () => {
+  const schema = z.object({});
+
+  it("accepts empty input", () => {
+    const result = schema.parse({});
+    expect(result).toEqual({});
+  });
+});
+
+// ---- v0.9.0 Registry Authentication ----
+
+describe("docker_login input validation", () => {
+  const schema = z.object({
+    server: z.string().optional(),
+    username: z.string().min(1),
+    password: z.string().min(1),
+  });
+
+  it("accepts required fields", () => {
+    const result = schema.parse({ username: "user", password: "token" });
+    expect(result.username).toBe("user");
+    expect(result.password).toBe("token");
+  });
+
+  it("accepts with server", () => {
+    const result = schema.parse({ server: "ghcr.io", username: "user", password: "token" });
+    expect(result.server).toBe("ghcr.io");
+  });
+
+  it("rejects empty username", () => {
+    expect(() => schema.parse({ username: "", password: "token" })).toThrow();
+  });
+
+  it("rejects empty password", () => {
+    expect(() => schema.parse({ username: "user", password: "" })).toThrow();
+  });
+
+  it("rejects missing username", () => {
+    expect(() => schema.parse({ password: "token" })).toThrow();
+  });
+});
+
+describe("docker_logout input validation", () => {
+  const schema = z.object({
+    server: z.string().optional(),
+  });
+
+  it("accepts empty input", () => {
+    const result = schema.parse({});
+    expect(result.server).toBeUndefined();
+  });
+
+  it("accepts with server", () => {
+    const result = schema.parse({ server: "ghcr.io" });
+    expect(result.server).toBe("ghcr.io");
+  });
+});

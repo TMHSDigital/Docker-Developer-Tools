@@ -87,10 +87,24 @@ import { register as registerComposeScale } from "./tools/composeScale.js";
 import { register as registerComposeStart } from "./tools/composeStart.js";
 import { register as registerComposeStop } from "./tools/composeStop.js";
 import { register as registerComposeTop } from "./tools/composeTop.js";
+import { register as registerDiff } from "./tools/diff.js";
+import { register as registerExport } from "./tools/export.js";
+import { register as registerPort } from "./tools/port.js";
+import { register as registerRename } from "./tools/rename.js";
+import { register as registerImageHistory } from "./tools/imageHistory.js";
+import { register as registerImport } from "./tools/import.js";
+import { register as registerContextCreate } from "./tools/contextCreate.js";
+import { register as registerContextLs } from "./tools/contextLs.js";
+import { register as registerContextInspect } from "./tools/contextInspect.js";
+import { register as registerContextRm } from "./tools/contextRm.js";
+import { register as registerContextUse } from "./tools/contextUse.js";
+import { register as registerContextShow } from "./tools/contextShow.js";
+import { register as registerLogin } from "./tools/login.js";
+import { register as registerLogout } from "./tools/logout.js";
 
 const server = new McpServer({
   name: "docker-mcp",
-  version: "0.8.0",
+  version: "0.9.0",
 });
 
 registerListContainers(server);
@@ -177,6 +191,20 @@ registerComposeScale(server);
 registerComposeStart(server);
 registerComposeStop(server);
 registerComposeTop(server);
+registerDiff(server);
+registerExport(server);
+registerPort(server);
+registerRename(server);
+registerImageHistory(server);
+registerImport(server);
+registerContextCreate(server);
+registerContextLs(server);
+registerContextInspect(server);
+registerContextRm(server);
+registerContextUse(server);
+registerContextShow(server);
+registerLogin(server);
+registerLogout(server);
 
 async function main(): Promise<void> {
   const transport = new StdioServerTransport();

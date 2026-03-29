@@ -1,6 +1,6 @@
 # @tmhs/docker-mcp
 
-MCP server for Docker CLI integration - 84 tools for containers, images, complete Compose V2, volumes, networks, cleanup, observability, buildx, manifests, and system info.
+MCP server for Docker CLI integration - 98 tools for containers, images, complete Compose V2, volumes, networks, cleanup, observability, buildx, manifests, contexts, registry auth, and system info.
 
 Part of the [Docker Developer Tools](https://github.com/TMHSDigital/Docker-Developer-Tools) Cursor plugin.
 
@@ -48,7 +48,7 @@ Or if installed globally:
 }
 ```
 
-## Tools (84)
+## Tools (98)
 
 ### Read / Inspect (10)
 
@@ -183,6 +183,40 @@ Or if installed globally:
 | `docker_manifestAnnotate` | Add platform info to a manifest entry |
 | `docker_manifestPush` | Push a manifest list to a registry |
 | `docker_manifestRm` | Remove local manifest lists |
+
+### Container Gaps (4)
+
+| Tool | Description |
+|------|-------------|
+| `docker_diff` | Inspect filesystem changes in a container |
+| `docker_export` | Export container filesystem as tar |
+| `docker_port` | List port mappings for a container |
+| `docker_rename` | Rename a container |
+
+### Image Gaps (2)
+
+| Tool | Description |
+|------|-------------|
+| `docker_imageHistory` | Show layer history of an image |
+| `docker_import` | Import tarball as filesystem image |
+
+### Context Management (6)
+
+| Tool | Description |
+|------|-------------|
+| `docker_contextCreate` | Create a context for remote hosts |
+| `docker_contextLs` | List available contexts |
+| `docker_contextInspect` | Detailed context info |
+| `docker_contextRm` | Remove contexts |
+| `docker_contextUse` | Set active context |
+| `docker_contextShow` | Print current context name |
+
+### Registry Authentication (2)
+
+| Tool | Description |
+|------|-------------|
+| `docker_login` | Authenticate to a registry |
+| `docker_logout` | Log out from a registry |
 
 ## License
 

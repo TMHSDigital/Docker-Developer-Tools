@@ -11,7 +11,7 @@
 <p align="center">
   <a href="https://github.com/TMHSDigital/Docker-Developer-Tools/actions/workflows/validate.yml"><img src="https://img.shields.io/github/actions/workflow/status/TMHSDigital/Docker-Developer-Tools/validate.yml?branch=main&label=CI" alt="CI" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-CC--BY--NC--ND--4.0-blue" alt="License" /></a>
-  <img src="https://img.shields.io/badge/version-0.7.0-green" alt="Version" />
+  <img src="https://img.shields.io/badge/version-0.8.0-green" alt="Version" />
   <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/v/@tmhs/docker-mcp" alt="npm" /></a>
   <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/dm/@tmhs/docker-mcp" alt="npm downloads" /></a>
   <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/unpacked-size/@tmhs/docker-mcp" alt="npm size" /></a>
@@ -22,7 +22,7 @@
 </p>
 
 <p align="center">
-  <strong>14 skills</strong>&nbsp;&bull;&nbsp;<strong>8 rules</strong>&nbsp;&bull;&nbsp;<strong>68 MCP tools</strong>
+  <strong>14 skills</strong>&nbsp;&bull;&nbsp;<strong>9 rules</strong>&nbsp;&bull;&nbsp;<strong>84 MCP tools</strong>
 </p>
 
 ---
@@ -74,7 +74,7 @@ flowchart LR
 </details>
 
 <details>
-<summary><strong>8 Rules</strong> - automatic best-practice enforcement</summary>
+<summary><strong>9 Rules</strong> - automatic best-practice enforcement</summary>
 
 &nbsp;
 
@@ -88,6 +88,7 @@ flowchart LR
 | `docker-port-conflicts` | Dockerfiles, compose files | Flag commonly conflicting port mappings |
 | `docker-logging` | Dockerfiles, compose files | Flag missing logging drivers and log rotation |
 | `buildx-best-practices` | Dockerfiles, compose files | Flag multi-platform build issues, missing cache config, arch hardcoding |
+| `compose-scaling` | Compose files | Flag scaling blockers: container_name, fixed host ports, missing limits |
 
 </details>
 
@@ -117,7 +118,7 @@ Add to your Cursor MCP config (`.cursor/mcp.json`):
 ```
 
 <details>
-<summary><strong>68 MCP Tools</strong> - full tool reference</summary>
+<summary><strong>84 MCP Tools</strong> - full tool reference</summary>
 
 &nbsp;
 
@@ -164,7 +165,7 @@ Add to your Cursor MCP config (`.cursor/mcp.json`):
 | `docker_save` | Save one or more images to a tar archive |
 | `docker_load` | Load images from a tar archive |
 
-**Compose** (8)
+**Compose** (24)
 
 | Tool | What It Does |
 |---|---|
@@ -176,6 +177,22 @@ Add to your Cursor MCP config (`.cursor/mcp.json`):
 | `docker_composeRestart` | Restart Compose services |
 | `docker_composePull` | Pull images for Compose services |
 | `docker_composeExec` | Execute a command in a running Compose service container |
+| `docker_composeConfig` | Validate, resolve, and render a Compose file in canonical format |
+| `docker_composeCp` | Copy files between a Compose service container and local filesystem |
+| `docker_composeCreate` | Create service containers without starting them |
+| `docker_composeEvents` | Receive real-time events from Compose containers |
+| `docker_composeImages` | List images used by Compose service containers |
+| `docker_composeKill` | Force stop Compose service containers |
+| `docker_composeLs` | List running Compose projects |
+| `docker_composePause` | Pause Compose services |
+| `docker_composeUnpause` | Unpause Compose services |
+| `docker_composePort` | Print the public port for a Compose service port binding |
+| `docker_composeRm` | Remove stopped Compose service containers |
+| `docker_composeRun` | Run a one-off command on a Compose service |
+| `docker_composeScale` | Scale Compose services to a specified replica count |
+| `docker_composeStart` | Start existing Compose service containers |
+| `docker_composeStop` | Stop Compose services without removing containers |
+| `docker_composeTop` | Display running processes in Compose service containers |
 
 **Volume Management** (4)
 

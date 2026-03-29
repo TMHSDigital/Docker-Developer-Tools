@@ -1,0 +1,35 @@
+import { z } from "zod";
+import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { execDocker, errorResponse } from "../utils/docker-api.js";
+
+const inputSchema = {
+  file: z.string().optional().describe("Path to compose file"),
+  projectDir: z.string().optional().describe("Working directory for the compose project"),
+  services: z.array(z.string()).optional().describe("Specific services to remove (default: all stopped)"),
+  volumes: z.boolean().optional().default(false).describe("Remove anonymous volumes attached to containers"),
+  stop: z.boolean().optional().default(false).describe("Stop running containers before removing"),
+};
+
+export function register(server: McpServer): void {
+  server.tool(
+    "docker_composeRm",
+    "Remove stopped Docker Compose service containers",
+    inputSchema,
+    async (args) => {
+      try {
+        const cmdArgs = ["compose"];
+        if (args.file) cmdArgs.push("-f", args.file);
+        if (args.projectDir) cmdArgs.push("--project-directory", args.projectDir);
+        cmdArgs.push("rm", "-f");
+        if (args.stop) cmdArgs.push("--stop");
+        if (args.volumes) cmdArgs.push("-v");
+        if (args.services) cmdArgs.push(...args.services);
+
+        const output = await execDocker(cmdArgs);
+        return { content: [{ type: "text" as const, text: output.trim() || "Stopped containers removed" }] };
+      } catch (error) {
+        return errorResponse(error);
+      }
+    },
+  );
+}

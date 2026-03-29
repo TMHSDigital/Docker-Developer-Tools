@@ -1,6 +1,6 @@
 # @tmhs/docker-mcp
 
-MCP server for Docker CLI integration - 68 tools for containers, images, Compose, volumes, networks, cleanup, observability, buildx, manifests, and system info.
+MCP server for Docker CLI integration - 84 tools for containers, images, complete Compose V2, volumes, networks, cleanup, observability, buildx, manifests, and system info.
 
 Part of the [Docker Developer Tools](https://github.com/TMHSDigital/Docker-Developer-Tools) Cursor plugin.
 
@@ -48,7 +48,7 @@ Or if installed globally:
 }
 ```
 
-## Tools (68)
+## Tools (84)
 
 ### Read / Inspect (10)
 
@@ -93,7 +93,7 @@ Or if installed globally:
 | `docker_save` | Save images to tar archive |
 | `docker_load` | Load images from tar archive |
 
-### Compose (8)
+### Compose (24)
 
 | Tool | Description |
 |------|-------------|
@@ -105,6 +105,22 @@ Or if installed globally:
 | `docker_composeRestart` | Restart Compose services |
 | `docker_composePull` | Pull Compose service images |
 | `docker_composeExec` | Execute command in a Compose service |
+| `docker_composeConfig` | Validate and render a Compose file |
+| `docker_composeCp` | Copy files to/from a Compose service |
+| `docker_composeCreate` | Create containers without starting |
+| `docker_composeEvents` | Real-time Compose container events |
+| `docker_composeImages` | List images used by services |
+| `docker_composeKill` | Force stop service containers |
+| `docker_composeLs` | List Compose projects |
+| `docker_composePause` | Pause Compose services |
+| `docker_composeUnpause` | Unpause Compose services |
+| `docker_composePort` | Get public port for a binding |
+| `docker_composeRm` | Remove stopped service containers |
+| `docker_composeRun` | Run one-off command on a service |
+| `docker_composeScale` | Scale services to replica count |
+| `docker_composeStart` | Start existing service containers |
+| `docker_composeStop` | Stop services without removing |
+| `docker_composeTop` | Running processes per service |
 
 ### Volume Management (4)
 

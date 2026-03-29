@@ -1,0 +1,60 @@
+---
+description: Flag Docker Compose configurations that prevent or complicate service scaling
+alwaysApply: false
+globs:
+  - "**/docker-compose*.yml"
+  - "**/docker-compose*.yaml"
+  - "**/compose*.yml"
+  - "**/compose*.yaml"
+---
+
+# Compose Scaling
+
+Flag issues that prevent or complicate horizontal scaling of Docker Compose services.
+
+## Rules
+
+1. **`container_name` blocks scaling** - A service with `container_name` set cannot have more than one replica. Remove `container_name` or accept single-instance only.
+
+2. **Replicas without resource limits** - When `deploy.replicas` is set above 1, the service should also define `deploy.resources.limits` (cpu and memory) to prevent runaway resource consumption.
+
+3. **Host port conflicts** - Port mappings with a fixed host port (e.g. `8080:80`) prevent scaling beyond one replica. Use dynamic host ports (e.g. `80` without host binding) or a port range.
+
+4. **No load balancer for scaled services** - If a service is scaled (replicas > 1 or intended for `--scale`), the project should include a reverse proxy or load balancer (e.g. nginx, traefik, haproxy) to distribute traffic.
+
+5. **Missing restart policy** - Scaled services should use `restart: unless-stopped` or `restart: always` to handle container crashes automatically. `restart: "no"` is risky for scaled workloads.
+
+## Examples
+
+### Bad - container_name blocks scaling
+```yaml
+services:
+  web:
+    image: nginx
+    container_name: my-web-app  # Cannot scale beyond 1
+    ports:
+      - "8080:80"               # Fixed host port also blocks scaling
+```
+
+### Good - scalable configuration
+```yaml
+services:
+  web:
+    image: nginx
+    ports:
+      - "80"  # Random host port per replica
+    deploy:
+      replicas: 3
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+    restart: unless-stopped
+
+  proxy:
+    image: traefik:v3.0
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+```

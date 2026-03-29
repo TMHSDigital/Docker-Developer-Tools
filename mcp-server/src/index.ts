@@ -71,10 +71,26 @@ import { register as registerManifestInspect } from "./tools/manifestInspect.js"
 import { register as registerManifestAnnotate } from "./tools/manifestAnnotate.js";
 import { register as registerManifestPush } from "./tools/manifestPush.js";
 import { register as registerManifestRm } from "./tools/manifestRm.js";
+import { register as registerComposeConfig } from "./tools/composeConfig.js";
+import { register as registerComposeCp } from "./tools/composeCp.js";
+import { register as registerComposeCreate } from "./tools/composeCreate.js";
+import { register as registerComposeEvents } from "./tools/composeEvents.js";
+import { register as registerComposeImages } from "./tools/composeImages.js";
+import { register as registerComposeKill } from "./tools/composeKill.js";
+import { register as registerComposeLs } from "./tools/composeLs.js";
+import { register as registerComposePause } from "./tools/composePause.js";
+import { register as registerComposeUnpause } from "./tools/composeUnpause.js";
+import { register as registerComposePort } from "./tools/composePort.js";
+import { register as registerComposeRm } from "./tools/composeRm.js";
+import { register as registerComposeRun } from "./tools/composeRun.js";
+import { register as registerComposeScale } from "./tools/composeScale.js";
+import { register as registerComposeStart } from "./tools/composeStart.js";
+import { register as registerComposeStop } from "./tools/composeStop.js";
+import { register as registerComposeTop } from "./tools/composeTop.js";
 
 const server = new McpServer({
   name: "docker-mcp",
-  version: "0.7.0",
+  version: "0.8.0",
 });
 
 registerListContainers(server);
@@ -145,6 +161,22 @@ registerManifestInspect(server);
 registerManifestAnnotate(server);
 registerManifestPush(server);
 registerManifestRm(server);
+registerComposeConfig(server);
+registerComposeCp(server);
+registerComposeCreate(server);
+registerComposeEvents(server);
+registerComposeImages(server);
+registerComposeKill(server);
+registerComposeLs(server);
+registerComposePause(server);
+registerComposeUnpause(server);
+registerComposePort(server);
+registerComposeRm(server);
+registerComposeRun(server);
+registerComposeScale(server);
+registerComposeStart(server);
+registerComposeStop(server);
+registerComposeTop(server);
 
 async function main(): Promise<void> {
   const transport = new StdioServerTransport();

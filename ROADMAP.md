@@ -4,7 +4,7 @@
 
 ## Current Status
 
-**v0.7.0** - Buildx, Manifests, and Registry release with 14 skills, 8 rules, and 68 MCP tools.
+**v0.8.0** - Compose Completeness release with 14 skills, 9 rules, and 84 MCP tools.
 
 ## Release Plan
 
@@ -16,8 +16,8 @@
 | v0.4.0 | Compose | +8 | 36 | +1 | +1 | Released |
 | v0.5.0 | Volumes, Networks, Cleanup | +13 | 49 | +0 | +0 | Released |
 | v0.6.0 | Advanced and Observability | +6 | 55 | +1 | +1 | Released |
-| v0.7.0 | Buildx, Manifests, and Registry | +13 | 68 | +1 | +1 | (current) |
-| v0.8.0 | Compose Completeness | +16 | 84 | +0 | +1 | Planned |
+| v0.7.0 | Buildx, Manifests, and Registry | +13 | 68 | +1 | +1 | Released |
+| v0.8.0 | Compose Completeness | +16 | 84 | +0 | +1 | (current) |
 | v0.9.0 | Container/Image Gaps, Context, Auth | +14 | 98 | +1 | +0 | Planned |
 | v0.10.0 | Swarm Orchestration | +24 | 122 | +1 | +1 | Planned |
 | v0.11.0 | Swarm Stacks, Configs, Secrets, Trust | +18 | 140 | +1 | +0 | Planned |
@@ -403,7 +403,8 @@ All destructive MCP tools (`rm`, `rmi`, `prune`, `kill`, `down`, `leave`) will:
 - [x] Comprehensive roadmap rewrite with ~150 planned MCP tools
 - [x] 13 buildx and manifest tools (buildxBuild/Ls/Create/Rm/Inspect/Use/Imagetools, builderPrune, manifestCreate/Inspect/Annotate/Push/Rm)
 - [x] 14 skills covering Docker workflows including multi-platform builds
-- [x] 8 rules including buildx best practices
+- [x] 16 compose completeness tools (composeConfig/Cp/Create/Events/Images/Kill/Ls/Pause/Unpause/Port/Rm/Run/Scale/Start/Stop/Top)
+- [x] 9 rules including buildx best practices and compose scaling
 - [x] 8 image and build tools (pull, push, build, tag, rmi, commit, save, load)
 - [x] 8 compose tools (composeUp, composeDown, composePs, composeLogs, composeBuild, composeRestart, composePull, composeExec)
 - [x] 13 volume, network, and cleanup tools (volumeCreate/Rm/Inspect/Prune, networkCreate/Rm/Connect/Disconnect/Inspect/Prune, systemPrune, containerPrune, imagePrune)

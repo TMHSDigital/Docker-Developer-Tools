@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Docker Developer Tools - Cursor Plugin</title>
-<meta name="description" content="Expert Docker workflows inside Cursor IDE. 14 skills, 8 rules, 68 MCP tools.">
+<meta name="description" content="Expert Docker workflows inside Cursor IDE. 14 skills, 9 rules, 84 MCP tools.">
 <meta name="theme-color" content="#0db7ed">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Docker Developer Tools - Cursor Plugin">
-<meta property="og:description" content="Expert Docker workflows inside Cursor IDE. 14 skills, 8 rules, 68 MCP tools.">
+<meta property="og:description" content="Expert Docker workflows inside Cursor IDE. 14 skills, 9 rules, 84 MCP tools.">
 <meta property="og:image" content="docs/assets/og-card.jpg">
 <meta property="og:url" content="https://tmhsdigital.github.io/Docker-Developer-Tools/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -241,7 +241,7 @@ section{padding:72px 0}
   <h1><span>Docker</span> Developer Tools</h1>
   <p class="tagline">Expert Docker workflows, live container data, and real-time linting - all inside Cursor IDE.</p>
   <div class="pills">
-    <span class="pill blue">v0.7.0</span>
+    <span class="pill blue">v0.8.0</span>
     <span class="pill">CC BY-NC-ND 4.0</span>
     <span class="pill">Cursor Plugin</span>
   </div>
@@ -255,11 +255,11 @@ section{padding:72px 0}
       <div class="stat-label">Skills</div>
     </div>
     <div class="stat-card">
-      <div class="stat-number" data-target="8">0</div>
+      <div class="stat-number" data-target="9">0</div>
       <div class="stat-label">Rules</div>
     </div>
     <div class="stat-card">
-      <div class="stat-number" data-target="68">0</div>
+      <div class="stat-number" data-target="84">0</div>
       <div class="stat-label">MCP Tools</div>
     </div>
   </div>
@@ -442,7 +442,7 @@ section{padding:72px 0}
 <!-- RULES GRID -->
 <section id="rules" style="background:var(--surface)">
   <div class="container">
-    <h2 class="section-title reveal">8 Always-On Rules</h2>
+    <h2 class="section-title reveal">9 Always-On Rules</h2>
     <p class="section-subtitle reveal">Automatic linting and guardrails that catch issues before they ship.</p>
     <div class="rules-grid">
       <div class="rule-card reveal">
@@ -485,6 +485,11 @@ section{padding:72px 0}
         <span class="rule-scope">Dockerfiles, compose files</span>
         <p>Flags multi-platform build issues, missing cache configuration, and architecture-specific hardcoding.</p>
       </div>
+      <div class="rule-card reveal">
+        <h3><span class="rule-icon">&#9878;</span> compose-scaling</h3>
+        <span class="rule-scope">**/docker-compose*.yml</span>
+        <p>Flags scaling blockers: container_name, fixed host ports, missing resource limits, missing restart policy.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -492,8 +497,8 @@ section{padding:72px 0}
 <!-- MCP TOOLS TABLE -->
 <section id="mcp-tools">
   <div class="container">
-    <h2 class="section-title reveal">68 MCP Tools</h2>
-    <p class="section-subtitle reveal">Live Docker data, container lifecycle, image pipeline, Compose V2, volume/network CRUD, resource cleanup, buildx multi-platform builds, and manifest management via the companion MCP server.</p>
+    <h2 class="section-title reveal">84 MCP Tools</h2>
+    <p class="section-subtitle reveal">Live Docker data, container lifecycle, image pipeline, complete Compose V2, volume/network CRUD, resource cleanup, buildx multi-platform builds, and manifest management via the companion MCP server.</p>
     <div class="tools-table-wrap reveal">
       <table class="tools-table">
         <thead>
@@ -539,6 +544,22 @@ section{padding:72px 0}
           <tr><td class="tool-name">docker_composeRestart</td><td>Restart Compose services</td></tr>
           <tr><td class="tool-name">docker_composePull</td><td>Pull images for Compose services</td></tr>
           <tr><td class="tool-name">docker_composeExec</td><td>Execute a command in a running Compose service container</td></tr>
+          <tr><td class="tool-name">docker_composeConfig</td><td>Validate, resolve, and render a Compose file</td></tr>
+          <tr><td class="tool-name">docker_composeCp</td><td>Copy files to/from a Compose service container</td></tr>
+          <tr><td class="tool-name">docker_composeCreate</td><td>Create service containers without starting</td></tr>
+          <tr><td class="tool-name">docker_composeEvents</td><td>Real-time events from Compose containers</td></tr>
+          <tr><td class="tool-name">docker_composeImages</td><td>List images used by Compose services</td></tr>
+          <tr><td class="tool-name">docker_composeKill</td><td>Force stop Compose service containers</td></tr>
+          <tr><td class="tool-name">docker_composeLs</td><td>List running Compose projects</td></tr>
+          <tr><td class="tool-name">docker_composePause</td><td>Pause Compose services</td></tr>
+          <tr><td class="tool-name">docker_composeUnpause</td><td>Unpause Compose services</td></tr>
+          <tr><td class="tool-name">docker_composePort</td><td>Print public port for a service binding</td></tr>
+          <tr><td class="tool-name">docker_composeRm</td><td>Remove stopped Compose service containers</td></tr>
+          <tr><td class="tool-name">docker_composeRun</td><td>Run one-off command on a Compose service</td></tr>
+          <tr><td class="tool-name">docker_composeScale</td><td>Scale Compose services to a replica count</td></tr>
+          <tr><td class="tool-name">docker_composeStart</td><td>Start existing Compose service containers</td></tr>
+          <tr><td class="tool-name">docker_composeStop</td><td>Stop Compose services without removing</td></tr>
+          <tr><td class="tool-name">docker_composeTop</td><td>Running processes in Compose service containers</td></tr>
           <tr><td colspan="2" style="padding:20px 16px 10px;font-weight:700;color:var(--blue);font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;border-bottom:2px solid var(--border)">Volume Management</td></tr>
           <tr><td class="tool-name">docker_volumeCreate</td><td>Create a named volume with optional driver and labels</td></tr>
           <tr><td class="tool-name">docker_volumeRm</td><td>Remove one or more volumes</td></tr>
@@ -715,15 +736,15 @@ section{padding:72px 0}
         <p>Advanced and Observability - 6 tools: cp, stats, top, events, update, wait. Live monitoring and file transfer.</p>
       </div>
 
-      <div class="timeline-item current">
+      <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <h3>v0.7.0 <span class="tag current-tag">Current</span></h3>
+        <h3>v0.7.0 <span class="tag upcoming-tag">Released</span></h3>
         <p>Buildx, Manifests, and Registry - 13 tools: buildx build/inspect/use, manifest create/inspect/annotate/push, builder prune.</p>
       </div>
 
-      <div class="timeline-item">
+      <div class="timeline-item current">
         <div class="timeline-dot"></div>
-        <h3>v0.8.0 <span class="tag upcoming-tag">Planned</span></h3>
+        <h3>v0.8.0 <span class="tag current-tag">Current</span></h3>
         <p>Compose Completeness - 16 tools: config, cp, create, events, images, kill, ls, pause/unpause, port, rm, run, scale, start, stop, top.</p>
       </div>
 

@@ -5,6 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.0] - 2026-03-29
+
+### Added
+
+#### MCP Server - Compose Completeness (+16, total 84)
+- `docker_composeConfig` - validate, resolve, and render a Compose file in canonical format (yaml/json output)
+- `docker_composeCp` - copy files between a Compose service container and the local filesystem (archive, index options)
+- `docker_composeCreate` - create Compose service containers without starting them (build, force-recreate, pull policy)
+- `docker_composeEvents` - receive real-time events from Compose containers (JSON format, service filter)
+- `docker_composeImages` - list images used by Compose service containers (JSON format)
+- `docker_composeKill` - force stop Compose service containers with configurable signal
+- `docker_composeLs` - list running Compose projects (all, filter options)
+- `docker_composePause` - pause Compose services
+- `docker_composeUnpause` - unpause Compose services
+- `docker_composePort` - print the public port for a Compose service port binding (tcp/udp protocol)
+- `docker_composeRm` - remove stopped Compose service containers (stop, volumes options)
+- `docker_composeRun` - run a one-off command on a Compose service (rm, detach, user, env, workdir, no-deps)
+- `docker_composeScale` - scale Compose services to a specified replica count via up --scale
+- `docker_composeStart` - start existing Compose service containers
+- `docker_composeStop` - stop Compose services without removing containers (timeout option)
+- `docker_composeTop` - display running processes in Compose service containers
+
+#### Plugin
+- `compose-scaling` rule - flag scaling blockers: container_name preventing replicas, fixed host ports, missing resource limits, missing restart policy
+
+---
+
 ## [0.7.0] - 2026-03-29
 
 ### Added
@@ -207,6 +234,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Python test suite: plugin manifest, skills, rules, docs consistency, internal links, roadmap
 - Vitest test suite: error classes, docker-api utilities, input validation
 
+[0.8.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.8.0
 [0.7.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.7.0
 [0.6.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.6.0
 [0.5.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.5.0

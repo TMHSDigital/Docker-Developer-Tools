@@ -1760,3 +1760,440 @@ describe("docker_manifestRm input validation", () => {
     expect(result.names).toHaveLength(2);
   });
 });
+
+// ── v0.8.0 Compose Completeness ──
+
+describe("docker_composeConfig input validation", () => {
+  const schema = z.object({
+    file: z.string().optional(),
+    projectDir: z.string().optional(),
+    format: z.enum(["yaml", "json"]).optional(),
+    services: z.array(z.string()).optional(),
+  });
+
+  it("accepts empty input", () => {
+    const result = schema.parse({});
+    expect(result).toEqual({});
+  });
+
+  it("accepts format option", () => {
+    const result = schema.parse({ format: "json" });
+    expect(result.format).toBe("json");
+  });
+
+  it("rejects invalid format", () => {
+    expect(() => schema.parse({ format: "xml" })).toThrow();
+  });
+
+  it("accepts services filter", () => {
+    const result = schema.parse({ services: ["web", "db"] });
+    expect(result.services).toEqual(["web", "db"]);
+  });
+
+  it("accepts file and projectDir", () => {
+    const result = schema.parse({ file: "docker-compose.prod.yml", projectDir: "/app" });
+    expect(result.file).toBe("docker-compose.prod.yml");
+    expect(result.projectDir).toBe("/app");
+  });
+});
+
+describe("docker_composeCp input validation", () => {
+  const schema = z.object({
+    file: z.string().optional(),
+    projectDir: z.string().optional(),
+    source: z.string().min(1),
+    destination: z.string().min(1),
+    archive: z.boolean().optional().default(false),
+    index: z.number().optional(),
+  });
+
+  it("requires source and destination", () => {
+    expect(() => schema.parse({})).toThrow();
+    expect(() => schema.parse({ source: "web:/app" })).toThrow();
+  });
+
+  it("rejects empty source", () => {
+    expect(() => schema.parse({ source: "", destination: "./local" })).toThrow();
+  });
+
+  it("accepts valid copy spec", () => {
+    const result = schema.parse({ source: "web:/app/data", destination: "./backup" });
+    expect(result.source).toBe("web:/app/data");
+    expect(result.archive).toBe(false);
+  });
+
+  it("accepts archive and index", () => {
+    const result = schema.parse({ source: "./file.txt", destination: "web:/tmp", archive: true, index: 2 });
+    expect(result.archive).toBe(true);
+    expect(result.index).toBe(2);
+  });
+});
+
+describe("docker_composeCreate input validation", () => {
+  const schema = z.object({
+    file: z.string().optional(),
+    projectDir: z.string().optional(),
+    services: z.array(z.string()).optional(),
+    build: z.boolean().optional().default(false),
+    forceRecreate: z.boolean().optional().default(false),
+    pull: z.string().optional(),
+  });
+
+  it("accepts empty input", () => {
+    const result = schema.parse({});
+    expect(result.build).toBe(false);
+    expect(result.forceRecreate).toBe(false);
+  });
+
+  it("accepts build and forceRecreate", () => {
+    const result = schema.parse({ build: true, forceRecreate: true });
+    expect(result.build).toBe(true);
+    expect(result.forceRecreate).toBe(true);
+  });
+
+  it("accepts pull policy", () => {
+    const result = schema.parse({ pull: "always" });
+    expect(result.pull).toBe("always");
+  });
+
+  it("accepts services list", () => {
+    const result = schema.parse({ services: ["web", "api"] });
+    expect(result.services).toEqual(["web", "api"]);
+  });
+});
+
+describe("docker_composeEvents input validation", () => {
+  const schema = z.object({
+    file: z.string().optional(),
+    projectDir: z.string().optional(),
+    services: z.array(z.string()).optional(),
+  });
+
+  it("accepts empty input", () => {
+    const result = schema.parse({});
+    expect(result).toEqual({});
+  });
+
+  it("accepts services filter", () => {
+    const result = schema.parse({ services: ["web"] });
+    expect(result.services).toEqual(["web"]);
+  });
+
+  it("accepts file option", () => {
+    const result = schema.parse({ file: "compose.yml" });
+    expect(result.file).toBe("compose.yml");
+  });
+});
+
+describe("docker_composeImages input validation", () => {
+  const schema = z.object({
+    file: z.string().optional(),
+    projectDir: z.string().optional(),
+    format: z.string().optional().default("json"),
+  });
+
+  it("defaults format to json", () => {
+    const result = schema.parse({});
+    expect(result.format).toBe("json");
+  });
+
+  it("accepts custom format", () => {
+    const result = schema.parse({ format: "table" });
+    expect(result.format).toBe("table");
+  });
+
+  it("accepts file option", () => {
+    const result = schema.parse({ file: "docker-compose.yml" });
+    expect(result.file).toBe("docker-compose.yml");
+  });
+});
+
+describe("docker_composeKill input validation", () => {
+  const schema = z.object({
+    file: z.string().optional(),
+    projectDir: z.string().optional(),
+    services: z.array(z.string()).optional(),
+    signal: z.string().optional(),
+  });
+
+  it("accepts empty input", () => {
+    const result = schema.parse({});
+    expect(result).toEqual({});
+  });
+
+  it("accepts signal option", () => {
+    const result = schema.parse({ signal: "SIGKILL" });
+    expect(result.signal).toBe("SIGKILL");
+  });
+
+  it("accepts services with signal", () => {
+    const result = schema.parse({ services: ["web"], signal: "SIGTERM" });
+    expect(result.services).toEqual(["web"]);
+    expect(result.signal).toBe("SIGTERM");
+  });
+});
+
+describe("docker_composeLs input validation", () => {
+  const schema = z.object({
+    all: z.boolean().optional().default(false),
+    format: z.string().optional().default("json"),
+    filter: z.string().optional(),
+  });
+
+  it("defaults all to false and format to json", () => {
+    const result = schema.parse({});
+    expect(result.all).toBe(false);
+    expect(result.format).toBe("json");
+  });
+
+  it("accepts all flag", () => {
+    const result = schema.parse({ all: true });
+    expect(result.all).toBe(true);
+  });
+
+  it("accepts filter", () => {
+    const result = schema.parse({ filter: "status=running" });
+    expect(result.filter).toBe("status=running");
+  });
+});
+
+describe("docker_composePause input validation", () => {
+  const schema = z.object({
+    file: z.string().optional(),
+    projectDir: z.string().optional(),
+    services: z.array(z.string()).optional(),
+  });
+
+  it("accepts empty input", () => {
+    const result = schema.parse({});
+    expect(result).toEqual({});
+  });
+
+  it("accepts services list", () => {
+    const result = schema.parse({ services: ["web", "db"] });
+    expect(result.services).toEqual(["web", "db"]);
+  });
+});
+
+describe("docker_composeUnpause input validation", () => {
+  const schema = z.object({
+    file: z.string().optional(),
+    projectDir: z.string().optional(),
+    services: z.array(z.string()).optional(),
+  });
+
+  it("accepts empty input", () => {
+    const result = schema.parse({});
+    expect(result).toEqual({});
+  });
+
+  it("accepts services list", () => {
+    const result = schema.parse({ services: ["web"] });
+    expect(result.services).toEqual(["web"]);
+  });
+});
+
+describe("docker_composePort input validation", () => {
+  const schema = z.object({
+    file: z.string().optional(),
+    projectDir: z.string().optional(),
+    service: z.string().min(1),
+    privatePort: z.number(),
+    protocol: z.enum(["tcp", "udp"]).optional(),
+  });
+
+  it("requires service and privatePort", () => {
+    expect(() => schema.parse({})).toThrow();
+    expect(() => schema.parse({ service: "web" })).toThrow();
+  });
+
+  it("rejects empty service", () => {
+    expect(() => schema.parse({ service: "", privatePort: 80 })).toThrow();
+  });
+
+  it("accepts valid input", () => {
+    const result = schema.parse({ service: "web", privatePort: 80 });
+    expect(result.service).toBe("web");
+    expect(result.privatePort).toBe(80);
+  });
+
+  it("accepts protocol option", () => {
+    const result = schema.parse({ service: "web", privatePort: 53, protocol: "udp" });
+    expect(result.protocol).toBe("udp");
+  });
+
+  it("rejects invalid protocol", () => {
+    expect(() => schema.parse({ service: "web", privatePort: 80, protocol: "sctp" })).toThrow();
+  });
+});
+
+describe("docker_composeRm input validation", () => {
+  const schema = z.object({
+    file: z.string().optional(),
+    projectDir: z.string().optional(),
+    services: z.array(z.string()).optional(),
+    volumes: z.boolean().optional().default(false),
+    stop: z.boolean().optional().default(false),
+  });
+
+  it("defaults volumes and stop to false", () => {
+    const result = schema.parse({});
+    expect(result.volumes).toBe(false);
+    expect(result.stop).toBe(false);
+  });
+
+  it("accepts stop and volumes flags", () => {
+    const result = schema.parse({ stop: true, volumes: true });
+    expect(result.stop).toBe(true);
+    expect(result.volumes).toBe(true);
+  });
+
+  it("accepts services list", () => {
+    const result = schema.parse({ services: ["web"] });
+    expect(result.services).toEqual(["web"]);
+  });
+});
+
+describe("docker_composeRun input validation", () => {
+  const schema = z.object({
+    file: z.string().optional(),
+    projectDir: z.string().optional(),
+    service: z.string().min(1),
+    command: z.array(z.string()).optional(),
+    rm: z.boolean().optional().default(true),
+    detach: z.boolean().optional().default(false),
+    user: z.string().optional(),
+    env: z.array(z.string()).optional(),
+    workdir: z.string().optional(),
+    noDeps: z.boolean().optional().default(false),
+  });
+
+  it("requires service", () => {
+    expect(() => schema.parse({})).toThrow();
+  });
+
+  it("rejects empty service", () => {
+    expect(() => schema.parse({ service: "" })).toThrow();
+  });
+
+  it("defaults rm to true, detach to false, noDeps to false", () => {
+    const result = schema.parse({ service: "web" });
+    expect(result.rm).toBe(true);
+    expect(result.detach).toBe(false);
+    expect(result.noDeps).toBe(false);
+  });
+
+  it("accepts full options", () => {
+    const result = schema.parse({
+      service: "web",
+      command: ["sh", "-c", "echo hello"],
+      user: "root",
+      env: ["FOO=bar"],
+      workdir: "/app",
+      noDeps: true,
+      detach: true,
+    });
+    expect(result.command).toEqual(["sh", "-c", "echo hello"]);
+    expect(result.user).toBe("root");
+    expect(result.env).toEqual(["FOO=bar"]);
+    expect(result.noDeps).toBe(true);
+  });
+});
+
+describe("docker_composeScale input validation", () => {
+  const schema = z.object({
+    file: z.string().optional(),
+    projectDir: z.string().optional(),
+    scales: z.array(z.string()).min(1),
+  });
+
+  it("requires scales", () => {
+    expect(() => schema.parse({})).toThrow();
+  });
+
+  it("rejects empty scales array", () => {
+    expect(() => schema.parse({ scales: [] })).toThrow();
+  });
+
+  it("accepts single scale spec", () => {
+    const result = schema.parse({ scales: ["web=3"] });
+    expect(result.scales).toEqual(["web=3"]);
+  });
+
+  it("accepts multiple scale specs", () => {
+    const result = schema.parse({ scales: ["web=3", "worker=2"] });
+    expect(result.scales).toHaveLength(2);
+  });
+
+  it("accepts file option with scales", () => {
+    const result = schema.parse({ file: "compose.yml", scales: ["api=5"] });
+    expect(result.file).toBe("compose.yml");
+  });
+});
+
+describe("docker_composeStart input validation", () => {
+  const schema = z.object({
+    file: z.string().optional(),
+    projectDir: z.string().optional(),
+    services: z.array(z.string()).optional(),
+  });
+
+  it("accepts empty input", () => {
+    const result = schema.parse({});
+    expect(result).toEqual({});
+  });
+
+  it("accepts services list", () => {
+    const result = schema.parse({ services: ["web", "db"] });
+    expect(result.services).toEqual(["web", "db"]);
+  });
+});
+
+describe("docker_composeStop input validation", () => {
+  const schema = z.object({
+    file: z.string().optional(),
+    projectDir: z.string().optional(),
+    services: z.array(z.string()).optional(),
+    timeout: z.number().optional(),
+  });
+
+  it("accepts empty input", () => {
+    const result = schema.parse({});
+    expect(result).toEqual({});
+  });
+
+  it("accepts timeout", () => {
+    const result = schema.parse({ timeout: 30 });
+    expect(result.timeout).toBe(30);
+  });
+
+  it("accepts services with timeout", () => {
+    const result = schema.parse({ services: ["web"], timeout: 10 });
+    expect(result.services).toEqual(["web"]);
+    expect(result.timeout).toBe(10);
+  });
+});
+
+describe("docker_composeTop input validation", () => {
+  const schema = z.object({
+    file: z.string().optional(),
+    projectDir: z.string().optional(),
+    services: z.array(z.string()).optional(),
+  });
+
+  it("accepts empty input", () => {
+    const result = schema.parse({});
+    expect(result).toEqual({});
+  });
+
+  it("accepts services list", () => {
+    const result = schema.parse({ services: ["web", "worker"] });
+    expect(result.services).toEqual(["web", "worker"]);
+  });
+
+  it("accepts file and projectDir", () => {
+    const result = schema.parse({ file: "compose.yml", projectDir: "/project" });
+    expect(result.file).toBe("compose.yml");
+    expect(result.projectDir).toBe("/project");
+  });
+});

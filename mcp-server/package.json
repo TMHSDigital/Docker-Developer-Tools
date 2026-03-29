@@ -1,7 +1,7 @@
 {
   "name": "@tmhs/docker-mcp",
-  "version": "0.7.0",
-  "description": "MCP server for Docker CLI integration - 68 tools for containers, images, compose, volumes, networks, cleanup, observability, buildx, manifests, and system info. Full lifecycle, image pipeline, Compose V2, volume/network CRUD, resource pruning, live monitoring, multi-platform builds, and manifest management.",
+  "version": "0.8.0",
+  "description": "MCP server for Docker CLI integration - 84 tools for containers, images, compose, volumes, networks, cleanup, observability, buildx, manifests, and system info. Full lifecycle, image pipeline, complete Compose V2, volume/network CRUD, resource pruning, live monitoring, multi-platform builds, and manifest management.",
   "type": "module",
   "main": "dist/index.js",
   "bin": {

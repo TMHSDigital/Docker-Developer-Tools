@@ -4,11 +4,11 @@ Project documentation for Claude Code and AI assistants working on this reposito
 
 ## Project Overview
 
-Docker Developer Tools is a Cursor IDE plugin that integrates Docker and container workflows into Cursor's AI chat. It includes 14 skills, 8 rules, and a companion MCP server with 68 tools for live Docker CLI integration.
+Docker Developer Tools is a Cursor IDE plugin that integrates Docker and container workflows into Cursor's AI chat. It includes 14 skills, 9 rules, and a companion MCP server with 84 tools for live Docker CLI integration.
 
 This is a monorepo - the Cursor plugin (skills and rules) and the companion MCP server live in the same repository. Docker's API is local (Docker Engine socket / CLI), so one repo is simpler for users to install and maintain.
 
-**Version:** 0.7.0
+**Version:** 0.8.0
 **License:** CC-BY-NC-ND-4.0
 **Author:** TMHSDigital
 
@@ -54,7 +54,7 @@ Docker-Developer-Tools/
 | `docker-advanced-workflows` | Multi-stage pipelines, sidecar patterns, healthchecks, signal handling |
 | `docker-multi-platform` | Multi-arch builds, buildx configuration, manifest lists, platform targeting |
 
-## Rules (8)
+## Rules (9)
 
 | Rule | Scope | Description |
 |------|-------|-------------|
@@ -66,8 +66,9 @@ Docker-Developer-Tools/
 | `docker-port-conflicts` | Dockerfiles, compose files | Flag port conflicts |
 | `docker-logging` | Dockerfiles, compose files | Flag missing logging drivers and log rotation |
 | `buildx-best-practices` | Dockerfiles, compose files | Flag multi-platform build issues, missing cache config |
+| `compose-scaling` | Compose files | Flag scaling blockers: container_name, fixed host ports, missing limits |
 
-## MCP Server (68 tools)
+## MCP Server (84 tools)
 
 The MCP server talks to Docker via CLI exec (`docker` commands) rather than the Docker Engine REST API. It uses stdio transport and requires `docker` to be available on PATH.
 
@@ -114,7 +115,7 @@ The MCP server talks to Docker via CLI exec (`docker` commands) rather than the 
 | `docker_save` | Save images to a tar archive |
 | `docker_load` | Load images from a tar archive |
 
-### Compose (8)
+### Compose (24)
 
 | Tool | Description |
 |------|-------------|
@@ -126,6 +127,22 @@ The MCP server talks to Docker via CLI exec (`docker` commands) rather than the 
 | `docker_composeRestart` | Restart Compose services |
 | `docker_composePull` | Pull images for Compose services |
 | `docker_composeExec` | Execute a command in a running Compose service |
+| `docker_composeConfig` | Validate, resolve, and render a Compose file |
+| `docker_composeCp` | Copy files between service container and host |
+| `docker_composeCreate` | Create service containers without starting |
+| `docker_composeEvents` | Real-time events from Compose containers |
+| `docker_composeImages` | List images used by Compose services |
+| `docker_composeKill` | Force stop Compose service containers |
+| `docker_composeLs` | List running Compose projects |
+| `docker_composePause` | Pause Compose services |
+| `docker_composeUnpause` | Unpause Compose services |
+| `docker_composePort` | Print public port for a service binding |
+| `docker_composeRm` | Remove stopped service containers |
+| `docker_composeRun` | Run a one-off command on a service |
+| `docker_composeScale` | Scale services to a replica count |
+| `docker_composeStart` | Start existing service containers |
+| `docker_composeStop` | Stop services without removing |
+| `docker_composeTop` | Running processes per service |
 
 ### Volume Management (4)
 
@@ -294,6 +311,22 @@ Full checklist with copy-paste commands: [CONTRIBUTING.md - Release Checklist](C
 | `docker compose restart` | `docker_composeRestart` |
 | `docker compose pull` | `docker_composePull` |
 | `docker compose exec` | `docker_composeExec` |
+| `docker compose config` | `docker_composeConfig` |
+| `docker compose cp` | `docker_composeCp` |
+| `docker compose create` | `docker_composeCreate` |
+| `docker compose events --json` | `docker_composeEvents` |
+| `docker compose images --format json` | `docker_composeImages` |
+| `docker compose kill` | `docker_composeKill` |
+| `docker compose ls --format json` | `docker_composeLs` |
+| `docker compose pause` | `docker_composePause` |
+| `docker compose unpause` | `docker_composeUnpause` |
+| `docker compose port` | `docker_composePort` |
+| `docker compose rm -f` | `docker_composeRm` |
+| `docker compose run --no-TTY` | `docker_composeRun` |
+| `docker compose up -d --scale` | `docker_composeScale` |
+| `docker compose start` | `docker_composeStart` |
+| `docker compose stop` | `docker_composeStop` |
+| `docker compose top` | `docker_composeTop` |
 | `docker volume create` | `docker_volumeCreate` |
 | `docker volume rm` | `docker_volumeRm` |
 | `docker volume inspect` | `docker_volumeInspect` |

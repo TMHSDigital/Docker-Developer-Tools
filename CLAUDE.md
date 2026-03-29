@@ -4,11 +4,11 @@ Project documentation for Claude Code and AI assistants working on this reposito
 
 ## Project Overview
 
-Docker Developer Tools is a Cursor IDE plugin that integrates Docker and container workflows into Cursor's AI chat. It includes 12 skills, 6 rules, and a companion MCP server with 20 tools for live Docker CLI integration.
+Docker Developer Tools is a Cursor IDE plugin that integrates Docker and container workflows into Cursor's AI chat. It includes 12 skills, 6 rules, and a companion MCP server with 28 tools for live Docker CLI integration.
 
 This is a monorepo - the Cursor plugin (skills and rules) and the companion MCP server live in the same repository. Docker's API is local (Docker Engine socket / CLI), so one repo is simpler for users to install and maintain.
 
-**Version:** 0.2.0
+**Version:** 0.3.0
 **License:** CC-BY-NC-ND-4.0
 **Author:** TMHSDigital
 
@@ -63,7 +63,7 @@ Docker-Developer-Tools/
 | `docker-image-pinning` | Dockerfiles, compose files | Flag unpinned image tags |
 | `docker-port-conflicts` | Dockerfiles, compose files | Flag port conflicts |
 
-## MCP Server (20 tools)
+## MCP Server (28 tools)
 
 The MCP server talks to Docker via CLI exec (`docker` commands) rather than the Docker Engine REST API. It uses stdio transport and requires `docker` to be available on PATH.
 
@@ -96,6 +96,19 @@ The MCP server talks to Docker via CLI exec (`docker` commands) rather than the 
 | `docker_pause` | Pause all processes in a container |
 | `docker_unpause` | Unpause a paused container |
 | `docker_exec` | Execute a command in a running container |
+
+### Image and Build (8)
+
+| Tool | Description |
+|------|-------------|
+| `docker_pull` | Pull an image from a registry |
+| `docker_push` | Push an image to a registry |
+| `docker_build` | Build an image from a Dockerfile |
+| `docker_tag` | Tag an image with a new name/tag |
+| `docker_rmi` | Remove one or more images |
+| `docker_commit` | Create image from container changes |
+| `docker_save` | Save images to a tar archive |
+| `docker_load` | Load images from a tar archive |
 
 ## Development Workflow
 
@@ -186,3 +199,11 @@ Full checklist with copy-paste commands: [CONTRIBUTING.md - Release Checklist](C
 | `docker pause` | `docker_pause` |
 | `docker unpause` | `docker_unpause` |
 | `docker exec` | `docker_exec` |
+| `docker pull` | `docker_pull` |
+| `docker push` | `docker_push` |
+| `docker build` | `docker_build` |
+| `docker tag` | `docker_tag` |
+| `docker rmi` | `docker_rmi` |
+| `docker commit` | `docker_commit` |
+| `docker save -o` | `docker_save` |
+| `docker load -i` | `docker_load` |

@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2026-03-29
+
+### Added
+
+#### MCP Server - Image and Build Tools (+8, total 28)
+- `docker_pull` - pull an image or repository from a registry (with platform and all-tags options)
+- `docker_push` - push an image or repository to a registry (with all-tags option)
+- `docker_build` - build an image from a Dockerfile and context (tags, build-args, target, no-cache, platform)
+- `docker_tag` - create a tag that refers to a source image
+- `docker_rmi` - remove one or more images (with force and no-prune options)
+- `docker_commit` - create a new image from a container's changes (with message, author, pause options)
+- `docker_save` - save one or more images to a tar archive
+- `docker_load` - load images from a tar archive
+
+---
+
 ## [0.2.0] - 2026-03-29
 
 ### Added
@@ -95,5 +111,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Python test suite: plugin manifest, skills, rules, docs consistency, internal links, roadmap
 - Vitest test suite: error classes, docker-api utilities, input validation
 
+[0.3.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.3.0
 [0.2.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.2.0
 [0.1.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.1.0

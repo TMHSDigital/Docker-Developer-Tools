@@ -1,7 +1,7 @@
 {
   "name": "@tmhs/docker-mcp",
-  "version": "0.2.0",
-  "description": "MCP server for Docker CLI integration - 20 tools for containers, images, volumes, networks, and system info. Includes container lifecycle management (run, stop, exec, rm, and more).",
+  "version": "0.3.0",
+  "description": "MCP server for Docker CLI integration - 28 tools for containers, images, volumes, networks, and system info. Includes container lifecycle, image build/pull/push, and more.",
   "type": "module",
   "main": "dist/index.js",
   "bin": {

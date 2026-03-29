@@ -23,10 +23,18 @@ import { register as registerRm } from "./tools/rm.js";
 import { register as registerPause } from "./tools/pause.js";
 import { register as registerUnpause } from "./tools/unpause.js";
 import { register as registerExec } from "./tools/exec.js";
+import { register as registerPull } from "./tools/pull.js";
+import { register as registerPush } from "./tools/push.js";
+import { register as registerBuild } from "./tools/build.js";
+import { register as registerTag } from "./tools/tag.js";
+import { register as registerRmi } from "./tools/rmi.js";
+import { register as registerCommit } from "./tools/commit.js";
+import { register as registerSave } from "./tools/save.js";
+import { register as registerLoad } from "./tools/load.js";
 
 const server = new McpServer({
   name: "docker-mcp",
-  version: "0.2.0",
+  version: "0.3.0",
 });
 
 registerListContainers(server);
@@ -49,6 +57,14 @@ registerRm(server);
 registerPause(server);
 registerUnpause(server);
 registerExec(server);
+registerPull(server);
+registerPush(server);
+registerBuild(server);
+registerTag(server);
+registerRmi(server);
+registerCommit(server);
+registerSave(server);
+registerLoad(server);
 
 async function main(): Promise<void> {
   const transport = new StdioServerTransport();

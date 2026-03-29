@@ -408,3 +408,275 @@ describe("docker_exec input validation", () => {
     expect(result.env).toEqual(["DEBUG=true"]);
   });
 });
+
+describe("docker_pull input validation", () => {
+  const schema = z.object({
+    image: z.string().min(1),
+    platform: z.string().optional(),
+    allTags: z.boolean().optional().default(false),
+  });
+
+  it("accepts image only", () => {
+    const result = schema.parse({ image: "nginx:alpine" });
+    expect(result.image).toBe("nginx:alpine");
+    expect(result.allTags).toBe(false);
+  });
+
+  it("rejects empty image", () => {
+    expect(() => schema.parse({ image: "" })).toThrow();
+  });
+
+  it("rejects missing image", () => {
+    expect(() => schema.parse({})).toThrow();
+  });
+
+  it("accepts platform option", () => {
+    const result = schema.parse({ image: "node:20", platform: "linux/arm64" });
+    expect(result.platform).toBe("linux/arm64");
+  });
+
+  it("accepts allTags option", () => {
+    const result = schema.parse({ image: "nginx", allTags: true });
+    expect(result.allTags).toBe(true);
+  });
+});
+
+describe("docker_push input validation", () => {
+  const schema = z.object({
+    image: z.string().min(1),
+    allTags: z.boolean().optional().default(false),
+  });
+
+  it("accepts image only", () => {
+    const result = schema.parse({ image: "myregistry.com/myapp:v1.0" });
+    expect(result.image).toBe("myregistry.com/myapp:v1.0");
+    expect(result.allTags).toBe(false);
+  });
+
+  it("rejects empty image", () => {
+    expect(() => schema.parse({ image: "" })).toThrow();
+  });
+
+  it("accepts allTags option", () => {
+    const result = schema.parse({ image: "myapp", allTags: true });
+    expect(result.allTags).toBe(true);
+  });
+});
+
+describe("docker_build input validation", () => {
+  const schema = z.object({
+    context: z.string().min(1),
+    tag: z.array(z.string()).optional(),
+    file: z.string().optional(),
+    buildArgs: z.array(z.string()).optional(),
+    target: z.string().optional(),
+    noCache: z.boolean().optional().default(false),
+    pull: z.boolean().optional().default(false),
+    labels: z.array(z.string()).optional(),
+    platform: z.string().optional(),
+  });
+
+  it("accepts context only", () => {
+    const result = schema.parse({ context: "." });
+    expect(result.context).toBe(".");
+    expect(result.noCache).toBe(false);
+    expect(result.pull).toBe(false);
+  });
+
+  it("rejects empty context", () => {
+    expect(() => schema.parse({ context: "" })).toThrow();
+  });
+
+  it("rejects missing context", () => {
+    expect(() => schema.parse({})).toThrow();
+  });
+
+  it("accepts full options", () => {
+    const result = schema.parse({
+      context: "./app",
+      tag: ["myapp:latest", "myapp:v1.0"],
+      file: "docker/Dockerfile.prod",
+      buildArgs: ["NODE_ENV=production"],
+      target: "runtime",
+      noCache: true,
+      pull: true,
+      labels: ["version=1.0"],
+      platform: "linux/amd64",
+    });
+    expect(result.tag).toEqual(["myapp:latest", "myapp:v1.0"]);
+    expect(result.file).toBe("docker/Dockerfile.prod");
+    expect(result.target).toBe("runtime");
+    expect(result.noCache).toBe(true);
+  });
+});
+
+describe("docker_tag input validation", () => {
+  const schema = z.object({
+    sourceImage: z.string().min(1),
+    targetImage: z.string().min(1),
+  });
+
+  it("accepts source and target", () => {
+    const result = schema.parse({
+      sourceImage: "myapp:latest",
+      targetImage: "registry.example.com/myapp:v2.0",
+    });
+    expect(result.sourceImage).toBe("myapp:latest");
+    expect(result.targetImage).toBe("registry.example.com/myapp:v2.0");
+  });
+
+  it("rejects empty sourceImage", () => {
+    expect(() =>
+      schema.parse({ sourceImage: "", targetImage: "foo:bar" }),
+    ).toThrow();
+  });
+
+  it("rejects empty targetImage", () => {
+    expect(() =>
+      schema.parse({ sourceImage: "foo:bar", targetImage: "" }),
+    ).toThrow();
+  });
+
+  it("rejects missing fields", () => {
+    expect(() => schema.parse({})).toThrow();
+    expect(() => schema.parse({ sourceImage: "foo" })).toThrow();
+  });
+});
+
+describe("docker_rmi input validation", () => {
+  const schema = z.object({
+    images: z.array(z.string().min(1)).min(1),
+    force: z.boolean().optional().default(false),
+    noPrune: z.boolean().optional().default(false),
+  });
+
+  it("accepts single image", () => {
+    const result = schema.parse({ images: ["nginx:old"] });
+    expect(result.images).toEqual(["nginx:old"]);
+    expect(result.force).toBe(false);
+    expect(result.noPrune).toBe(false);
+  });
+
+  it("accepts multiple images", () => {
+    const result = schema.parse({ images: ["img1:v1", "img2:v2"] });
+    expect(result.images).toHaveLength(2);
+  });
+
+  it("rejects empty array", () => {
+    expect(() => schema.parse({ images: [] })).toThrow();
+  });
+
+  it("rejects empty string in array", () => {
+    expect(() => schema.parse({ images: [""] })).toThrow();
+  });
+
+  it("accepts force and noPrune", () => {
+    const result = schema.parse({
+      images: ["abc123"],
+      force: true,
+      noPrune: true,
+    });
+    expect(result.force).toBe(true);
+    expect(result.noPrune).toBe(true);
+  });
+});
+
+describe("docker_commit input validation", () => {
+  const schema = z.object({
+    containerId: z.string().min(1),
+    repository: z.string().optional(),
+    tag: z.string().optional(),
+    message: z.string().optional(),
+    author: z.string().optional(),
+    pause: z.boolean().optional().default(true),
+  });
+
+  it("accepts containerId only", () => {
+    const result = schema.parse({ containerId: "my-container" });
+    expect(result.containerId).toBe("my-container");
+    expect(result.pause).toBe(true);
+  });
+
+  it("rejects empty containerId", () => {
+    expect(() => schema.parse({ containerId: "" })).toThrow();
+  });
+
+  it("rejects missing containerId", () => {
+    expect(() => schema.parse({})).toThrow();
+  });
+
+  it("accepts full options", () => {
+    const result = schema.parse({
+      containerId: "webapp",
+      repository: "myapp",
+      tag: "v1.0",
+      message: "Added config files",
+      author: "Dev <dev@example.com>",
+      pause: false,
+    });
+    expect(result.repository).toBe("myapp");
+    expect(result.tag).toBe("v1.0");
+    expect(result.message).toBe("Added config files");
+    expect(result.pause).toBe(false);
+  });
+});
+
+describe("docker_save input validation", () => {
+  const schema = z.object({
+    images: z.array(z.string().min(1)).min(1),
+    output: z.string().min(1),
+  });
+
+  it("accepts images and output", () => {
+    const result = schema.parse({
+      images: ["myapp:v1"],
+      output: "./myapp.tar",
+    });
+    expect(result.images).toEqual(["myapp:v1"]);
+    expect(result.output).toBe("./myapp.tar");
+  });
+
+  it("accepts multiple images", () => {
+    const result = schema.parse({
+      images: ["myapp:v1", "myapp:v2"],
+      output: "./images.tar",
+    });
+    expect(result.images).toHaveLength(2);
+  });
+
+  it("rejects empty images array", () => {
+    expect(() =>
+      schema.parse({ images: [], output: "./out.tar" }),
+    ).toThrow();
+  });
+
+  it("rejects empty output", () => {
+    expect(() =>
+      schema.parse({ images: ["myapp:v1"], output: "" }),
+    ).toThrow();
+  });
+
+  it("rejects missing fields", () => {
+    expect(() => schema.parse({})).toThrow();
+    expect(() => schema.parse({ images: ["foo"] })).toThrow();
+  });
+});
+
+describe("docker_load input validation", () => {
+  const schema = z.object({
+    input: z.string().min(1),
+  });
+
+  it("accepts input path", () => {
+    const result = schema.parse({ input: "./myapp.tar" });
+    expect(result.input).toBe("./myapp.tar");
+  });
+
+  it("rejects empty input", () => {
+    expect(() => schema.parse({ input: "" })).toThrow();
+  });
+
+  it("rejects missing input", () => {
+    expect(() => schema.parse({})).toThrow();
+  });
+});

@@ -11,7 +11,7 @@
 <p align="center">
   <a href="https://github.com/TMHSDigital/Docker-Developer-Tools/actions/workflows/validate.yml"><img src="https://img.shields.io/github/actions/workflow/status/TMHSDigital/Docker-Developer-Tools/validate.yml?branch=main&label=CI" alt="CI" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-CC--BY--NC--ND--4.0-blue" alt="License" /></a>
-  <img src="https://img.shields.io/badge/version-0.2.0-green" alt="Version" />
+  <img src="https://img.shields.io/badge/version-0.3.0-green" alt="Version" />
   <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/v/@tmhs/docker-mcp" alt="npm" /></a>
   <a href="https://github.com/TMHSDigital/Docker-Developer-Tools/stargazers"><img src="https://img.shields.io/github/stars/TMHSDigital/Docker-Developer-Tools" alt="Stars" /></a>
   <img src="https://img.shields.io/github/last-commit/TMHSDigital/Docker-Developer-Tools" alt="Last Commit" />
@@ -20,7 +20,7 @@
 </p>
 
 <p align="center">
-  <strong>12 skills</strong>&nbsp;&bull;&nbsp;<strong>6 rules</strong>&nbsp;&bull;&nbsp;<strong>20 MCP tools</strong>
+  <strong>12 skills</strong>&nbsp;&bull;&nbsp;<strong>6 rules</strong>&nbsp;&bull;&nbsp;<strong>28 MCP tools</strong>
 </p>
 
 ---
@@ -145,6 +145,19 @@ Add to your Cursor MCP config (`.cursor/mcp.json`):
 | `docker_pause` | Pause all processes in a running container |
 | `docker_unpause` | Unpause a paused container |
 | `docker_exec` | Execute a command in a running container |
+
+#### Image and Build
+
+| Tool | What It Does |
+|---|---|
+| `docker_pull` | Pull an image or repository from a registry |
+| `docker_push` | Push an image or repository to a registry |
+| `docker_build` | Build an image from a Dockerfile and context directory |
+| `docker_tag` | Create a tag that refers to a source image |
+| `docker_rmi` | Remove one or more images |
+| `docker_commit` | Create a new image from a container's changes |
+| `docker_save` | Save one or more images to a tar archive |
+| `docker_load` | Load images from a tar archive |
 
 ---
 

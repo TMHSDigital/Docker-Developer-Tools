@@ -1,7 +1,7 @@
 {
   "name": "@tmhs/docker-mcp",
-  "version": "0.10.0",
-  "description": "MCP server for Docker CLI integration - 122 tools for containers, images, compose, volumes, networks, cleanup, observability, buildx, manifests, contexts, registry auth, Swarm orchestration, and system info. Full lifecycle, image pipeline, complete Compose V2, volume/network CRUD, resource pruning, live monitoring, multi-platform builds, manifest management, remote host contexts, registry login, and Swarm cluster/service/node management.",
+  "version": "0.11.0",
+  "description": "MCP server for Docker CLI integration - 140 tools for containers, images, compose, volumes, networks, cleanup, observability, buildx, manifests, contexts, registry auth, Swarm orchestration, stacks, configs, secrets, content trust, and system info.",
   "type": "module",
   "main": "dist/index.js",
   "bin": {

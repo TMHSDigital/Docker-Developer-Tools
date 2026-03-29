@@ -2997,3 +2997,333 @@ describe("docker_nodeDemote input validation", () => {
     expect(() => schema.parse({ nodes: [] })).toThrow();
   });
 });
+
+// ---- v0.11.0 Swarm Stacks ----
+
+describe("docker_stackDeploy input validation", () => {
+  const schema = z.object({
+    name: z.string().min(1),
+    composeFile: z.string().min(1),
+    prune: z.boolean().optional().default(false),
+    resolveImage: z.enum(["always", "changed", "never"]).optional(),
+    withRegistryAuth: z.boolean().optional().default(false),
+  });
+
+  it("accepts required fields", () => {
+    const result = schema.parse({ name: "mystack", composeFile: "docker-compose.yml" });
+    expect(result.name).toBe("mystack");
+    expect(result.composeFile).toBe("docker-compose.yml");
+  });
+
+  it("accepts all options", () => {
+    const result = schema.parse({ name: "mystack", composeFile: "compose.yml", prune: true, resolveImage: "always", withRegistryAuth: true });
+    expect(result.prune).toBe(true);
+    expect(result.resolveImage).toBe("always");
+  });
+
+  it("rejects empty name", () => {
+    expect(() => schema.parse({ name: "", composeFile: "compose.yml" })).toThrow();
+  });
+
+  it("rejects invalid resolveImage", () => {
+    expect(() => schema.parse({ name: "s", composeFile: "f", resolveImage: "sometimes" })).toThrow();
+  });
+});
+
+describe("docker_stackRm input validation", () => {
+  const schema = z.object({
+    stacks: z.array(z.string()).min(1),
+  });
+
+  it("accepts stacks", () => {
+    const result = schema.parse({ stacks: ["web", "api"] });
+    expect(result.stacks).toHaveLength(2);
+  });
+
+  it("rejects empty array", () => {
+    expect(() => schema.parse({ stacks: [] })).toThrow();
+  });
+});
+
+describe("docker_stackLs input validation", () => {
+  const schema = z.object({
+    format: z.string().optional().default("json"),
+  });
+
+  it("accepts empty input", () => {
+    const result = schema.parse({});
+    expect(result.format).toBe("json");
+  });
+});
+
+describe("docker_stackPs input validation", () => {
+  const schema = z.object({
+    stack: z.string().min(1),
+    filter: z.array(z.string()).optional(),
+    format: z.string().optional().default("json"),
+  });
+
+  it("accepts stack", () => {
+    const result = schema.parse({ stack: "web" });
+    expect(result.format).toBe("json");
+  });
+
+  it("rejects empty stack", () => {
+    expect(() => schema.parse({ stack: "" })).toThrow();
+  });
+});
+
+describe("docker_stackServices input validation", () => {
+  const schema = z.object({
+    stack: z.string().min(1),
+    filter: z.array(z.string()).optional(),
+    format: z.string().optional().default("json"),
+  });
+
+  it("accepts stack with filters", () => {
+    const result = schema.parse({ stack: "web", filter: ["name=api"] });
+    expect(result.filter).toEqual(["name=api"]);
+  });
+
+  it("rejects empty stack", () => {
+    expect(() => schema.parse({ stack: "" })).toThrow();
+  });
+});
+
+describe("docker_stackConfig input validation", () => {
+  const schema = z.object({
+    composeFile: z.string().min(1),
+  });
+
+  it("accepts compose file", () => {
+    const result = schema.parse({ composeFile: "docker-compose.yml" });
+    expect(result.composeFile).toBe("docker-compose.yml");
+  });
+
+  it("rejects empty", () => {
+    expect(() => schema.parse({ composeFile: "" })).toThrow();
+  });
+});
+
+// ---- v0.11.0 Swarm Configs ----
+
+describe("docker_configCreate input validation", () => {
+  const schema = z.object({
+    name: z.string().min(1),
+    file: z.string().min(1),
+    labels: z.array(z.string()).optional(),
+  });
+
+  it("accepts required fields", () => {
+    const result = schema.parse({ name: "my-config", file: "/path/to/config" });
+    expect(result.name).toBe("my-config");
+  });
+
+  it("accepts with labels", () => {
+    const result = schema.parse({ name: "cfg", file: "f", labels: ["env=prod"] });
+    expect(result.labels).toEqual(["env=prod"]);
+  });
+
+  it("rejects empty name", () => {
+    expect(() => schema.parse({ name: "", file: "f" })).toThrow();
+  });
+});
+
+describe("docker_configInspect input validation", () => {
+  const schema = z.object({
+    config: z.string().min(1),
+    pretty: z.boolean().optional().default(false),
+  });
+
+  it("accepts config", () => {
+    const result = schema.parse({ config: "my-config" });
+    expect(result.pretty).toBe(false);
+  });
+
+  it("rejects empty config", () => {
+    expect(() => schema.parse({ config: "" })).toThrow();
+  });
+});
+
+describe("docker_configLs input validation", () => {
+  const schema = z.object({
+    filter: z.array(z.string()).optional(),
+    format: z.string().optional().default("json"),
+  });
+
+  it("accepts empty input", () => {
+    const result = schema.parse({});
+    expect(result.format).toBe("json");
+  });
+
+  it("accepts filters", () => {
+    const result = schema.parse({ filter: ["name=my-config"] });
+    expect(result.filter).toEqual(["name=my-config"]);
+  });
+});
+
+describe("docker_configRm input validation", () => {
+  const schema = z.object({
+    configs: z.array(z.string()).min(1),
+  });
+
+  it("accepts configs", () => {
+    const result = schema.parse({ configs: ["cfg1", "cfg2"] });
+    expect(result.configs).toHaveLength(2);
+  });
+
+  it("rejects empty array", () => {
+    expect(() => schema.parse({ configs: [] })).toThrow();
+  });
+});
+
+// ---- v0.11.0 Swarm Secrets ----
+
+describe("docker_secretCreate input validation", () => {
+  const schema = z.object({
+    name: z.string().min(1),
+    file: z.string().min(1),
+    labels: z.array(z.string()).optional(),
+  });
+
+  it("accepts required fields", () => {
+    const result = schema.parse({ name: "my-secret", file: "/path/to/secret" });
+    expect(result.name).toBe("my-secret");
+  });
+
+  it("accepts with labels", () => {
+    const result = schema.parse({ name: "sec", file: "f", labels: ["env=prod"] });
+    expect(result.labels).toEqual(["env=prod"]);
+  });
+
+  it("rejects empty name", () => {
+    expect(() => schema.parse({ name: "", file: "f" })).toThrow();
+  });
+});
+
+describe("docker_secretInspect input validation", () => {
+  const schema = z.object({
+    secret: z.string().min(1),
+    pretty: z.boolean().optional().default(false),
+  });
+
+  it("accepts secret", () => {
+    const result = schema.parse({ secret: "my-secret" });
+    expect(result.pretty).toBe(false);
+  });
+
+  it("rejects empty secret", () => {
+    expect(() => schema.parse({ secret: "" })).toThrow();
+  });
+});
+
+describe("docker_secretLs input validation", () => {
+  const schema = z.object({
+    filter: z.array(z.string()).optional(),
+    format: z.string().optional().default("json"),
+  });
+
+  it("accepts empty input", () => {
+    const result = schema.parse({});
+    expect(result.format).toBe("json");
+  });
+
+  it("accepts filters", () => {
+    const result = schema.parse({ filter: ["name=my-secret"] });
+    expect(result.filter).toEqual(["name=my-secret"]);
+  });
+});
+
+describe("docker_secretRm input validation", () => {
+  const schema = z.object({
+    secrets: z.array(z.string()).min(1),
+  });
+
+  it("accepts secrets", () => {
+    const result = schema.parse({ secrets: ["sec1"] });
+    expect(result.secrets).toEqual(["sec1"]);
+  });
+
+  it("rejects empty array", () => {
+    expect(() => schema.parse({ secrets: [] })).toThrow();
+  });
+});
+
+// ---- v0.11.0 Docker Content Trust ----
+
+describe("docker_trustInspect input validation", () => {
+  const schema = z.object({
+    image: z.string().min(1),
+    pretty: z.boolean().optional().default(false),
+  });
+
+  it("accepts image", () => {
+    const result = schema.parse({ image: "docker.io/library/nginx" });
+    expect(result.image).toBe("docker.io/library/nginx");
+  });
+
+  it("rejects empty image", () => {
+    expect(() => schema.parse({ image: "" })).toThrow();
+  });
+});
+
+describe("docker_trustSign input validation", () => {
+  const schema = z.object({
+    image: z.string().min(1),
+    local: z.boolean().optional().default(false),
+  });
+
+  it("accepts image", () => {
+    const result = schema.parse({ image: "registry.example.com/app:v1" });
+    expect(result.local).toBe(false);
+  });
+
+  it("accepts with local", () => {
+    const result = schema.parse({ image: "app:v1", local: true });
+    expect(result.local).toBe(true);
+  });
+
+  it("rejects empty image", () => {
+    expect(() => schema.parse({ image: "" })).toThrow();
+  });
+});
+
+describe("docker_trustRevoke input validation", () => {
+  const schema = z.object({
+    image: z.string().min(1),
+    yes: z.boolean().optional().default(true),
+  });
+
+  it("accepts image", () => {
+    const result = schema.parse({ image: "app:v1" });
+    expect(result.yes).toBe(true);
+  });
+
+  it("rejects empty image", () => {
+    expect(() => schema.parse({ image: "" })).toThrow();
+  });
+});
+
+describe("docker_trustKey input validation", () => {
+  const schema = z.object({
+    action: z.enum(["generate", "load"]),
+    name: z.string().optional(),
+    keyFile: z.string().optional(),
+  });
+
+  it("accepts generate with name", () => {
+    const result = schema.parse({ action: "generate", name: "mykey" });
+    expect(result.action).toBe("generate");
+    expect(result.name).toBe("mykey");
+  });
+
+  it("accepts load with keyFile", () => {
+    const result = schema.parse({ action: "load", keyFile: "/path/to/key.pem" });
+    expect(result.action).toBe("load");
+    expect(result.keyFile).toBe("/path/to/key.pem");
+  });
+
+  it("rejects invalid action", () => {
+    expect(() => schema.parse({ action: "delete" })).toThrow();
+  });
+});

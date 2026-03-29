@@ -4,11 +4,11 @@ Project documentation for Claude Code and AI assistants working on this reposito
 
 ## Project Overview
 
-Docker Developer Tools is a Cursor IDE plugin that integrates Docker and container workflows into Cursor's AI chat. It includes 16 skills, 10 rules, and a companion MCP server with 122 tools for live Docker CLI integration.
+Docker Developer Tools is a Cursor IDE plugin that integrates Docker and container workflows into Cursor's AI chat. It includes 17 skills, 10 rules, and a companion MCP server with 140 tools for live Docker CLI integration.
 
 This is a monorepo - the Cursor plugin (skills and rules) and the companion MCP server live in the same repository. Docker's API is local (Docker Engine socket / CLI), so one repo is simpler for users to install and maintain.
 
-**Version:** 0.10.0
+**Version:** 0.11.0
 **License:** CC-BY-NC-ND-4.0
 **Author:** TMHSDigital
 
@@ -35,7 +35,7 @@ Docker-Developer-Tools/
   tests/                     # Python structure tests
 ```
 
-## Skills (16)
+## Skills (17)
 
 | Skill | Description |
 |-------|-------------|
@@ -55,6 +55,7 @@ Docker-Developer-Tools/
 | `docker-multi-platform` | Multi-arch builds, buildx configuration, manifest lists, platform targeting |
 | `docker-context-management` | Remote Docker hosts, SSH/TLS contexts, multi-host workflows |
 | `docker-swarm` | Swarm cluster management, service deployment, scaling, node administration |
+| `docker-image-signing` | Docker Content Trust, image signing, verification, key management |
 
 ## Rules (10)
 
@@ -71,7 +72,7 @@ Docker-Developer-Tools/
 | `compose-scaling` | Compose files | Flag scaling blockers: container_name, fixed host ports, missing limits |
 | `swarm-security` | Docker-related files | Flag missing autolock, unrotated certs, unencrypted overlays, exposed ports |
 
-## MCP Server (122 tools)
+## MCP Server (140 tools)
 
 The MCP server talks to Docker via CLI exec (`docker` commands) rather than the Docker Engine REST API. It uses stdio transport and requires `docker` to be available on PATH.
 
@@ -282,6 +283,44 @@ The MCP server talks to Docker via CLI exec (`docker` commands) rather than the 
 | `docker_nodePromote` | Promote workers to managers |
 | `docker_nodeDemote` | Demote managers to workers |
 
+### Swarm Stacks (6)
+
+| Tool | Description |
+|------|-------------|
+| `docker_stackDeploy` | Deploy or update a stack from a compose file |
+| `docker_stackRm` | Remove stacks |
+| `docker_stackLs` | List stacks |
+| `docker_stackPs` | List tasks in a stack |
+| `docker_stackServices` | List services in a stack |
+| `docker_stackConfig` | Output merged stack configuration |
+
+### Swarm Configs (4)
+
+| Tool | Description |
+|------|-------------|
+| `docker_configCreate` | Create a Swarm config |
+| `docker_configInspect` | Inspect a config |
+| `docker_configLs` | List configs |
+| `docker_configRm` | Remove configs |
+
+### Swarm Secrets (4)
+
+| Tool | Description |
+|------|-------------|
+| `docker_secretCreate` | Create a Swarm secret |
+| `docker_secretInspect` | Inspect a secret (metadata only) |
+| `docker_secretLs` | List secrets |
+| `docker_secretRm` | Remove secrets |
+
+### Docker Content Trust (4)
+
+| Tool | Description |
+|------|-------------|
+| `docker_trustInspect` | Inspect trust data for an image |
+| `docker_trustSign` | Sign an image |
+| `docker_trustRevoke` | Revoke trust for an image |
+| `docker_trustKey` | Manage signing keys |
+
 ## Development Workflow
 
 ### Plugin development (symlink)
@@ -473,3 +512,21 @@ Full checklist with copy-paste commands: [CONTRIBUTING.md - Release Checklist](C
 | `docker node update` | `docker_nodeUpdate` |
 | `docker node promote` | `docker_nodePromote` |
 | `docker node demote` | `docker_nodeDemote` |
+| `docker stack deploy` | `docker_stackDeploy` |
+| `docker stack rm` | `docker_stackRm` |
+| `docker stack ls --format json` | `docker_stackLs` |
+| `docker stack ps --format json` | `docker_stackPs` |
+| `docker stack services --format json` | `docker_stackServices` |
+| `docker stack config` | `docker_stackConfig` |
+| `docker config create` | `docker_configCreate` |
+| `docker config inspect` | `docker_configInspect` |
+| `docker config ls --format json` | `docker_configLs` |
+| `docker config rm` | `docker_configRm` |
+| `docker secret create` | `docker_secretCreate` |
+| `docker secret inspect` | `docker_secretInspect` |
+| `docker secret ls --format json` | `docker_secretLs` |
+| `docker secret rm` | `docker_secretRm` |
+| `docker trust inspect` | `docker_trustInspect` |
+| `docker trust sign` | `docker_trustSign` |
+| `docker trust revoke` | `docker_trustRevoke` |
+| `docker trust key` | `docker_trustKey` |

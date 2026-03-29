@@ -5,6 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.11.0] - 2026-03-29
+
+### Added
+
+#### MCP Server - Swarm Stacks, Configs, Secrets, and Trust (+18, total 140)
+- `docker_stackDeploy` - deploy or update a stack from a compose file (with prune, resolve-image, registry auth options, 120s timeout)
+- `docker_stackRm` - remove one or more Swarm stacks
+- `docker_stackLs` - list Swarm stacks (JSON format)
+- `docker_stackPs` - list tasks in a stack with filters (JSON format)
+- `docker_stackServices` - list services in a stack with filters (JSON format)
+- `docker_stackConfig` - output the final merged configuration for a stack
+- `docker_configCreate` - create a Swarm config from a file with optional labels
+- `docker_configInspect` - inspect detailed Swarm config information (pretty or JSON)
+- `docker_configLs` - list Swarm configs with filters (JSON format)
+- `docker_configRm` - remove one or more Swarm configs
+- `docker_secretCreate` - create a Swarm secret from a file with optional labels
+- `docker_secretInspect` - inspect Swarm secret metadata (pretty or JSON, value not exposed)
+- `docker_secretLs` - list Swarm secrets with filters (JSON format)
+- `docker_secretRm` - remove one or more Swarm secrets
+- `docker_trustInspect` - inspect Docker Content Trust data for an image (signers, signatures, keys)
+- `docker_trustSign` - sign an image for Docker Content Trust (local or remote, 120s timeout)
+- `docker_trustRevoke` - revoke Docker Content Trust for an image (auto-confirm)
+- `docker_trustKey` - manage Docker Content Trust signing keys (generate or load)
+
+#### Skill
+- `docker-image-signing` - Docker Content Trust, image signing/verification, key management, CI/CD signing pipelines
+
 ## [0.10.0] - 2026-03-29
 
 ### Added
@@ -295,6 +322,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Python test suite: plugin manifest, skills, rules, docs consistency, internal links, roadmap
 - Vitest test suite: error classes, docker-api utilities, input validation
 
+[0.11.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.11.0
 [0.10.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.10.0
 [0.9.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.9.0
 [0.8.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.8.0

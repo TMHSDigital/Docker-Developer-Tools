@@ -1,6 +1,6 @@
 # @tmhs/docker-mcp
 
-MCP server for Docker CLI integration - 122 tools for containers, images, complete Compose V2, volumes, networks, cleanup, observability, buildx, manifests, contexts, registry auth, Swarm orchestration, and system info.
+MCP server for Docker CLI integration - 140 tools for containers, images, complete Compose V2, volumes, networks, cleanup, observability, buildx, manifests, contexts, registry auth, Swarm orchestration, stacks, configs, secrets, content trust, and system info.
 
 Part of the [Docker Developer Tools](https://github.com/TMHSDigital/Docker-Developer-Tools) Cursor plugin.
 
@@ -48,7 +48,7 @@ Or if installed globally:
 }
 ```
 
-## Tools (122)
+## Tools (140)
 
 ### Read / Inspect (10)
 
@@ -256,6 +256,44 @@ Or if installed globally:
 | `docker_nodeUpdate` | Update node metadata |
 | `docker_nodePromote` | Promote workers to managers |
 | `docker_nodeDemote` | Demote managers to workers |
+
+### Swarm Stacks (6)
+
+| Tool | Description |
+|------|-------------|
+| `docker_stackDeploy` | Deploy or update a stack |
+| `docker_stackRm` | Remove stacks |
+| `docker_stackLs` | List stacks |
+| `docker_stackPs` | List tasks in a stack |
+| `docker_stackServices` | List services in a stack |
+| `docker_stackConfig` | Output merged stack config |
+
+### Swarm Configs (4)
+
+| Tool | Description |
+|------|-------------|
+| `docker_configCreate` | Create a Swarm config |
+| `docker_configInspect` | Inspect a config |
+| `docker_configLs` | List configs |
+| `docker_configRm` | Remove configs |
+
+### Swarm Secrets (4)
+
+| Tool | Description |
+|------|-------------|
+| `docker_secretCreate` | Create a Swarm secret |
+| `docker_secretInspect` | Inspect a secret (metadata only) |
+| `docker_secretLs` | List secrets |
+| `docker_secretRm` | Remove secrets |
+
+### Docker Content Trust (4)
+
+| Tool | Description |
+|------|-------------|
+| `docker_trustInspect` | Inspect trust data for an image |
+| `docker_trustSign` | Sign an image |
+| `docker_trustRevoke` | Revoke trust for an image |
+| `docker_trustKey` | Manage signing keys |
 
 ## License
 

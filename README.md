@@ -11,7 +11,7 @@
 <p align="center">
   <a href="https://github.com/TMHSDigital/Docker-Developer-Tools/actions/workflows/validate.yml"><img src="https://img.shields.io/github/actions/workflow/status/TMHSDigital/Docker-Developer-Tools/validate.yml?branch=main&label=CI" alt="CI" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-CC--BY--NC--ND--4.0-blue" alt="License" /></a>
-  <img src="https://img.shields.io/badge/version-0.10.0-green" alt="Version" />
+  <img src="https://img.shields.io/badge/version-0.11.0-green" alt="Version" />
   <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/v/@tmhs/docker-mcp" alt="npm" /></a>
   <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/dm/@tmhs/docker-mcp" alt="npm downloads" /></a>
   <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/unpacked-size/@tmhs/docker-mcp" alt="npm size" /></a>
@@ -22,7 +22,7 @@
 </p>
 
 <p align="center">
-  <strong>16 skills</strong>&nbsp;&bull;&nbsp;<strong>10 rules</strong>&nbsp;&bull;&nbsp;<strong>122 MCP tools</strong>
+  <strong>17 skills</strong>&nbsp;&bull;&nbsp;<strong>10 rules</strong>&nbsp;&bull;&nbsp;<strong>140 MCP tools</strong>
 </p>
 
 ---
@@ -72,6 +72,7 @@ flowchart LR
 | **Advanced** | `docker-multi-platform` | Multi-arch builds, buildx configuration, manifest lists, platform targeting |
 | **Advanced** | `docker-context-management` | Remote Docker hosts, SSH/TLS contexts, multi-host workflows |
 | **Orchestration** | `docker-swarm` | Swarm cluster management, service deployment, scaling, node administration |
+| **Security** | `docker-image-signing` | Docker Content Trust, image signing, verification, key management |
 
 </details>
 
@@ -332,6 +333,44 @@ Add to your Cursor MCP config (`.cursor/mcp.json`):
 | `docker_nodePromote` | Promote workers to managers |
 | `docker_nodeDemote` | Demote managers to workers |
 
+**Swarm Stacks** (6)
+
+| Tool | What It Does |
+|---|---|
+| `docker_stackDeploy` | Deploy or update a stack from a compose file |
+| `docker_stackRm` | Remove Swarm stacks |
+| `docker_stackLs` | List Swarm stacks |
+| `docker_stackPs` | List tasks in a stack |
+| `docker_stackServices` | List services in a stack |
+| `docker_stackConfig` | Output merged stack configuration |
+
+**Swarm Configs** (4)
+
+| Tool | What It Does |
+|---|---|
+| `docker_configCreate` | Create a Swarm config from a file |
+| `docker_configInspect` | Inspect a Swarm config |
+| `docker_configLs` | List Swarm configs |
+| `docker_configRm` | Remove Swarm configs |
+
+**Swarm Secrets** (4)
+
+| Tool | What It Does |
+|---|---|
+| `docker_secretCreate` | Create a Swarm secret from a file |
+| `docker_secretInspect` | Inspect a Swarm secret (metadata only) |
+| `docker_secretLs` | List Swarm secrets |
+| `docker_secretRm` | Remove Swarm secrets |
+
+**Docker Content Trust** (4)
+
+| Tool | What It Does |
+|---|---|
+| `docker_trustInspect` | Inspect trust data for an image |
+| `docker_trustSign` | Sign an image for Docker Content Trust |
+| `docker_trustRevoke` | Revoke trust for an image |
+| `docker_trustKey` | Manage signing keys (generate or load) |
+
 </details>
 
 ---
@@ -392,6 +431,7 @@ Then add the JSON config from the [MCP Server section](#companion-docker-mcp-ser
 | `docker-multi-platform` | "Build my Go API image for both amd64 and arm64 with buildx" |
 | `docker-context-management` | "Set up a Docker context for my remote staging server via SSH" |
 | `docker-swarm` | "Initialize a Swarm cluster and deploy a 3-replica nginx service" |
+| `docker-image-signing` | "Set up Docker Content Trust and sign our production images" |
 
 </details>
 

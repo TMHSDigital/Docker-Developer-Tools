@@ -125,10 +125,28 @@ import { register as registerNodeRm } from "./tools/nodeRm.js";
 import { register as registerNodeUpdate } from "./tools/nodeUpdate.js";
 import { register as registerNodePromote } from "./tools/nodePromote.js";
 import { register as registerNodeDemote } from "./tools/nodeDemote.js";
+import { register as registerStackDeploy } from "./tools/stackDeploy.js";
+import { register as registerStackRm } from "./tools/stackRm.js";
+import { register as registerStackLs } from "./tools/stackLs.js";
+import { register as registerStackPs } from "./tools/stackPs.js";
+import { register as registerStackServices } from "./tools/stackServices.js";
+import { register as registerStackConfig } from "./tools/stackConfig.js";
+import { register as registerConfigCreate } from "./tools/configCreate.js";
+import { register as registerConfigInspect } from "./tools/configInspect.js";
+import { register as registerConfigLs } from "./tools/configLs.js";
+import { register as registerConfigRm } from "./tools/configRm.js";
+import { register as registerSecretCreate } from "./tools/secretCreate.js";
+import { register as registerSecretInspect } from "./tools/secretInspect.js";
+import { register as registerSecretLs } from "./tools/secretLs.js";
+import { register as registerSecretRm } from "./tools/secretRm.js";
+import { register as registerTrustInspect } from "./tools/trustInspect.js";
+import { register as registerTrustSign } from "./tools/trustSign.js";
+import { register as registerTrustRevoke } from "./tools/trustRevoke.js";
+import { register as registerTrustKey } from "./tools/trustKey.js";
 
 const server = new McpServer({
   name: "docker-mcp",
-  version: "0.10.0",
+  version: "0.11.0",
 });
 
 registerListContainers(server);
@@ -253,6 +271,24 @@ registerNodeRm(server);
 registerNodeUpdate(server);
 registerNodePromote(server);
 registerNodeDemote(server);
+registerStackDeploy(server);
+registerStackRm(server);
+registerStackLs(server);
+registerStackPs(server);
+registerStackServices(server);
+registerStackConfig(server);
+registerConfigCreate(server);
+registerConfigInspect(server);
+registerConfigLs(server);
+registerConfigRm(server);
+registerSecretCreate(server);
+registerSecretInspect(server);
+registerSecretLs(server);
+registerSecretRm(server);
+registerTrustInspect(server);
+registerTrustSign(server);
+registerTrustRevoke(server);
+registerTrustKey(server);
 
 async function main(): Promise<void> {
   const transport = new StdioServerTransport();

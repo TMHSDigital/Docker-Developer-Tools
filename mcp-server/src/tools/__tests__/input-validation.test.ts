@@ -918,3 +918,276 @@ describe("docker_composeExec input validation", () => {
     expect(result.env).toEqual(["DEBUG=1"]);
   });
 });
+
+describe("docker_volumeCreate input validation", () => {
+  const schema = z.object({
+    name: z.string().min(1),
+    driver: z.string().optional(),
+    labels: z.array(z.string()).optional(),
+    driverOpts: z.array(z.string()).optional(),
+  });
+
+  it("accepts name only", () => {
+    const result = schema.parse({ name: "mydata" });
+    expect(result.name).toBe("mydata");
+  });
+
+  it("rejects empty name", () => {
+    expect(() => schema.parse({ name: "" })).toThrow();
+  });
+
+  it("accepts driver, labels, and opts", () => {
+    const result = schema.parse({
+      name: "vol1",
+      driver: "local",
+      labels: ["env=prod"],
+      driverOpts: ["type=nfs"],
+    });
+    expect(result.driver).toBe("local");
+    expect(result.labels).toEqual(["env=prod"]);
+  });
+});
+
+describe("docker_volumeRm input validation", () => {
+  const schema = z.object({
+    volumes: z.array(z.string()).min(1),
+    force: z.boolean().optional().default(false),
+  });
+
+  it("accepts volume names", () => {
+    const result = schema.parse({ volumes: ["vol1", "vol2"] });
+    expect(result.volumes).toEqual(["vol1", "vol2"]);
+    expect(result.force).toBe(false);
+  });
+
+  it("rejects empty array", () => {
+    expect(() => schema.parse({ volumes: [] })).toThrow();
+  });
+
+  it("accepts force flag", () => {
+    const result = schema.parse({ volumes: ["x"], force: true });
+    expect(result.force).toBe(true);
+  });
+});
+
+describe("docker_volumeInspect input validation", () => {
+  const schema = z.object({
+    volume: z.string().min(1),
+  });
+
+  it("accepts volume name", () => {
+    const result = schema.parse({ volume: "mydata" });
+    expect(result.volume).toBe("mydata");
+  });
+
+  it("rejects empty volume", () => {
+    expect(() => schema.parse({ volume: "" })).toThrow();
+  });
+});
+
+describe("docker_volumePrune input validation", () => {
+  const schema = z.object({
+    all: z.boolean().optional().default(false),
+    filter: z.string().optional(),
+  });
+
+  it("accepts defaults", () => {
+    const result = schema.parse({});
+    expect(result.all).toBe(false);
+  });
+
+  it("accepts all and filter", () => {
+    const result = schema.parse({ all: true, filter: "label=keep" });
+    expect(result.all).toBe(true);
+    expect(result.filter).toBe("label=keep");
+  });
+});
+
+describe("docker_networkCreate input validation", () => {
+  const schema = z.object({
+    name: z.string().min(1),
+    driver: z.string().optional(),
+    subnet: z.string().optional(),
+    gateway: z.string().optional(),
+    ipRange: z.string().optional(),
+    internal: z.boolean().optional().default(false),
+    labels: z.array(z.string()).optional(),
+  });
+
+  it("accepts name only", () => {
+    const result = schema.parse({ name: "mynet" });
+    expect(result.name).toBe("mynet");
+    expect(result.internal).toBe(false);
+  });
+
+  it("rejects empty name", () => {
+    expect(() => schema.parse({ name: "" })).toThrow();
+  });
+
+  it("accepts full options", () => {
+    const result = schema.parse({
+      name: "backend",
+      driver: "bridge",
+      subnet: "172.28.0.0/16",
+      gateway: "172.28.0.1",
+      ipRange: "172.28.5.0/24",
+      internal: true,
+      labels: ["env=dev"],
+    });
+    expect(result.driver).toBe("bridge");
+    expect(result.subnet).toBe("172.28.0.0/16");
+    expect(result.internal).toBe(true);
+  });
+});
+
+describe("docker_networkRm input validation", () => {
+  const schema = z.object({
+    networks: z.array(z.string()).min(1),
+    force: z.boolean().optional().default(false),
+  });
+
+  it("accepts network names", () => {
+    const result = schema.parse({ networks: ["net1"] });
+    expect(result.networks).toEqual(["net1"]);
+  });
+
+  it("rejects empty array", () => {
+    expect(() => schema.parse({ networks: [] })).toThrow();
+  });
+});
+
+describe("docker_networkConnect input validation", () => {
+  const schema = z.object({
+    network: z.string().min(1),
+    container: z.string().min(1),
+    ip: z.string().optional(),
+    alias: z.array(z.string()).optional(),
+  });
+
+  it("accepts network and container", () => {
+    const result = schema.parse({ network: "mynet", container: "web" });
+    expect(result.network).toBe("mynet");
+    expect(result.container).toBe("web");
+  });
+
+  it("rejects empty network", () => {
+    expect(() => schema.parse({ network: "", container: "web" })).toThrow();
+  });
+
+  it("rejects empty container", () => {
+    expect(() => schema.parse({ network: "mynet", container: "" })).toThrow();
+  });
+
+  it("accepts ip and alias", () => {
+    const result = schema.parse({
+      network: "mynet",
+      container: "web",
+      ip: "172.28.0.10",
+      alias: ["webapp"],
+    });
+    expect(result.ip).toBe("172.28.0.10");
+    expect(result.alias).toEqual(["webapp"]);
+  });
+});
+
+describe("docker_networkDisconnect input validation", () => {
+  const schema = z.object({
+    network: z.string().min(1),
+    container: z.string().min(1),
+    force: z.boolean().optional().default(false),
+  });
+
+  it("accepts network and container", () => {
+    const result = schema.parse({ network: "mynet", container: "web" });
+    expect(result.force).toBe(false);
+  });
+
+  it("accepts force flag", () => {
+    const result = schema.parse({ network: "mynet", container: "web", force: true });
+    expect(result.force).toBe(true);
+  });
+});
+
+describe("docker_networkInspect input validation", () => {
+  const schema = z.object({
+    network: z.string().min(1),
+  });
+
+  it("accepts network name", () => {
+    const result = schema.parse({ network: "bridge" });
+    expect(result.network).toBe("bridge");
+  });
+
+  it("rejects empty network", () => {
+    expect(() => schema.parse({ network: "" })).toThrow();
+  });
+});
+
+describe("docker_networkPrune input validation", () => {
+  const schema = z.object({
+    filter: z.string().optional(),
+  });
+
+  it("accepts empty", () => {
+    const result = schema.parse({});
+    expect(result.filter).toBeUndefined();
+  });
+
+  it("accepts filter", () => {
+    const result = schema.parse({ filter: "until=24h" });
+    expect(result.filter).toBe("until=24h");
+  });
+});
+
+describe("docker_systemPrune input validation", () => {
+  const schema = z.object({
+    all: z.boolean().optional().default(false),
+    volumes: z.boolean().optional().default(false),
+  });
+
+  it("accepts defaults", () => {
+    const result = schema.parse({});
+    expect(result.all).toBe(false);
+    expect(result.volumes).toBe(false);
+  });
+
+  it("accepts all and volumes", () => {
+    const result = schema.parse({ all: true, volumes: true });
+    expect(result.all).toBe(true);
+    expect(result.volumes).toBe(true);
+  });
+});
+
+describe("docker_containerPrune input validation", () => {
+  const schema = z.object({
+    filter: z.string().optional(),
+  });
+
+  it("accepts empty", () => {
+    const result = schema.parse({});
+    expect(result.filter).toBeUndefined();
+  });
+
+  it("accepts filter", () => {
+    const result = schema.parse({ filter: "until=24h" });
+    expect(result.filter).toBe("until=24h");
+  });
+});
+
+describe("docker_imagePrune input validation", () => {
+  const schema = z.object({
+    all: z.boolean().optional().default(false),
+    filter: z.string().optional(),
+  });
+
+  it("accepts defaults", () => {
+    const result = schema.parse({});
+    expect(result.all).toBe(false);
+  });
+
+  it("accepts all and filter", () => {
+    const result = schema.parse({ all: true, filter: "until=24h" });
+    expect(result.all).toBe(true);
+    expect(result.filter).toBe("until=24h");
+  });
+});

@@ -5,6 +5,35 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0] - 2026-03-29
+
+### Added
+
+#### MCP Server - Volume Management Tools (+4)
+- `docker_volumeCreate` - create a named volume with optional driver, labels, and driver options
+- `docker_volumeRm` - remove one or more volumes (with optional force)
+- `docker_volumeInspect` - display detailed volume information
+- `docker_volumePrune` - remove all unused volumes (non-interactive, with optional all flag and filter)
+
+#### MCP Server - Network Management Tools (+6)
+- `docker_networkCreate` - create a network with driver, subnet, gateway, ip-range, internal, and labels
+- `docker_networkRm` - remove one or more networks (with optional force)
+- `docker_networkConnect` - connect a container to a network (with optional IP and aliases)
+- `docker_networkDisconnect` - disconnect a container from a network (with optional force)
+- `docker_networkInspect` - display detailed network information
+- `docker_networkPrune` - remove all unused networks (non-interactive, with optional filter)
+
+#### MCP Server - Cleanup / Prune Tools (+3, total 49)
+- `docker_systemPrune` - remove unused containers, networks, images, and optionally volumes (non-interactive)
+- `docker_containerPrune` - remove all stopped containers (non-interactive, with optional filter)
+- `docker_imagePrune` - remove dangling or unused images (non-interactive, with optional all flag and filter)
+
+#### Error Handling
+- Added `VolumeNotFoundError` and `NetworkNotFoundError` custom error classes
+- Added stderr detection for "No such volume" and "No such network" messages in `execDocker()`
+
+---
+
 ## [0.4.0] - 2026-03-29
 
 ### Added
@@ -132,6 +161,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Python test suite: plugin manifest, skills, rules, docs consistency, internal links, roadmap
 - Vitest test suite: error classes, docker-api utilities, input validation
 
+[0.5.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.5.0
 [0.4.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.4.0
 [0.3.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.3.0
 [0.2.0]: https://github.com/TMHSDigital/Docker-Developer-Tools/releases/tag/v0.2.0

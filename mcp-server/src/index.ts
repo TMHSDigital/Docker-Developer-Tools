@@ -39,10 +39,23 @@ import { register as registerComposeBuild } from "./tools/composeBuild.js";
 import { register as registerComposeRestart } from "./tools/composeRestart.js";
 import { register as registerComposePull } from "./tools/composePull.js";
 import { register as registerComposeExec } from "./tools/composeExec.js";
+import { register as registerVolumeCreate } from "./tools/volumeCreate.js";
+import { register as registerVolumeRm } from "./tools/volumeRm.js";
+import { register as registerVolumeInspect } from "./tools/volumeInspect.js";
+import { register as registerVolumePrune } from "./tools/volumePrune.js";
+import { register as registerNetworkCreate } from "./tools/networkCreate.js";
+import { register as registerNetworkRm } from "./tools/networkRm.js";
+import { register as registerNetworkConnect } from "./tools/networkConnect.js";
+import { register as registerNetworkDisconnect } from "./tools/networkDisconnect.js";
+import { register as registerNetworkInspect } from "./tools/networkInspect.js";
+import { register as registerNetworkPrune } from "./tools/networkPrune.js";
+import { register as registerSystemPrune } from "./tools/systemPrune.js";
+import { register as registerContainerPrune } from "./tools/containerPrune.js";
+import { register as registerImagePrune } from "./tools/imagePrune.js";
 
 const server = new McpServer({
   name: "docker-mcp",
-  version: "0.4.0",
+  version: "0.5.0",
 });
 
 registerListContainers(server);
@@ -81,6 +94,19 @@ registerComposeBuild(server);
 registerComposeRestart(server);
 registerComposePull(server);
 registerComposeExec(server);
+registerVolumeCreate(server);
+registerVolumeRm(server);
+registerVolumeInspect(server);
+registerVolumePrune(server);
+registerNetworkCreate(server);
+registerNetworkRm(server);
+registerNetworkConnect(server);
+registerNetworkDisconnect(server);
+registerNetworkInspect(server);
+registerNetworkPrune(server);
+registerSystemPrune(server);
+registerContainerPrune(server);
+registerImagePrune(server);
 
 async function main(): Promise<void> {
   const transport = new StdioServerTransport();

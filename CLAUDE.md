@@ -4,11 +4,11 @@ Project documentation for Claude Code and AI assistants working on this reposito
 
 ## Project Overview
 
-Docker Developer Tools is a Cursor IDE plugin that integrates Docker and container workflows into Cursor's AI chat. It includes 12 skills, 6 rules, and a companion MCP server with 36 tools for live Docker CLI integration.
+Docker Developer Tools is a Cursor IDE plugin that integrates Docker and container workflows into Cursor's AI chat. It includes 12 skills, 6 rules, and a companion MCP server with 49 tools for live Docker CLI integration.
 
 This is a monorepo - the Cursor plugin (skills and rules) and the companion MCP server live in the same repository. Docker's API is local (Docker Engine socket / CLI), so one repo is simpler for users to install and maintain.
 
-**Version:** 0.4.0
+**Version:** 0.5.0
 **License:** CC-BY-NC-ND-4.0
 **Author:** TMHSDigital
 
@@ -63,7 +63,7 @@ Docker-Developer-Tools/
 | `docker-image-pinning` | Dockerfiles, compose files | Flag unpinned image tags |
 | `docker-port-conflicts` | Dockerfiles, compose files | Flag port conflicts |
 
-## MCP Server (36 tools)
+## MCP Server (49 tools)
 
 The MCP server talks to Docker via CLI exec (`docker` commands) rather than the Docker Engine REST API. It uses stdio transport and requires `docker` to be available on PATH.
 
@@ -122,6 +122,34 @@ The MCP server talks to Docker via CLI exec (`docker` commands) rather than the 
 | `docker_composeRestart` | Restart Compose services |
 | `docker_composePull` | Pull images for Compose services |
 | `docker_composeExec` | Execute a command in a running Compose service |
+
+### Volume Management (4)
+
+| Tool | Description |
+|------|-------------|
+| `docker_volumeCreate` | Create a named volume with driver and labels |
+| `docker_volumeRm` | Remove one or more volumes |
+| `docker_volumeInspect` | Display detailed volume information |
+| `docker_volumePrune` | Remove all unused volumes |
+
+### Network Management (6)
+
+| Tool | Description |
+|------|-------------|
+| `docker_networkCreate` | Create a network (bridge, overlay, macvlan) |
+| `docker_networkRm` | Remove one or more networks |
+| `docker_networkConnect` | Connect a container to a network |
+| `docker_networkDisconnect` | Disconnect a container from a network |
+| `docker_networkInspect` | Display detailed network information |
+| `docker_networkPrune` | Remove all unused networks |
+
+### Cleanup / Prune (3)
+
+| Tool | Description |
+|------|-------------|
+| `docker_systemPrune` | Remove unused containers, networks, images, volumes |
+| `docker_containerPrune` | Remove all stopped containers |
+| `docker_imagePrune` | Remove dangling or unused images |
 
 ## Development Workflow
 
@@ -228,3 +256,16 @@ Full checklist with copy-paste commands: [CONTRIBUTING.md - Release Checklist](C
 | `docker compose restart` | `docker_composeRestart` |
 | `docker compose pull` | `docker_composePull` |
 | `docker compose exec` | `docker_composeExec` |
+| `docker volume create` | `docker_volumeCreate` |
+| `docker volume rm` | `docker_volumeRm` |
+| `docker volume inspect` | `docker_volumeInspect` |
+| `docker volume prune -f` | `docker_volumePrune` |
+| `docker network create` | `docker_networkCreate` |
+| `docker network rm` | `docker_networkRm` |
+| `docker network connect` | `docker_networkConnect` |
+| `docker network disconnect` | `docker_networkDisconnect` |
+| `docker network inspect` | `docker_networkInspect` |
+| `docker network prune -f` | `docker_networkPrune` |
+| `docker system prune -f` | `docker_systemPrune` |
+| `docker container prune -f` | `docker_containerPrune` |
+| `docker image prune -f` | `docker_imagePrune` |

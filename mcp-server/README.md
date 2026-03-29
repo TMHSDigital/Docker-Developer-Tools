@@ -1,6 +1,6 @@
 # @tmhs/docker-mcp
 
-MCP server for Docker CLI integration - 36 tools for containers, images, Compose, volumes, networks, and system info.
+MCP server for Docker CLI integration - 49 tools for containers, images, Compose, volumes, networks, cleanup, and system info.
 
 Part of the [Docker Developer Tools](https://github.com/TMHSDigital/Docker-Developer-Tools) Cursor plugin.
 
@@ -48,7 +48,7 @@ Or if installed globally:
 }
 ```
 
-## Tools (36)
+## Tools (49)
 
 ### Read / Inspect (10)
 
@@ -105,6 +105,34 @@ Or if installed globally:
 | `docker_composeRestart` | Restart Compose services |
 | `docker_composePull` | Pull Compose service images |
 | `docker_composeExec` | Execute command in a Compose service |
+
+### Volume Management (4)
+
+| Tool | Description |
+|------|-------------|
+| `docker_volumeCreate` | Create a named volume |
+| `docker_volumeRm` | Remove volumes |
+| `docker_volumeInspect` | Detailed volume info |
+| `docker_volumePrune` | Remove unused volumes |
+
+### Network Management (6)
+
+| Tool | Description |
+|------|-------------|
+| `docker_networkCreate` | Create a network |
+| `docker_networkRm` | Remove networks |
+| `docker_networkConnect` | Connect container to network |
+| `docker_networkDisconnect` | Disconnect container from network |
+| `docker_networkInspect` | Detailed network info |
+| `docker_networkPrune` | Remove unused networks |
+
+### Cleanup / Prune (3)
+
+| Tool | Description |
+|------|-------------|
+| `docker_systemPrune` | Remove unused containers, networks, images |
+| `docker_containerPrune` | Remove stopped containers |
+| `docker_imagePrune` | Remove unused images |
 
 ## License
 

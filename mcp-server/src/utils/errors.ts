@@ -48,6 +48,26 @@ export class ImageNotFoundError extends DockerError {
   }
 }
 
+export class VolumeNotFoundError extends DockerError {
+  public readonly volumeName: string;
+
+  constructor(volumeName: string) {
+    super(`Volume not found: ${volumeName}`);
+    this.name = "VolumeNotFoundError";
+    this.volumeName = volumeName;
+  }
+}
+
+export class NetworkNotFoundError extends DockerError {
+  public readonly networkName: string;
+
+  constructor(networkName: string) {
+    super(`Network not found: ${networkName}`);
+    this.name = "NetworkNotFoundError";
+    this.networkName = networkName;
+  }
+}
+
 export class PermissionDeniedError extends DockerError {
   constructor() {
     super(

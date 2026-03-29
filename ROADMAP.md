@@ -4,7 +4,7 @@
 
 ## Current Status
 
-**v0.4.0** - Compose release with 12 skills, 6 rules, and 36 MCP tools.
+**v0.5.0** - Volumes, Networks, and Cleanup release with 12 skills, 6 rules, and 49 MCP tools.
 
 ## Release Plan
 
@@ -13,12 +13,12 @@
 | v0.1.0 | Foundation (read-only) | 10 | 10 | 12 | 6 | Released |
 | v0.2.0 | Container Lifecycle | +10 | 20 | +0 | +0 | Released |
 | v0.3.0 | Image and Build | +8 | 28 | +0 | +0 | Released |
-| v0.4.0 | Compose | +8 | 36 | +1 | +1 | (current) |
-| v0.5.0 | Volumes, Networks, Cleanup | +12 | 48 | +0 | +0 | Planned |
-| v0.6.0 | Advanced and Observability | +6 | 54 | +1 | +1 | Planned |
-| v0.7.0 | Buildx and Multi-platform | +5 | 59 | +0 | +0 | Planned |
-| v0.8.0 | Polish | +0 | 59 | +0 | +0 | Planned |
-| v1.0.0 | Stable | +0 | 59 | +0 | +0 | Planned |
+| v0.4.0 | Compose | +8 | 36 | +1 | +1 | Released |
+| v0.5.0 | Volumes, Networks, Cleanup | +13 | 49 | +0 | +0 | (current) |
+| v0.6.0 | Advanced and Observability | +6 | 55 | +1 | +1 | Planned |
+| v0.7.0 | Buildx and Multi-platform | +5 | 60 | +0 | +0 | Planned |
+| v0.8.0 | Polish | +0 | 60 | +0 | +0 | Planned |
+| v1.0.0 | Stable | +0 | 60 | +0 | +0 | Planned |
 
 ---
 
@@ -222,6 +222,8 @@ All destructive MCP tools (`rm`, `rmi`, `prune`, `kill`, `down`) will:
 - [x] Comprehensive roadmap rewrite (59 planned MCP tools)
 - [x] 8 image and build tools (pull, push, build, tag, rmi, commit, save, load)
 - [x] 8 compose tools (composeUp, composeDown, composePs, composeLogs, composeBuild, composeRestart, composePull, composeExec)
+- [x] 13 volume, network, and cleanup tools (volumeCreate/Rm/Inspect/Prune, networkCreate/Rm/Connect/Disconnect/Inspect/Prune, systemPrune, containerPrune, imagePrune)
+- [x] VolumeNotFoundError and NetworkNotFoundError error classes
 - [x] npm publish of @tmhs/docker-mcp with GitHub Actions automation
 - [x] 12 skills covering core Docker workflows
 - [x] 6 rules for Dockerfile and compose validation

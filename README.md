@@ -11,7 +11,7 @@
 <p align="center">
   <a href="https://github.com/TMHSDigital/Docker-Developer-Tools/actions/workflows/validate.yml"><img src="https://img.shields.io/github/actions/workflow/status/TMHSDigital/Docker-Developer-Tools/validate.yml?branch=main&label=CI" alt="CI" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-CC--BY--NC--ND--4.0-blue" alt="License" /></a>
-  <img src="https://img.shields.io/badge/version-0.4.0-green" alt="Version" />
+  <img src="https://img.shields.io/badge/version-0.5.0-green" alt="Version" />
   <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/v/@tmhs/docker-mcp" alt="npm" /></a>
   <a href="https://github.com/TMHSDigital/Docker-Developer-Tools/stargazers"><img src="https://img.shields.io/github/stars/TMHSDigital/Docker-Developer-Tools" alt="Stars" /></a>
   <img src="https://img.shields.io/github/last-commit/TMHSDigital/Docker-Developer-Tools" alt="Last Commit" />
@@ -20,7 +20,7 @@
 </p>
 
 <p align="center">
-  <strong>12 skills</strong>&nbsp;&bull;&nbsp;<strong>6 rules</strong>&nbsp;&bull;&nbsp;<strong>36 MCP tools</strong>
+  <strong>12 skills</strong>&nbsp;&bull;&nbsp;<strong>6 rules</strong>&nbsp;&bull;&nbsp;<strong>49 MCP tools</strong>
 </p>
 
 ---
@@ -111,7 +111,7 @@ Add to your Cursor MCP config (`.cursor/mcp.json`):
 ```
 
 <details>
-<summary><strong>36 MCP Tools</strong> - full tool reference</summary>
+<summary><strong>49 MCP Tools</strong> - full tool reference</summary>
 
 &nbsp;
 
@@ -170,6 +170,34 @@ Add to your Cursor MCP config (`.cursor/mcp.json`):
 | `docker_composeRestart` | Restart Compose services |
 | `docker_composePull` | Pull images for Compose services |
 | `docker_composeExec` | Execute a command in a running Compose service container |
+
+**Volume Management** (4)
+
+| Tool | What It Does |
+|---|---|
+| `docker_volumeCreate` | Create a named volume with optional driver and labels |
+| `docker_volumeRm` | Remove one or more volumes |
+| `docker_volumeInspect` | Display detailed volume information |
+| `docker_volumePrune` | Remove all unused volumes |
+
+**Network Management** (6)
+
+| Tool | What It Does |
+|---|---|
+| `docker_networkCreate` | Create a network (bridge, overlay, macvlan) |
+| `docker_networkRm` | Remove one or more networks |
+| `docker_networkConnect` | Connect a container to a network |
+| `docker_networkDisconnect` | Disconnect a container from a network |
+| `docker_networkInspect` | Display detailed network information |
+| `docker_networkPrune` | Remove all unused networks |
+
+**Cleanup / Prune** (3)
+
+| Tool | What It Does |
+|---|---|
+| `docker_systemPrune` | Remove unused containers, networks, images, and optionally volumes |
+| `docker_containerPrune` | Remove all stopped containers |
+| `docker_imagePrune` | Remove dangling or unused images |
 
 </details>
 

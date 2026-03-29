@@ -6,6 +6,8 @@ import {
   DockerNotRunningError,
   ContainerNotFoundError,
   ImageNotFoundError,
+  VolumeNotFoundError,
+  NetworkNotFoundError,
   PermissionDeniedError,
 } from "./errors.js";
 
@@ -95,6 +97,16 @@ export async function execDocker(
     ) {
       const match = stderr.match(/No such image:\s*(\S+)/);
       throw new ImageNotFoundError(match?.[1] ?? "unknown");
+    }
+
+    if (stderr.includes("No such volume")) {
+      const match = stderr.match(/No such volume:\s*(\S+)/);
+      throw new VolumeNotFoundError(match?.[1] ?? "unknown");
+    }
+
+    if (stderr.includes("No such network") || stderr.includes("network") && stderr.includes("not found")) {
+      const match = stderr.match(/No such network:\s*(\S+)/) ?? stderr.match(/network\s+(\S+)\s+not found/);
+      throw new NetworkNotFoundError(match?.[1] ?? "unknown");
     }
 
     throw new DockerError(stderr.trim() || err.message, undefined, args[0]);

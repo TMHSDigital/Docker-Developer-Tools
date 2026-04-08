@@ -1,0 +1,19 @@
+{
+  "accent": "#0db7ed",
+  "accentLight": "#4fc3f7",
+  "heroGradientFrom": "#0a1117",
+  "heroGradientTo": "#0d2137",
+  "favicon": "assets/logo.png",
+  "ogImage": "assets/logo.png",
+  "installSteps": [
+    "Clone the repository",
+    "Open the folder in Cursor IDE",
+    "Install MCP server: <code>cd mcp-server && npm install</code>",
+    "Configure MCP in your editor settings",
+    "Start using the AI skills and rules"
+  ],
+  "links": {
+    "npm": "https://www.npmjs.com/package/@tmhs/docker-mcp",
+    "github": "https://github.com/TMHSDigital/Docker-Developer-Tools"
+  }
+}

@@ -1,7 +1,7 @@
 {
   "name": "docker-developer-tools",
   "displayName": "Docker Developer Tools",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Docker and container workflows for Cursor, Claude Code, and MCP-compatible editors - 17 skills, 10 rules, and 150 MCP tools for building, debugging, optimizing, and managing Docker containers, images, networks, and volumes. Includes a companion MCP server (docker-mcp) for live Docker CLI integration.",
   "author": {
     "name": "TMHSDigital",
@@ -27,7 +27,11 @@
     "mcp"
   ],
   "category": "developer-tools",
-  "tags": ["docker", "containers", "devops"],
+  "tags": [
+    "docker",
+    "containers",
+    "devops"
+  ],
   "logo": "assets/logo.png",
   "skills": "./skills/",
   "rules": "./rules/"

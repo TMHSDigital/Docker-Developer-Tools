@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/TMHSDigital/Docker-Developer-Tools/releases/latest"><img src="https://img.shields.io/badge/version-1.2.0-0db7ed?style=flat-square" alt="Version" /></a>
+  <a href="https://github.com/TMHSDigital/Docker-Developer-Tools/releases/latest"><img src="https://img.shields.io/badge/version-1.2.1-0db7ed?style=flat-square" alt="Version" /></a>
   <a href="https://github.com/TMHSDigital/Docker-Developer-Tools/releases/latest"><img src="https://img.shields.io/github/v/release/TMHSDigital/Docker-Developer-Tools?style=flat-square&color=0db7ed&label=release" alt="Release" /></a>
   <a href="https://www.npmjs.com/package/@tmhs/docker-mcp"><img src="https://img.shields.io/npm/v/@tmhs/docker-mcp?style=flat-square&color=066da5&label=npm" alt="npm" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-CC--BY--NC--ND--4.0-384d54?style=flat-square" alt="License" /></a>

@@ -3,6 +3,7 @@ description: Flag common Dockerfile antipatterns including unpinned base images,
 alwaysApply: false
 globs:
   - "**/Dockerfile*"
+standards-version: 1.6.3
 ---
 
 # Dockerfile Linting Rules

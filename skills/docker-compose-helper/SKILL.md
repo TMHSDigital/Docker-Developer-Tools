@@ -1,6 +1,7 @@
 ---
 name: docker-compose-helper
 description: Write, debug, and optimize docker-compose.yml files with service definitions, networking, volumes, and healthchecks.
+standards-version: 1.6.3
 ---
 
 # Docker Compose Helper

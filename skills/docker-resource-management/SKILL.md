@@ -1,6 +1,7 @@
 ---
 name: docker-resource-management
 description: Configure resource limits and monitoring with CPU and memory constraints, cgroups, container stats, and OOM kill prevention.
+standards-version: 1.6.3
 ---
 
 # Docker Resource Management

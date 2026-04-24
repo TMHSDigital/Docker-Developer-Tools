@@ -1,6 +1,7 @@
 ---
 name: docker-swarm
 description: Docker Swarm mode orchestration - cluster management, service deployment, scaling, node administration, and rolling updates
+standards-version: 1.6.3
 ---
 
 # Docker Swarm Orchestration

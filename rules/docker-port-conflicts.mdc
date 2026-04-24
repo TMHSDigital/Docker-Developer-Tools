@@ -7,6 +7,7 @@ globs:
   - "**/compose*.yml"
   - "**/compose*.yaml"
   - "**/Dockerfile*"
+standards-version: 1.6.3
 ---
 
 # Docker Port Conflict Detection

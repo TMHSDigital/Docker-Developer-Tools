@@ -1,6 +1,7 @@
 ---
 name: dockerfile-best-practices
 description: Write and optimize Dockerfiles with multi-stage builds, layer caching, image size reduction, and security hardening.
+standards-version: 1.6.3
 ---
 
 # Dockerfile Best Practices

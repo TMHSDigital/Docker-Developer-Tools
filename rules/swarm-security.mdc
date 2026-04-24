@@ -9,6 +9,7 @@ globs:
   - "**/compose*.yaml"
   - "**/docker-stack*.yml"
   - "**/docker-stack*.yaml"
+standards-version: 1.6.3
 ---
 
 # Swarm Security

@@ -6,6 +6,7 @@ globs:
   - "**/docker-compose*.yaml"
   - "**/compose*.yml"
   - "**/compose*.yaml"
+standards-version: 1.6.3
 ---
 
 # Docker Compose Validation Rules

@@ -1,6 +1,7 @@
 ---
 name: docker-multi-platform
 description: Multi-architecture builds, buildx builder configuration, manifest lists, platform targeting, and cross-compilation patterns.
+standards-version: 1.6.3
 ---
 
 # Docker Multi-Platform Builds

@@ -1,7 +1,7 @@
 ---
 name: docker-advanced-workflows
 description: Multi-stage pipelines, sidecar patterns, healthchecks, init containers, signal handling, and graceful shutdown.
-standards-version: 1.6.3
+standards-version: 1.7.0
 ---
 
 # Docker Advanced Workflows

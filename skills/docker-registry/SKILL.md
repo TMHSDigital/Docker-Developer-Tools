@@ -1,7 +1,7 @@
 ---
 name: docker-registry
 description: Work with container registries including Docker Hub, GHCR, ECR, and ACR for pushing, pulling, and tag management.
-standards-version: 1.6.3
+standards-version: 1.7.0
 ---
 
 # Docker Registry

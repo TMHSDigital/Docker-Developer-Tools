@@ -1,7 +1,7 @@
 ---
 name: image-optimization
 description: Reduce Docker image size with base image selection, layer consolidation, multi-stage patterns, and distroless builds.
-standards-version: 1.6.3
+standards-version: 1.7.0
 ---
 
 # Image Optimization

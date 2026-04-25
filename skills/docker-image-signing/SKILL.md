@@ -1,7 +1,7 @@
 ---
 name: docker-image-signing
 description: Docker Content Trust - image signing, verification, key management, and CI/CD signing pipelines
-standards-version: 1.6.3
+standards-version: 1.7.0
 ---
 
 # Docker Content Trust and Image Signing

@@ -1,7 +1,7 @@
 ---
 name: docker-networking
 description: Configure container networking with bridge, host, and overlay drivers, port mapping, DNS resolution, and inter-container communication.
-standards-version: 1.6.3
+standards-version: 1.7.0
 ---
 
 # Docker Networking

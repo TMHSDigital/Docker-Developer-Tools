@@ -1,7 +1,7 @@
 ---
 name: docker-context-management
 description: Manage Docker contexts for multi-host and remote Docker engine workflows
-standards-version: 1.6.3
+standards-version: 1.7.0
 ---
 
 # Docker Context Management

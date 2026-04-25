@@ -1,7 +1,7 @@
 ---
 name: docker-volumes
 description: Manage data persistence with named volumes, bind mounts, tmpfs mounts, volume drivers, and backup strategies.
-standards-version: 1.6.3
+standards-version: 1.7.0
 ---
 
 # Docker Volumes

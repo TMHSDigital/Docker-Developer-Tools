@@ -1,7 +1,7 @@
 ---
 name: docker-development-env
 description: Set up development environments with Docker including hot reload, dev containers, bind mounts, and database containers.
-standards-version: 1.6.3
+standards-version: 1.7.0
 ---
 
 # Docker Development Environment

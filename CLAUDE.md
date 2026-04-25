@@ -12,7 +12,7 @@ Docker Developer Tools integrates Docker and container workflows into AI-assiste
 
 This is a monorepo - the skills, rules, and companion MCP server live in the same repository. Docker's API is local (Docker Engine socket / CLI), so one repo is simpler for users to install and maintain.
 
-**Version:** 1.3.1
+**Version:** 1.3.2
 **License:** CC-BY-NC-ND-4.0
 **Author:** TMHSDigital
 

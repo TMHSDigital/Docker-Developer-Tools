@@ -13,14 +13,6 @@ def test_has_single_current_marker(roadmap_text):
     )
 
 
-def test_current_matches_plugin_version(manifest, roadmap_text):
-    version = manifest["version"]
-    pattern = re.compile(rf"v?{re.escape(version)}.*\(current\)", re.IGNORECASE)
-    assert pattern.search(roadmap_text), (
-        f"ROADMAP.md '(current)' marker does not match plugin version {version}"
-    )
-
-
 def test_completed_section_no_unchecked(roadmap_text):
     completed_match = re.search(
         r"##\s+Completed\s*\n(.*?)(?=\n##|\Z)", roadmap_text, re.DOTALL

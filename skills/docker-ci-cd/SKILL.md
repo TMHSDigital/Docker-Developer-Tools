@@ -1,7 +1,7 @@
 ---
 name: docker-ci-cd
 description: Use Docker in CI/CD pipelines with GitHub Actions, multi-platform builds, registry push, and layer caching strategies.
-standards-version: 1.7.0
+standards-version: 1.9.0
 ---
 
 # Docker CI/CD

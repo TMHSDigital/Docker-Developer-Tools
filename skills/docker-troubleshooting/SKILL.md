@@ -1,7 +1,7 @@
 ---
 name: docker-troubleshooting
 description: Diagnose and fix common Docker problems including port conflicts, permission errors, disk space, networking issues, and build failures.
-standards-version: 1.7.0
+standards-version: 1.9.0
 ---
 
 # Docker Troubleshooting

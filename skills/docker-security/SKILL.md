@@ -1,7 +1,7 @@
 ---
 name: docker-security
 description: Harden container security with rootless mode, read-only filesystems, capability management, secret handling, and image scanning.
-standards-version: 1.7.0
+standards-version: 1.9.0
 ---
 
 # Docker Security
